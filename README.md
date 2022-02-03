@@ -1,0 +1,1 @@
+# furniture-insight-frontend
