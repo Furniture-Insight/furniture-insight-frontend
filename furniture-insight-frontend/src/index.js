@@ -1,12 +1,8 @@
-import React from "react";
-import './App.css';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
 
-function App() {
-    return (
-        <div className='App'>
-            <h1> App </h1>
-        </div>
-    );
-}
-
-export default App;
+ReactDOM.render(
+  <App/>,
+  document.getElementById('root')
+);
