@@ -4,7 +4,7 @@ function MainPage() {
     return(
         <div>
             <div>
-                <h3>Furniture Insight</h3>
+                
             </div>           
         </div>        
     )
