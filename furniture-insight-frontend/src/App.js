@@ -1,11 +1,20 @@
 import React from "react";
-import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./components/pages/Login";
+import SignUp from "./components/pages/SignUp";
+import RecoverPass from "./components/pages/RecoverPass";
+import Layout from "./components/Layout";
 
 function App() {
     return (
-        <div className='App'>
-            <h1> App </h1>
-        </div>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Layout/>}></Route>
+                <Route path="login" element={<Login/>}></Route>
+                <Route path="signup" element={<SignUp/>}></Route>
+                <Route path="recoverpass" element={<RecoverPass/>}></Route>
+            </Routes>
+        </BrowserRouter>
     );
 }
 
