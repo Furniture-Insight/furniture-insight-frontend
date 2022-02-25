@@ -1,14 +1,27 @@
 import { Outlet, Link } from "react-router-dom";
 
-function Layout(){
-    return(
-        <div>       
-            <nav>           
-                <Link to="/signup">SignUp</Link>
-                <Link to="/login">Login</Link>
-                <Link to="/recoverpass">RecoverPassword</Link>
+function Layout() {
+    return (
+        <div>
+            <nav>
+                <div>
+                    <ul>
+                        <li>
+                            <Link to="/signup">SignUp</Link>
+                        </li>
+                        <li>
+                            <Link to="/login">Login</Link>
+                        </li>
+                        <li>
+                            <Link to="/recoverpass">RecoverPassword</Link>
+                        </li>
+                        <li>
+                            <Link to="/store">Store</Link>
+                        </li>
+                    </ul>
+                </div>
             </nav>
-            <Outlet/>
+            <Outlet />
         </div>
     )
 }
