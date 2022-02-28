@@ -1,6 +1,6 @@
 import React from "react";
 
-function MainPage() {
+function Home() {
     return(
         <div>
             <div>
@@ -9,4 +9,4 @@ function MainPage() {
         </div>        
     )
 }
-export default MainPage;
+export default Home;
