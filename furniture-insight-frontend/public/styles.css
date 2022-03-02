@@ -21,3 +21,8 @@
     margin-right: auto;
     width: 50%;
   }
+
+.img-small{
+    width: 100px;
+    height: 100px;
+}
