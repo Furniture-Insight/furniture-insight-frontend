@@ -16,6 +16,9 @@ function Layout() {
                             <Link to="/recoverpass">RecoverPassword</Link>
                         </li>
                         <li>
+                            <Link to="/home">Home</Link>
+                        </li>
+                        <li>
                             <Link to="/store">Store</Link>
                         </li>
                     </ul>
