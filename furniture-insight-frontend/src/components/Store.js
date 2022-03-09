@@ -33,21 +33,21 @@ function Store() {
             </div>
             <div className="row">
                 <div className="col">   
-                    <img className="center img-thumbnail" src={bed} alt="bed.jpg"/>
+                    <img className="center img-thumbnail border border-dark" src={bed} alt="bed.jpg"/>
                     <h5 className="h5 text-center">Beds</h5>
                 </div>
                 <div className="col">
-                    <img className="center img-thumbnail" src={chairs} alt="chairs.jpg"/>
+                    <img className="center img-thumbnail border border-dark" src={chairs} alt="chairs.jpg"/>
                     <p className="h5 text-center">Chairs</p>
                 </div>
             </div>
             <div className="row">
                 <div className="col">
-                    <img className="center img-thumbnail" src={table} alt="table.jpg"/>        
+                    <img className="center img-thumbnail border border-dark" src={table} alt="table.jpg"/>        
                     <p className="h5 text-center">Tables</p>
                 </div>
                 <div className="col">
-                    <img className="center img-thumbnail" src={desk} alt="desk.jpg"/>
+                    <img className="center img-thumbnail border border-dark" src={desk} alt="desk.jpg"/>
                     <p className="h5 text-center">Desks</p>
                 </div>
             </div>
