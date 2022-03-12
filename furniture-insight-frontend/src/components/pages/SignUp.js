@@ -1,8 +1,10 @@
 import React from "react";
-import { useState } from "react";
+import {useState } from "react";
+import {useNavigate} from "react-router-dom";
 import logo from "../images/logo.png";
 
 function SignUp() {
+    let navigate = useNavigate();
 
     const [user, setUser] = useState({
         firstname: "",
@@ -15,6 +17,10 @@ function SignUp() {
         event.preventDefault();
         alert("Data entered");
         console.log(user);
+    }
+
+    const handleClick = () => {
+        navigate("/store");
     }
 
     return (
@@ -50,6 +56,7 @@ function SignUp() {
                     <button 
                         type="submit" 
                         className="btn btn-outline-secondary rounded-pill"
+                        onClick={handleClick}
                         >Sign Up</button>
                 </div>
             </form>
