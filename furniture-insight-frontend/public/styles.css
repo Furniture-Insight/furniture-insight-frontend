@@ -6,3 +6,27 @@
     margin: 100px auto auto auto;  
     text-align: center;
 }
+
+.search-bar{
+    margin-left: 25%;
+}
+
+.img-categories{
+    margin: 0 auto;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
+
+.img-small{
+    width: 100px;
+    height: 100px;
+}
+
+.login-signup{
+    float: left;
+}
