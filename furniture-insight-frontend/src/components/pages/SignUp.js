@@ -6,21 +6,30 @@ import logo from "../images/logo.png";
 function SignUp() {
     let navigate = useNavigate();
 
-    const [user, setUser] = useState({
-        firstname: "",
-        lastname: "",
-        email: "",
-        password: ""
+    const [usuario, setUsuario] = useState({
+        Nombres: "",
+        Apellidos: "",
+        Email: "",
+        Password: "",
+        Sexos: "",
+        Edades: "",
+        Direccion_residencia: ""
     });
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        alert("Data entered");
-        console.log(user);
+        fetch('http://localhost:8000/usuarioCliente/crearUsuario', {
+            method: 'POST',
+            headers: {"Content-Type" : "application/json"},
+            body: JSON.stringify(usuario)
+        }).then(() =>{
+            console.log(usuario);
+            console.log("new user created");
+        })
     }
 
     const handleClick = () => {
-        navigate("/store");
+        
     }
 
     return (
@@ -32,27 +41,45 @@ function SignUp() {
                     <input 
                         className="mb-3 form-control rounded-pill border border-dark" 
                         type="text" 
-                        placeholder="First Name" 
-                        value={user.firstname}
-                        onChange={(e) => setUser({...user, firstname:e.target.value})}/>
+                        placeholder="Nombres" 
+                        value={usuario.Nombres}
+                        onChange={(e) => setUsuario({...usuario, Nombres:e.target.value})}/>
                     <input 
                         className="mb-3 form-control rounded-pill border border-dark" 
                         type="text" 
-                        placeholder="Last Name" 
-                        value={user.lastname}
-                        onChange={(e) => setUser({...user, lastname:e.target.value})}/>
+                        placeholder="Apellidos" 
+                        value={usuario.Apellidos}
+                        onChange={(e) => setUsuario({...usuario, Apellidos:e.target.value})}/>
                     <input 
                         className="mb-3 form-control rounded-pill border border-dark" 
                         type="email" 
                         placeholder="Email" 
-                        value={user.email}
-                        onChange={(e) => setUser({...user, email:e.target.value})}/>
+                        value={usuario.Email}
+                        onChange={(e) => setUsuario({...usuario, Email:e.target.value})}/>
                     <input 
                         className="mb-3 form-control rounded-pill border border-dark" 
                         type="password" 
                         placeholder="Password" 
-                        value={user.password}
-                        onChange={(e) => setUser({...user, password:e.target.value})}/>
+                        value={usuario.Password}
+                        onChange={(e) => setUsuario({...usuario, Password:e.target.value})}/>
+                    <input 
+                        className="mb-3 form-control rounded-pill border border-dark" 
+                        type="text" 
+                        placeholder="Sexos" 
+                        value={usuario.Sexos}
+                        onChange={(e) => setUsuario({...usuario, Sexos:e.target.value})}/>
+                    <input 
+                        className="mb-3 form-control rounded-pill border border-dark" 
+                        type="number" 
+                        placeholder="Edades"
+                        value={usuario.Edades}
+                        onChange={(e) => setUsuario({...usuario, Edades:e.target.value})}/>
+                    <input 
+                        className="mb-3 form-control rounded-pill border border-dark" 
+                        type="text" 
+                        placeholder="Direccion Residencia" 
+                        value={usuario.Direccion_residencia}
+                        onChange={(e) => setUsuario({...usuario, Direccion_residencia:e.target.value})}/>
                     <button 
                         type="submit" 
                         className="btn btn-outline-secondary rounded-pill"

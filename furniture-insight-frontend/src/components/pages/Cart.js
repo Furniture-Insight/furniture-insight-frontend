@@ -1,11 +1,7 @@
 import React from "react";
 
 
-function Cart() {   
-
-    const handleClick = () => {
-        
-    }
+function Cart() {       
 
     return (
         <div className="container lh-lg">
@@ -14,11 +10,9 @@ function Cart() {
                 <label>ITBIS: </label>
                 <label>Total: </label>
                 <button 
-                    type="button" 
-                    onClick={handleClick} 
+                    type="button"                     
                     className="btn btn-success rounded-pill w-25"
-                    data-bs-toggle="modal" 
-                    data-bs-target="#Modal">Proceed to Checkout</button>
+                    data-bs-toggle>Proceed to Checkout</button>
             </div>
         </div>
     );
