@@ -22,13 +22,13 @@ function Home() {
                 <div className="col">
                     <button
                     type="button"
-                    className="btn btn-success rounded-pill w-25"
+                    className="btn btn-secondary"
                     data-bs-toggle> See more like this </button>
                 </div>
                 <div className="col">
                     <button
                     type="button"
-                    className="btn btn-success rounded-pill w-25"
+                    className="btn btn-secondary"
                     data-bs-toggle> Details </button>
                 </div>
             </div>
