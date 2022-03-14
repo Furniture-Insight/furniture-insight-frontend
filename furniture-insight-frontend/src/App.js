@@ -16,16 +16,16 @@ function App() {
                     <div className="collapse navbar-collapse" id="navbarToggler">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <Link className="nav-link text-light" aria-current="page" to="/store">Store</Link>
+                                <Link className="nav-link" aria-current="page" to="/store">Store</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link text-light" to="/login">Login</Link>
+                                <Link className="nav-link" to="/login">Login</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link text-light" to="/signup">SignUp</Link>
+                                <Link className="nav-link" to="/signup">SignUp</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link text-light" to="/cart">Cart</Link>
+                                <Link className="nav-link" to="/cart">Cart</Link>
                             </li>
                         </ul>
                     </div>

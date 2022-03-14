@@ -41,13 +41,13 @@ function SignUp() {
                     <input 
                         className="mb-3 form-control rounded-pill border border-dark" 
                         type="text" 
-                        placeholder="Nombres" 
+                        placeholder="Nombre" 
                         value={usuario.Nombres}
                         onChange={(e) => setUsuario({...usuario, Nombres:e.target.value})}/>
                     <input 
                         className="mb-3 form-control rounded-pill border border-dark" 
                         type="text" 
-                        placeholder="Apellidos" 
+                        placeholder="Apellido" 
                         value={usuario.Apellidos}
                         onChange={(e) => setUsuario({...usuario, Apellidos:e.target.value})}/>
                     <input 
@@ -65,13 +65,13 @@ function SignUp() {
                     <input 
                         className="mb-3 form-control rounded-pill border border-dark" 
                         type="text" 
-                        placeholder="Sexos" 
+                        placeholder="Sexo" 
                         value={usuario.Sexos}
                         onChange={(e) => setUsuario({...usuario, Sexos:e.target.value})}/>
                     <input 
                         className="mb-3 form-control rounded-pill border border-dark" 
                         type="number" 
-                        placeholder="Edades"
+                        placeholder="Edad"
                         value={usuario.Edades}
                         onChange={(e) => setUsuario({...usuario, Edades:e.target.value})}/>
                     <input 

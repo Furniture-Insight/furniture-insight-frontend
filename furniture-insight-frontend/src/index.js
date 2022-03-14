@@ -5,8 +5,7 @@ import App from './App';
 import Login from "./components/pages/Login";
 import SignUp from "./components/pages/SignUp";
 import RecoverPass from "./components/pages/RecoverPass";
-import Layout from "./components/Layout";
-import Store from "./components/Store";
+import Store from "./components/pages/Store";
 import Cart from "./components/pages/Cart";
 
 const rootElement = document.getElementById('root');
