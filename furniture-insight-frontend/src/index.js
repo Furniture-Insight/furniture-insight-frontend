@@ -17,7 +17,7 @@ ReactDOM.render(
         <Route path="signup" element={<SignUp />}></Route>
         <Route path="store" element={<Store/>}></Route>
         <Route path="recoverpass" element={<RecoverPass/>}></Route>
-        <Route path="cart" element={<Cart/>}></Route>        
+        <Route path="cart" element={<Cart/>}></Route>         
       </Route>      
     </Routes>    
   </BrowserRouter>,
