@@ -39,42 +39,49 @@ function SignUp() {
                     <img className="mb-3" src={logo} width="60" height="65" />
                     <h4 className="h4 mb-3">Sign Up</h4>
                     <input 
+                        required
                         className="mb-3 form-control rounded-pill border border-dark" 
                         type="text" 
                         placeholder="Nombre" 
                         value={usuario.Nombres}
                         onChange={(e) => setUsuario({...usuario, Nombres:e.target.value})}/>
                     <input 
+                        required
                         className="mb-3 form-control rounded-pill border border-dark" 
                         type="text" 
                         placeholder="Apellido" 
                         value={usuario.Apellidos}
                         onChange={(e) => setUsuario({...usuario, Apellidos:e.target.value})}/>
                     <input 
+                        required
                         className="mb-3 form-control rounded-pill border border-dark" 
                         type="email" 
                         placeholder="Email" 
                         value={usuario.Email}
                         onChange={(e) => setUsuario({...usuario, Email:e.target.value})}/>
                     <input 
+                        required
                         className="mb-3 form-control rounded-pill border border-dark" 
                         type="password" 
                         placeholder="Password" 
                         value={usuario.Password}
                         onChange={(e) => setUsuario({...usuario, Password:e.target.value})}/>
                     <input 
+                        required
                         className="mb-3 form-control rounded-pill border border-dark" 
                         type="text" 
                         placeholder="Sexo" 
                         value={usuario.Sexos}
                         onChange={(e) => setUsuario({...usuario, Sexos:e.target.value})}/>
                     <input 
+                        required
                         className="mb-3 form-control rounded-pill border border-dark" 
                         type="number" 
                         placeholder="Edad"
                         value={usuario.Edades}
                         onChange={(e) => setUsuario({...usuario, Edades:e.target.value})}/>
                     <input 
+                        required
                         className="mb-3 form-control rounded-pill border border-dark" 
                         type="text" 
                         placeholder="Direccion Residencia" 
