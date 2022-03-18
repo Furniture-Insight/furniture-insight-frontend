@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCreditCard } from "@fortawesome/free-regular-svg-icons";
 import { faPaypal } from '@fortawesome/free-brands-svg-icons';
@@ -6,8 +7,10 @@ import { faPaypal } from '@fortawesome/free-brands-svg-icons';
 
 function Cart() {
 
-    const handleClick = () => {
+    let navigate = useNavigate();
 
+    const handleClick = () => {
+        navigate("/checkout", {replace:true});
     }
 
     return (
@@ -37,10 +40,7 @@ function Cart() {
                             <button className="btn btn-secondary" onClick={handleClick} data-bs-dismiss="modal">
                                 <FontAwesomeIcon icon={faCreditCard} className="me-1" />
                                 Pagar con Tarjeta Credito/Debito</button>
-                        </div>
-                        <div className="modal-footer">
-                            <button type="button" className="btn btn-outline-secondary rounded-pill">Pagar</button>
-                        </div>
+                        </div>                       
                     </div>
                 </div>
             </div>

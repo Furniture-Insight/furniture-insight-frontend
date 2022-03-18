@@ -36,7 +36,7 @@ function SignUp() {
         <div>
             <form onSubmit={handleSubmit}>
                 <div className="form-login">
-                    <img className="mb-3" src={logo} width="60" height="65" />
+                    <img className="mb-3" src={logo} width="60" height="65" alt="logo" />
                     <h4 className="h4 mb-3">Sign Up</h4>
                     <input 
                         required
