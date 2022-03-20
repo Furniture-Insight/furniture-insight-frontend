@@ -2,14 +2,14 @@ import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import logo from "./images/logo.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStore, faRightToBracket, faUserPlus, faCartShopping, faHouse, faTableCells } from "@fortawesome/free-solid-svg-icons";
+import { faStore, faRightToBracket, faUserPlus, faCartShopping, faHouse, faTableCells, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
-function Navbar() {
+function Navbar({isUserLogged}) {
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark justify-content-end">
                 <div className="container-fluid">
-                    <Link className="navbar-brand" to="/store">
+                    <Link className="navbar-brand" to="/home">
                         <img src={logo} width="40" height="40" alt="logo" className="me-2" />
                         Furniture Insight
                     </Link>
@@ -38,7 +38,8 @@ function Navbar() {
                     <div className="collapse navbar-collapse navbarToggler">
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0 nav nav-tabs">
                             <li className="nav-item">
-                                <Link className="nav-link" to="/login"><FontAwesomeIcon icon={faRightToBracket} /> Login</Link>
+                            {isUserLogged? <Link className="nav-link" to="/login"><FontAwesomeIcon icon={faUserCircle} /></Link>:<Link className="nav-link" to="/login"><FontAwesomeIcon icon={faRightToBracket} /> Login</Link>}
+                                
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/signup"><FontAwesomeIcon icon={faUserPlus} /> SignUp</Link>
