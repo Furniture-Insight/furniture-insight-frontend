@@ -19,7 +19,7 @@ function Navbar({isUserLogged}) {
                     <div className="collapse navbar-collapse navbarToggler" >
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0 nav nav-tabs">
                             <li className="nav-item">
-                                <Link className="nav-link"   to="/Home"><FontAwesomeIcon icon={faHouse} /> Home</Link>
+                                <Link className="nav-link" to="/ome"><FontAwesomeIcon icon={faHouse} /> Home</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" aria-current="page" to="/store"><FontAwesomeIcon icon={faStore} /> Store</Link>
@@ -35,17 +35,31 @@ function Navbar({isUserLogged}) {
                             </li>
                         </ul>
                     </div>
+                    {isUserLogged?
                     <div className="collapse navbar-collapse navbarToggler">
-                        <ul className="navbar-nav ms-auto mb-2 mb-lg-0 nav nav-tabs">
-                            <li className="nav-item">
-                            {isUserLogged? <Link className="nav-link" to="/login"><FontAwesomeIcon icon={faUserCircle} /></Link>:<Link className="nav-link" to="/login"><FontAwesomeIcon icon={faRightToBracket} /> Login</Link>}
-                                
+                        <ul className="navbar-nav ms-auto mb-2 mb-lg-0">                        
+                            <li className="nav-item dropdown">                             
+                                <Link className="nav-link dropdown-toggle" id="userDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" to="/login"><FontAwesomeIcon icon={faUserCircle} /></Link>
+                                <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdownMenuLink">                            
+                                <li><Link className="dropdown-item" to="/home">Profile</Link></li>
+                                <li><Link className="dropdown-item" to="/home">Logout</Link></li>
+                                </ul>                                
+                            </li>
+                            <li className="nav-item"></li>
+                            <Link className="nav-link" to="/login">User name</Link>                                        
+                        </ul>
+                    </div>:
+                    <div className="collapse navbar-collapse navbarToggler">
+                        <ul className="navbar-nav ms-auto mb-2 mb-lg-0 nav nav-tabs">                        
+                            <li className="nav-item">                             
+                                <Link className="nav-link" to="/login"><FontAwesomeIcon icon={faRightToBracket} /> Login</Link>                                                           
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/signup"><FontAwesomeIcon icon={faUserPlus} /> SignUp</Link>
-                            </li>
+                                <Link className="nav-link" to="/signup"><FontAwesomeIcon icon={faUserPlus}/> Signup</Link>                                
+                            </li>                       
                         </ul>
                     </div>
+                    }
                 </div>
             </nav>
             <Outlet />

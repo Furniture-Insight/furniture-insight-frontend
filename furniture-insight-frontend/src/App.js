@@ -13,7 +13,7 @@ import Checkout from "./components/pages/Checkout";
 import Navbar from './components/Navbar';
 
 function App() {
-    const [userLogged, setUserLogged] = useState();
+    const [userLogged, setUserLogged] = useState(true);
 
    
     const isUserLogged = (userLoggedStatus) => {             
