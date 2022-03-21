@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate,Link} from "react-router-dom";
 import logo from "../images/logo.png";
 
-function Login() {
+function Login({isUserLogged}) {      
     let navigate = useNavigate();
 
     const [user, setUser] = useState({
@@ -17,9 +17,11 @@ function Login() {
         console.log(user);
     }
 
-    const handleClick = () => {
-        navigate("/store")
+   
+    const handleClick = () => {               
+        isUserLogged(true);          
     }
+    
 
     return (
         <div>
