@@ -11,6 +11,7 @@ import Cart from "./components/pages/Cart";
 import Checkout from "./components/pages/Checkout";
 import Navbar from './components/Navbar';
 import AboutUs from './components/pages/AboutUs';
+import Profile from './components/pages/Profile';
 
 function App() {
     return (
@@ -27,6 +28,7 @@ function App() {
                     <Route path="cart" element={<Cart />}></Route>
                     <Route path="checkout" element={<Checkout />}></Route>
                     <Route path="aboutUs" element={<AboutUs/>}></Route>
+                    <Route path="profile" element={<Profile/>}></Route>
                 </Route>
             </Routes>
         </BrowserRouter>
