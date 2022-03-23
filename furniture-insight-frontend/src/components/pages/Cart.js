@@ -23,10 +23,10 @@ function Cart() {
                     type="button"
                     className="btn btn-success rounded-pill w-25"
                     data-bs-toggle="modal"
-                    data-bs-target="#checkoutModal">Proceed to Checkout</button>
+                    data-bs-target="#checkoutModal">Proceder al Checkout</button>
             </div>
             <div className="modal fade" id="checkoutModal" tabIndex="-1" aria-labelledby="checkoutModalLabel" aria-hidden="true">
-                <div className="modal-dialog">
+                <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
                         <div className="modal-header">
                             <h5 className="modal-title" id="checkoutModalLabel">Checkout</h5>
@@ -43,7 +43,7 @@ function Cart() {
                         </div>                       
                     </div>
                 </div>
-            </div>
+            </div>                     
         </div>
     );
 };

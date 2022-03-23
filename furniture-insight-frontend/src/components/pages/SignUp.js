@@ -3,7 +3,7 @@ import {useState } from "react";
 import {useNavigate} from "react-router-dom";
 import logo from "../images/logo.png";
 
-function SignUp() {
+function SignUp({isUserLogged}) {
     let navigate = useNavigate();
 
     const [usuario, setUsuario] = useState({
@@ -29,7 +29,7 @@ function SignUp() {
     }
 
     const handleClick = () => {
-        
+        isUserLogged(true);
     }
 
     return (
