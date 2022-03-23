@@ -19,7 +19,7 @@ function Navbar({isUserLogged}) {
                     <div className="collapse navbar-collapse navbarToggler" >
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0 nav nav-tabs">
                             <li className="nav-item">
-                                <Link className="nav-link" to="/ome"><FontAwesomeIcon icon={faHouse} /> Home</Link>
+                                <Link className="nav-link" to="/home"><FontAwesomeIcon icon={faHouse} /> Home</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" aria-current="page" to="/store"><FontAwesomeIcon icon={faStore} /> Store</Link>
@@ -38,7 +38,7 @@ function Navbar({isUserLogged}) {
                     {isUserLogged?
                     <div className="collapse navbar-collapse navbarToggler">
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">                        
-                            <li className="nav-item dropdown">                             
+                            <li className="nav-item dropdown">
                                 <Link className="nav-link dropdown-toggle" id="userDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" to="/login"><FontAwesomeIcon icon={faUserCircle} /></Link>
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdownMenuLink">                            
                                 <li><Link className="dropdown-item" to="/home">Profile</Link></li>

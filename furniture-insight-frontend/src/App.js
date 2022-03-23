@@ -13,7 +13,7 @@ import Checkout from "./components/pages/Checkout";
 import Navbar from './components/Navbar';
 
 function App() {
-    const [userLogged, setUserLogged] = useState(true);
+    const [userLogged, setUserLogged] = useState();
 
    
     const isUserLogged = (userLoggedStatus) => {             
@@ -25,7 +25,7 @@ function App() {
                 <Route path="/" element={<Navbar isUserLogged = {userLogged}/>}>
                     <Route path="home" element={<Home />}></Route>
                     <Route path="login" element={<Login isUserLogged = {isUserLogged} />}></Route>
-                    <Route path="signup" element={<SignUp />}></Route>
+                    <Route path="signup" element={<SignUp isUserLogged = {isUserLogged} />}></Route>
                     <Route path="recoverpass" element={<RecoverPass />}></Route>
                     <Route path="store" element={<Store />}></Route>
                     <Route path="description" element={<Description />}></Route>
