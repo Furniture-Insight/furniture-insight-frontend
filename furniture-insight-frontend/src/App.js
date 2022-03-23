@@ -10,6 +10,7 @@ import SmartRoom from './components/pages/SmartRoom';
 import Cart from "./components/pages/Cart";
 import Checkout from "./components/pages/Checkout";
 import Navbar from './components/Navbar';
+import AboutUs from './components/pages/AboutUs';
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                     <Route path="smartRoom" element={<SmartRoom />}></Route>
                     <Route path="cart" element={<Cart />}></Route>
                     <Route path="checkout" element={<Checkout />}></Route>
+                    <Route path="aboutUs" element={<AboutUs/>}></Route>
                 </Route>
             </Routes>
         </BrowserRouter>
