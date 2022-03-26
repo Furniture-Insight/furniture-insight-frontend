@@ -18,11 +18,12 @@ function App() {
    
     const isUserLogged = (userLoggedStatus) => {             
         setUserLogged(userLoggedStatus);
-    }     
+    }
+    
     return (        
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<Navbar isUserLogged = {userLogged}/>}>
+                <Route path="/" element={<Navbar isUserLogged = {userLogged} />}>
                     <Route path="home" element={<Home />}></Route>
                     <Route path="login" element={<Login isUserLogged = {isUserLogged} />}></Route>
                     <Route path="signup" element={<SignUp isUserLogged = {isUserLogged} />}></Route>
