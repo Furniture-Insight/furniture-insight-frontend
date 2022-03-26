@@ -5,6 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStore, faRightToBracket, faUserPlus, faCartShopping, faHouse, faTableCells, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
 function Navbar({isUserLogged}) {
+    
+    const handleClick = () =>{
+        isUserLogged(false);            
+    }
+
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark justify-content-end">
@@ -39,10 +44,10 @@ function Navbar({isUserLogged}) {
                     <div className="collapse navbar-collapse navbarToggler">
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">                        
                             <li className="nav-item dropdown">
-                                <Link className="nav-link dropdown-toggle" id="userDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" to="/login"><FontAwesomeIcon icon={faUserCircle} /></Link>
+                                <Link className="nav-link dropdown-toggle" id="userDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" to="#"><FontAwesomeIcon icon={faUserCircle} /></Link>
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdownMenuLink">                            
                                 <li><Link className="dropdown-item" to="/home">Profile</Link></li>
-                                <li><Link className="dropdown-item" to="/home">Logout</Link></li>
+                                <li><Link className="dropdown-item" to="/home" onClick={handleClick}>Logout</Link></li>
                                 </ul>                                
                             </li>
                             <li className="nav-item"></li>

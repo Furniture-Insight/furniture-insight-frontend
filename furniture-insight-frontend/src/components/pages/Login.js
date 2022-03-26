@@ -19,7 +19,8 @@ function Login({isUserLogged}) {
 
    
     const handleClick = () => {               
-        isUserLogged(true);          
+        isUserLogged(true); 
+        navigate("/home", {replace:true});         
     }
     
 

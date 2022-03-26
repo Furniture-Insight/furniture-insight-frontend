@@ -7,18 +7,17 @@ function SignUp({isUserLogged}) {
     let navigate = useNavigate();
 
     const [usuario, setUsuario] = useState({
-        Nombres: "",
-        Apellidos: "",
-        Email: "",
-        Password: "",
-        Sexos: "",
-        Edades: "",
-        Direccion_residencia: ""
+        Id_Genero: "",
+        Nombre: "",
+        Apellido: "",
+        Contraseña: "",        
+        Edad: "",
+        Direccion_Residencia: ""
     });
-
-    const handleSubmit = (event) => {
+   
+    const handleSubmit = (event) => {        
         event.preventDefault();
-        fetch('http://localhost:8000/usuarioCliente/crearUsuario', {
+        fetch('http://localhost:8000/user/createUser', {
             method: 'POST',
             headers: {"Content-Type" : "application/json"},
             body: JSON.stringify(usuario)
@@ -29,7 +28,7 @@ function SignUp({isUserLogged}) {
     }
 
     const handleClick = () => {
-        isUserLogged(true);
+        isUserLogged(true);        
     }
 
     return (
@@ -43,43 +42,45 @@ function SignUp({isUserLogged}) {
                         className="mb-3 form-control rounded-pill border border-dark" 
                         type="text" 
                         placeholder="Nombre" 
-                        value={usuario.Nombres}
-                        onChange={(e) => setUsuario({...usuario, Nombres:e.target.value})}/>
+                        value={usuario.Nombre}
+                        onChange={(e) => setUsuario({...usuario, Nombre:e.target.value})}/>
                     <input 
                         required
                         className="mb-3 form-control rounded-pill border border-dark" 
                         type="text" 
                         placeholder="Apellido" 
-                        value={usuario.Apellidos}
-                        onChange={(e) => setUsuario({...usuario, Apellidos:e.target.value})}/>
-                    <input 
+                        value={usuario.Apellido}
+                        onChange={(e) => setUsuario({...usuario, Apellido:e.target.value})}/>
+                    {/* <input 
                         required
                         className="mb-3 form-control rounded-pill border border-dark" 
                         type="email" 
                         placeholder="Email" 
                         value={usuario.Email}
-                        onChange={(e) => setUsuario({...usuario, Email:e.target.value})}/>
+                        onChange={(e) => setUsuario({...usuario, Email:e.target.value})}/> */}
                     <input 
                         required
                         className="mb-3 form-control rounded-pill border border-dark" 
                         type="password" 
                         placeholder="Password" 
-                        value={usuario.Password}
-                        onChange={(e) => setUsuario({...usuario, Password:e.target.value})}/>
-                    <input 
+                        value={usuario.Contraseña}
+                        onChange={(e) => setUsuario({...usuario, Contraseña:e.target.value})}/>
+                    <select
                         required
-                        className="mb-3 form-control rounded-pill border border-dark" 
-                        type="text" 
-                        placeholder="Sexo" 
-                        value={usuario.Sexos}
-                        onChange={(e) => setUsuario({...usuario, Sexos:e.target.value})}/>
+                        className="mb-3 form-select rounded-pill border border-dark" 
+                        value={usuario.Id_Genero}  
+                        onChange={(e) => setUsuario({...usuario, Id_Genero:e.target.value})}>
+                        <option>Genero</option>
+                        <option value="1">Hombre</option>
+                        <option value="2">Mujer</option>
+                    </select>                   
                     <input 
                         required
                         className="mb-3 form-control rounded-pill border border-dark" 
                         type="number" 
                         placeholder="Edad"
-                        value={usuario.Edades}
-                        onChange={(e) => setUsuario({...usuario, Edades:e.target.value})}/>
+                        value={usuario.Edad}
+                        onChange={(e) => setUsuario({...usuario, Edad:e.target.value})}/>
                     <input 
                         required
                         className="mb-3 form-control rounded-pill border border-dark" 
