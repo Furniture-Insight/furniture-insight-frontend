@@ -30,3 +30,12 @@
 .login-signup{
     float: left;
 }
+
+.about-section {
+    padding: 50px;
+}
+
+.welcome-message {
+    padding: 50px;
+    text-align: center;
+}
