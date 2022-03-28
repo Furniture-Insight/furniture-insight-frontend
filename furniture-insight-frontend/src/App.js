@@ -13,6 +13,7 @@ import Checkout from "./components/pages/Checkout";
 import Navbar from './components/Navbar';
 import AboutUs from './components/pages/AboutUs';
 import Profile from './components/pages/Profile';
+import Search from './components/pages/SearchedFurniture';
 
 function App() {
     const [userLogged, setUserLogged] = useState();
@@ -31,6 +32,7 @@ function App() {
                     <Route path="signup" element={<SignUp isUserLogged = {isUserLogged} />}></Route>
                     <Route path="recoverpass" element={<RecoverPass />}></Route>
                     <Route path="store" element={<Store />}></Route>
+                    <Route path="search" element={<Search />}></Route>
                     <Route path="description" element={<Description />}></Route>
                     <Route path="smartRoom" element={<SmartRoom />}></Route>
                     <Route path="cart" element={<Cart />}></Route>
