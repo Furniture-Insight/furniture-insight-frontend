@@ -23,12 +23,12 @@ function Login({isUserLogged}) {
         navigate("/home", {replace:true});         
     }
     
-
     return (
         <div>
             <form onSubmit={handleSubmit}>
                 <div className="form-login">
-                <img className="mb-3" src={logo} width="60" height="65" alt="logo" />
+                    <h1> Furniture Insight </h1>
+                    <img className="mb-3" src={logo} width="60" height="65" alt="logo" />
                     <h4 className="h4 mb-3">Log In</h4>
                     <input
                         className="mb-3 form-control rounded-pill border border-dark"
@@ -42,13 +42,13 @@ function Login({isUserLogged}) {
                         placeholder="Password"
                         value={user.password}
                         onChange={(e) => setUser({ ...user, password: e.target.value })} />
-                    <div className="mb-3">
-                        <Link to="/recoverpass">Forgot Password?</Link>
-                    </div>
                     <button
                         type="submit"
                         className="btn btn-outline-secondary rounded-pill"
                         onClick={handleClick}>Log In</button>
+                    <div className="mb-3">
+                        <Link to="/recoverpass">Forgot Password?</Link>
+                    </div>
                 </div>
             </form>
         </div>

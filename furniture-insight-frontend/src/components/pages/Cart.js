@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCreditCard } from "@fortawesome/free-regular-svg-icons";
 import { faPaypal } from '@fortawesome/free-brands-svg-icons';
+import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
 
 function Cart() {
@@ -15,6 +16,7 @@ function Cart() {
 
     return (
         <div className="container lh-lg">
+            <h1 align="center"><FontAwesomeIcon icon={faCartShopping}/> Cart </h1>
             <div className="row">
                 <label>Subtotal: </label>
                 <label>ITBIS: </label>
