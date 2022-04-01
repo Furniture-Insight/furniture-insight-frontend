@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly signup 1`] = `
+<div>
+  <form
+    onSubmit={[Function]}
+  >
+    <div
+      className="form-login"
+    >
+      <img
+        alt="logo"
+        className="mb-3"
+        height="65"
+        src=""
+        width="60"
+      />
+      <h4
+        className="h4 mb-3"
+      >
+        Sign Up
+      </h4>
+      <input
+        className="mb-3 form-control rounded-pill border border-dark"
+        id="nombre-input"
+        onChange={[Function]}
+        placeholder="Nombre"
+        required={true}
+        type="text"
+        value=""
+      />
+      <input
+        className="mb-3 form-control rounded-pill border border-dark"
+        id="apellido-input"
+        onChange={[Function]}
+        placeholder="Apellido"
+        required={true}
+        type="text"
+        value=""
+      />
+      <input
+        className="mb-3 form-control rounded-pill border border-dark"
+        id="email-input"
+        onChange={[Function]}
+        placeholder="Email"
+        required={true}
+        type="email"
+        value=""
+      />
+      <input
+        className="mb-3 form-control rounded-pill border border-dark"
+        id="contraseña-input"
+        onChange={[Function]}
+        placeholder="Contraseña"
+        required={true}
+        type="password"
+        value=""
+      />
+      <select
+        className="mb-3 form-select rounded-pill border border-dark"
+        id="genero-select"
+        onChange={[Function]}
+        required={true}
+        value=""
+      >
+        <option>
+          Genero
+        </option>
+        <option
+          value="1"
+        >
+          Hombre
+        </option>
+        <option
+          value="2"
+        >
+          Mujer
+        </option>
+      </select>
+      <input
+        className="mb-3 form-control rounded-pill border border-dark"
+        onChange={[Function]}
+        placeholder="Edad"
+        required={true}
+        type="number"
+        value=""
+      />
+      <input
+        className="mb-3 form-control rounded-pill border border-dark"
+        onChange={[Function]}
+        placeholder="Direccion Residencia"
+        required={true}
+        type="text"
+      />
+      <button
+        className="btn btn-outline-secondary rounded-pill"
+        onClick={[Function]}
+        type="submit"
+      >
+        Sign Up
+      </button>
+    </div>
+  </form>
+</div>
+`;

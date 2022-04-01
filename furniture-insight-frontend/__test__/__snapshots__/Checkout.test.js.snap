@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Checkout Page renders without problems 1`] = `
-<div>
-  <h1>
-    This is Checkout Page
-  </h1>
-</div>
-`;
