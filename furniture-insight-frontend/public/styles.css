@@ -31,6 +31,15 @@
     float: left;
 }
 
+.about-section {
+    padding: 50px;
+}
+
+.welcome-message {
+    padding: 50px;
+    text-align: center;
+}
+
 .cards {
     text-align: center;
     padding: 10px;
