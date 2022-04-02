@@ -14,42 +14,42 @@ function Login({ isUserLogged }) {
     const [usuarioToken, setUsuarioToken] = useState({
         accessToken: "",
         refreshToken: ""
-    })    
+    })
 
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type' : 'application/json' },
-        body: JSON.stringify(usuario)
-    };
+        headers: { 'Content-Type': 'application/json' },        
+        body: JSON.stringify(usuario),
+        
+    }
 
     const loginUsuario = () => {
         fetch('http://localhost:8000/login', requestOptions)
-        .then(async response => {
-            const isJson = response.headers.get('content-type')?.includes('application/json');
-            const data = isJson && await response.json();            
-            if(!response.ok){
-                alert("Nombre o Contraseña invalidos")
-                const error = (data && data.message) || response.status;
-                isUserLogged(false)
-                return Promise.reject(error)
-            }
-            else {
-                isUserLogged(true)
-                navigate("/home", {replace:true})
-            }
-            setUsuarioToken(data, console.log(usuarioToken));
-        })
-    } 
+            .then(async response => {
+                const isJson = response.headers.get('content-type')?.includes('application/json');
+                const data = isJson && await response.json();
+                if (!response.ok) {
+                    alert("Nombre o Contraseña invalidos")
+                    const error = (data && data.message) || response.status;
+                    isUserLogged(false)
+                    return Promise.reject(error)
+                }
+                else {
+                    isUserLogged(true)
+                    navigate("/home", { replace: true })
+                }
+            })
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
         loginUsuario();
         console.log(usuario)
-        
+
 
     }
 
-    const handleClick = () => {        
+    const handleClick = () => {
         // navigate("/home", {replace:true});         
     }
     return (
@@ -76,7 +76,7 @@ function Login({ isUserLogged }) {
                     <button
                         type="submit"
                         className="btn btn-outline-secondary rounded-pill"
-                       >Log In</button>
+                    >Log In</button>
                 </div>
             </form>
         </div>
