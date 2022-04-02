@@ -56,6 +56,7 @@ function SignUp({ isUserLogged }) {
         <div>
             <form onSubmit={handleSubmit} data-testid="form">
                 <div className="form-login">
+                    <h1> Furniture Insight </h1>
                     <img className="mb-3" src={logo} width="60" height="65" alt="logo" />
                     <h4 className="h4 mb-3">Sign Up</h4>
                     <input

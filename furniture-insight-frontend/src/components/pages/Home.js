@@ -2,7 +2,9 @@ import React from "react";
 import bed from "../images/bed.jpg";
 import table from "../images/table.jpg";
 import chairs from "../images/chairs.jpg";
+
 function Home() {
+    
     return (
         <div align="center">
             <div id="carouselHomeSlidesOnly" className="carousel slide " data-bs-ride="carousel">
