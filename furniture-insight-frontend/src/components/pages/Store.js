@@ -1,5 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import bed from "../images/bed.jpg";
@@ -10,8 +11,9 @@ import desk from "../images/desk.jpg";
 function Store() {
     const [error, setError] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [buscandoMuebles, setBuscandoMuebles] = useState(false);
     const [muebles, setMuebles] = useState([]);
-    const[muebleUpdated, setMuebleUpdated] = useState("");
+    const [muebleUpdated, setMuebleUpdated] = useState("");
 
     useEffect(() => {
         fetch('http://localhost:8000/mueble/all')
@@ -26,19 +28,25 @@ function Store() {
                     setError(error);
                 }
             )
-    }, [])    
+    }, [])
     const [busqueda, setBusqueda] = useState(
         {
-            buscar: "",
-            ancho: "",
-            largo: ""
+            Nombre: ""
         }
     )
 
+    const buscarMueblePorNombre = () => {
+        fetch(`http://localhost:8000/mueble/mueble/${busqueda.Nombre}`)
+            .then(async response => {
+                const data = await response.json()
+                console.log(data)
+            })
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        alert("Data entered");
-        console.log(busqueda);
+        buscarMueblePorNombre();
+        setBuscandoMuebles(true);
     }
 
     if (error) {
@@ -61,23 +69,20 @@ function Store() {
                                 type="text"
                                 placeholder="Buscar Mueble"
                                 value={busqueda.buscar}
-                                onChange={(e) => setBusqueda({ ...busqueda, buscar: e.target.value })} />
+                                onChange={(e) => setBusqueda({ ...busqueda, Nombre: e.target.value })} />
                         </div>
                         <div className="col-1">
                             <input
                                 className="form-control rounded-pill border border-dark"
                                 type="text"
-                                placeholder="Ancho"
-                                value={busqueda.ancho}
-                                onChange={(e) => setBusqueda({ ...busqueda, ancho: e.target.value })} />
+                                placeholder="Ancho" />
                         </div>
                         <div className="col-1">
                             <input
                                 className="form-control rounded-pill border border-dark"
                                 type="text"
                                 placeholder="Largo"
-                                value={busqueda.largo}
-                                onChange={(e) => setBusqueda({ ...busqueda, largo: e.target.value })} />
+                            />
                         </div>
                         <div className="col">
                             <button
@@ -89,14 +94,14 @@ function Store() {
                         </div>
                     </div>
                 </form>
-                <div className="row">
+                <div className="row justify-content-center">
                     {muebles.map((mueble) => (
                         <div className="col-auto" key={mueble.Id_Mueble} style={{ "maxWidth": "18rem" }}>
                             <div className="card text-center">
-                                <div className="card-body">
+                                <div className="card-body text-dark bg-light">
                                     <h5 className="card-title">{mueble.Nombre}</h5>
                                     <p className="card-text">Precio: {mueble.Precio}</p>
-                                    <button type="button" className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#muebleModal" onClick={() => {setMuebleUpdated(mueble)}}>
+                                    <button type="button" className="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#muebleModal" onClick={() => { setMuebleUpdated(mueble) }}>
                                         Ver Detalles
                                     </button>
                                 </div>
