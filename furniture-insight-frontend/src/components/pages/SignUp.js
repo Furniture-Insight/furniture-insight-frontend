@@ -1,10 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
 
 function SignUp({ isUserLogged }) {
-    let navigate = useNavigate();
+    // let navigate = useNavigate();
 
     const [usuario, setUsuario] = useState({
         Id_Genero: "",
@@ -21,24 +21,24 @@ function SignUp({ isUserLogged }) {
     })
 
 
-    const createUsuario = () => {        
+    const createUsuario = () => {
         fetch('http://localhost:8000/user/crear', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(usuario)
         }).then((response) => response.json())
-        .then(data => this.setCliente({...cliente,Id_Usuario: data.Id_Usuario}))
-        .then(console.log(cliente))     
+            .then(data => this.setCliente({ ...cliente, Id_Usuario: data.Id_Usuario }))
+            .then(console.log(cliente))
     }
 
-    const createCliente = () => {        
+    const createCliente = () => {
         fetch('http://localhost:8000/client/createClient', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(cliente)
-        }).then(()=> {
+        }).then(() => {
             console.log(cliente)
-        })        
+        })
     }
 
     const handleSubmit = (event) => {
@@ -54,13 +54,14 @@ function SignUp({ isUserLogged }) {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} data-testid="form">
                 <div className="form-login">
                     <h1> Furniture Insight </h1>
                     <img className="mb-3" src={logo} width="60" height="65" alt="logo" />
                     <h4 className="h4 mb-3">Sign Up</h4>
                     <input
                         required
+                        name="nombre"                        
                         className="mb-3 form-control rounded-pill border border-dark"
                         type="text"
                         placeholder="Nombre"
@@ -68,6 +69,7 @@ function SignUp({ isUserLogged }) {
                         onChange={(e) => setUsuario({ ...usuario, Nombre: e.target.value })} />
                     <input
                         required
+                        name="apellido"                        
                         className="mb-3 form-control rounded-pill border border-dark"
                         type="text"
                         placeholder="Apellido"
@@ -75,6 +77,7 @@ function SignUp({ isUserLogged }) {
                         onChange={(e) => setUsuario({ ...usuario, Apellido: e.target.value })} />
                     <input
                         required
+                        name="email"                        
                         className="mb-3 form-control rounded-pill border border-dark"
                         type="email"
                         placeholder="Email"
@@ -82,13 +85,15 @@ function SignUp({ isUserLogged }) {
                         onChange={(e) => setCliente({ ...cliente, Email: e.target.value })} />
                     <input
                         required
+                        name="contraseña"                        
                         className="mb-3 form-control rounded-pill border border-dark"
                         type="password"
-                        placeholder="Password"
+                        placeholder="Contraseña"
                         value={usuario.Contraseña}
                         onChange={(e) => setUsuario({ ...usuario, Contraseña: e.target.value })} />
                     <select
                         required
+                        name="genero"
                         className="mb-3 form-select rounded-pill border border-dark"
                         value={usuario.Id_Genero}
                         onChange={(e) => setUsuario({ ...usuario, Id_Genero: e.target.value })}>
@@ -98,20 +103,22 @@ function SignUp({ isUserLogged }) {
                     </select>
                     <input
                         required
+                        name="edad"
                         className="mb-3 form-control rounded-pill border border-dark"
-                        type="number"
+                        type="text"
                         placeholder="Edad"
                         value={usuario.Edad}
                         onChange={(e) => setUsuario({ ...usuario, Edad: e.target.value })} />
                     <input
                         required
+                        name="direccion_residencia"
                         className="mb-3 form-control rounded-pill border border-dark"
                         type="text"
                         placeholder="Direccion Residencia"
                         value={usuario.Direccion_residencia}
                         onChange={(e) => setUsuario({ ...usuario, Direccion_Residencia: e.target.value })} />
                     <button
-                        type="submit"
+                        type="submit"                        
                         className="btn btn-outline-secondary rounded-pill"
                         onClick={handleClick}
                     >Sign Up</button>
