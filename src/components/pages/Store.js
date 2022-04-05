@@ -16,7 +16,7 @@ function Store() {
     const [muebleUpdated, setMuebleUpdated] = useState("");
 
     useEffect(() => {
-        fetch('http://localhost:8000/mueble/all')
+        fetch('https://furniture-insight-app.herokuapp.com/mueble/all')
             .then(res => res.json())
             .then(
                 (result) => {
