@@ -1,31 +1,28 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { Buffer } from 'buffer';
 
 function Store() {
-    const [muebles, setMuebles] = useState([]);   
+    let navigate = useNavigate();
+    const [muebles, setMuebles] = useState([]);
+    const [busqueda, setBusqueda] = useState("")
 
     const getMuebles = async () => {
         const response = await fetch('http://localhost:8000/mueble/all')
         const result = await response.json()
         for (const item of result) {
             const b64 = Buffer.from(item.data).toString("base64");
-            item.data = b64;           
+            item.data = b64;
         }
         setMuebles(result);
-    }    
+    }
 
     useEffect(() => {
-        getMuebles();        
-    }, [])
-
-    const [busqueda, setBusqueda] = useState(
-        {
-            Nombre: ""
-        }
-    )
+        getMuebles();
+    }, [])    
 
     const buscarMueblePorNombre = () => {
         fetch(`http://localhost:8000/mueble/mueble/${busqueda.Nombre}`)
@@ -37,6 +34,10 @@ function Store() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
+    }
+
+    const handleClick = () => {
+        navigate("/mueble", {replace: true})
     }
     return (
         <div className="container">
@@ -51,9 +52,8 @@ function Store() {
                         <input
                             className="form-control rounded-pill border border-dark"
                             type="text"
-                            placeholder="Buscar Mueble"
-                            value={busqueda.buscar}
-                            onChange={(e) => setBusqueda({ ...busqueda, Nombre: e.target.value })} />
+                            placeholder="Buscar Mueble"                            
+                            onChange={event => setBusqueda(event.target.value)} />
                     </div>
                     <div className="col-1">
                         <input
@@ -78,24 +78,35 @@ function Store() {
                     </div>
                 </div>
             </form>
-            <div className="row justify-content-center">
-                {muebles.map((mueble) => (
-                    <div className="col" key={mueble.Id_Mueble}>
-                        <div className="card mb-3" style={{ "maxWidth": "33.75rem" }}>
-                            <div className="row g-0">
-                                <div className="col-md-8">
-                                    <div className="card-body">
-                                        <div className="col-md-4">
-                                            <img src={`data:image/jpg;base64,${mueble.data}`} className="img-fluid rounded-start" />
+            <div className="col">
+                <div className="row row-cols-2">
+                
+                    {
+                        muebles.filter(mueble =>{
+                            if(busqueda === ""){
+                                return mueble
+                            }else if (mueble.Nombre.toString().toLowerCase().includes(busqueda.toLowerCase())){
+                                return mueble
+                            }
+                        }).map((mueble) => (
+                        <div className="col" key={mueble.Id_Mueble}>
+                            <div className="card border-secondary stretched-link text-center mb-3" style={{ "maxWidth": "33.75rem" }} onClick={handleClick}>
+                                <div className="row g-0">
+                                    <div className="col-md-4">
+                                        <img src={`data:image/jpg;base64,${mueble.data}`} className="img-fluid rounded-start" />
+                                    </div>
+                                    <div className="col-md-8">
+                                        <div className="card-body">
+                                            <h5 className="card-title">{mueble.Nombre}</h5>
+
+                                            <p className="card-text">{mueble.Precio}</p>
                                         </div>
-                                        <h5 className="card-title">{mueble.Nombre}</h5>
-                                        <p className="card-text">{mueble.Precio}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
     )
