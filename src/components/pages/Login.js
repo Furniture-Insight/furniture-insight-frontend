@@ -1,10 +1,47 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import axios from 'axios';
 import logo from "../images/logo.png";
+
+const apiUrl = 'https://furniture-insight-app.herokuapp.com/login';
+
+axios.interceptors.request.use(
+    config => {
+        const { origin } = new URL(config.url);
+        const allowedOrigins = [apiUrl];
+        const accessToken = localStorage.getItem('accessToken');
+        const refreshToken = localStorage.getItem('refreshToken');
+
+        if (allowedOrigins.includes(origin)) {
+            config.headers.authorization = `Bearer ${accessToken}`;
+            config.headers.authorization = `Bearer ${refreshToken}`;
+        }
+        return config;
+    },
+    error => {
+        return Promise.reject(error);
+    }
+);
 
 function Login({ isUserLogged }) {
     let navigate = useNavigate();
+    const storedAccessToken = localStorage.getItem('accessToken');
+    const storedRefreshToken = localStorage.getItem('refreshToken');
+    const [jwt, setJwt] = useState({
+        storedAccessToken,
+        storedRefreshToken
+    })
+
+    const getJwt = async () => {
+        const user = usuario;
+        const { data } = await axios.post(apiUrl, user);
+        localStorage.setItem('accessToken', data.accessToken);
+        localStorage.setItem('refreshToken', data.refreshToken);
+        setJwt(data.accessToken);
+        setJwt(data.refreshToken);
+
+    }
 
     const [usuario, setUsuario] = useState({
         Nombre: "",
@@ -18,13 +55,13 @@ function Login({ isUserLogged }) {
 
     const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },        
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(usuario),
-        
+
     }
 
     const loginUsuario = () => {
-        fetch('http://localhost:8000/login', requestOptions)
+        fetch('https://furniture-insight-app.herokuapp.com/login', requestOptions)
             .then(async response => {
                 const isJson = response.headers.get('content-type')?.includes('application/json');
                 const data = isJson && await response.json();
@@ -42,15 +79,13 @@ function Login({ isUserLogged }) {
     }
 
     const handleSubmit = (event) => {
-        event.preventDefault();
-        loginUsuario();
-        console.log(usuario)
-
-
+        event.preventDefault();        
+        getJwt();
+        console.log(jwt)      
     }
 
     const handleClick = () => {
-        // navigate("/home", {replace:true});         
+        //  navigate("/home", {replace:true});         
     }
     return (
         <div>
