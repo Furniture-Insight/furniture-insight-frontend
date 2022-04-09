@@ -6,7 +6,7 @@ function Mueble({ clickedMueble }) {
             <div className="container">
                 <div className="row">
                     <div className="col">
-                        <img src={`data:image/jpg;base64,${clickedMueble.data}`} className="img-fluid rounded-start" style={{ "maxWidth": "33.75rem" }} />
+                        <img src={`data:image/${clickedMueble.mimetype};base64,${clickedMueble.data}`} className="img-fluid rounded-start" style={{ "maxWidth": "33.75rem" }} />
                         <div className="row">
                             <div className="col">
                                 <h3 className="h3">{clickedMueble.Precio}</h3>

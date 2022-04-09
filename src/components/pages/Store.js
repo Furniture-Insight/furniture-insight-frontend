@@ -90,7 +90,7 @@ function Store({clickedMueble}) {
                                     <div className="card border-secondary stretched-link text-center mb-3" style={{ "maxWidth": "33.75rem" }} onClick={() => clickedMueble(mueble)}>
                                         <div className="row g-0">
                                             <div className="col-md-4">
-                                                <img src={`data:image/jpg;base64,${mueble.data}`} className="img-fluid rounded-start" />
+                                                <img src={`data:image/${clickedMueble.mimetype};base64,${mueble.data}`} className="img-fluid rounded-start" />
                                             </div>
                                             <div className="col-md-8">
                                                 <div className="card-body">
