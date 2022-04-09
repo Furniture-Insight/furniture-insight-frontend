@@ -1,17 +1,16 @@
-
-.form-login{
+.form-login {
     width: 100%;
     max-width: 330px;
     padding: 15px;
-    margin: 100px auto auto auto; 
+    margin: 100px auto auto auto;
     text-align: center;
 }
 
-.search-bar{
+.search-bar {
     margin-left: 25%;
 }
 
-.img-categories{
+.img-categories {
     margin: 0 auto;
 }
 
@@ -20,14 +19,14 @@
     margin-left: auto;
     margin-right: auto;
     width: 50%;
-  }
+}
 
-.img-small{
+.img-small {
     width: 100px;
     height: 100px;
 }
 
-.login-signup{
+.login-signup {
     float: left;
 }
 
@@ -47,11 +46,25 @@
     border-radius: 5px;
     padding: 1em;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  }
+}
 
-  .item-container {
+.item-container {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     gap: 2em;
-  }
+}
+
+.card {
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, .08), 0 0 6px rgba(0, 0, 0, .05);
+    transition: .3s transform cubic-bezier(.155, 1.105, .295, 1.12), .3s box-shadow, .3s -webkit-transform cubic-bezier(.155, 1.105, .295, 1.12);
+    padding: 14px 80px 18px 36px;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+}
