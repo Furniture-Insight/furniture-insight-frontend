@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 import Home from "./components/pages/Home"
 import Login from "./components/pages/Login";
 import SignUp from "./components/pages/SignUp";
@@ -17,16 +18,16 @@ import Mueble from './components/pages/Mueble';
 
 function App() {
     const [userLogged, setUserLogged] = useState();
-    const [mueble, setMueble] = useState();
-   
+    const [mueble, setMueble] = useState();    
+
     const isUserLogged = (userLoggedStatus) => {             
         setUserLogged(userLoggedStatus);
     }
 
     const clickedMueble = (muebleClicked) => {
         setMueble(muebleClicked);
-    }
-
+    }    
+    
     console.log(mueble);
     
     return (        
@@ -38,7 +39,7 @@ function App() {
                     <Route path="signup" element={<SignUp isUserLogged = {isUserLogged} />}></Route>
                     <Route path="recoverpass" element={<RecoverPass />}></Route>
                     <Route path="store" element={<Store clickedMueble={clickedMueble} />}></Route>
-                    <Route path="mueble" element={<Mueble clickedMueble={mueble}/>}></Route>
+                    <Route path="mueble" element={<Mueble clickedMueble={mueble} />}></Route>
                     <Route path="description" element={<Description />}></Route>
                     <Route path="smartRoom" element={<SmartRoom />}></Route>
                     <Route path="cart" element={<Cart />}></Route>

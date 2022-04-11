@@ -2,9 +2,12 @@ import React from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
+import Cookies from 'universal-cookie';
 
 function SignUp({ isUserLogged }) {
     let navigate = useNavigate();
+
+    const cookies = new Cookies();
 
     const [usuario, setUsuario] = useState({
         Id_Genero: "",
@@ -13,15 +16,18 @@ function SignUp({ isUserLogged }) {
         Contraseña: "",
         Edad: "",
         Direccion_Residencia: ""
-    });    
+    });     
 
     const createUsuario = () => {
-        fetch('https://furniture-insight-app.herokuapp.com/user/crear', {
+        fetch('http://localhost:8000/user/crear', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(usuario)
-        }).then(navigate("/store", {replace:true}))
-    }   
+        }).then(response => response.json())
+        .then(data => {
+            cookies.set('Id_Usuario', data.Id_Usuario, {path:'/'})
+        })            
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
