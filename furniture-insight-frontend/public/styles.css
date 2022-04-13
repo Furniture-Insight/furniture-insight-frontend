@@ -36,7 +36,7 @@
 }
 
 .welcome-message {
-    padding: 50px;
+    padding: 50px 0 0 0;
     text-align: center;
 }
 
@@ -61,6 +61,6 @@
     padding: 50px 0 20px;
 }
 
-a:hover {
-    background-color: yellow;
+.profile-container {
+    margin: 0 200px 0 200px;
 }
