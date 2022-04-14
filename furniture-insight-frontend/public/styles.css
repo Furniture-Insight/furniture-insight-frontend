@@ -64,3 +64,14 @@
 .profile-container {
     margin: 0 200px 0 200px;
 }
+
+.carousel-control-next,
+.carousel-control-prev {
+    filter: invert(100%);
+}
+
+.carousel {
+    margin-top: 50px;
+    width: 1365px;
+    height: 340px;
+}

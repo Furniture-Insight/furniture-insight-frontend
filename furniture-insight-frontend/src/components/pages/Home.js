@@ -7,7 +7,7 @@ function Home() {
     
     return (
         <div align="center">
-            <div id="carouselHomeSlidesOnly" className="carousel slide " data-bs-ride="carousel">
+            <div id="carouselHomeSlidesOnly" className="carousel slide" data-bs-ride="carousel">
                 <div className="carousel-inner">
                     <div className="carousel-item active">
                         <img src={bed} className="d-block w-25" alt="bed.jpg"/>
