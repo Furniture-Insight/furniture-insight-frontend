@@ -13,7 +13,7 @@ function Mueble({ clickedMueble}) {
     });         
 
     const crearCarrito = () => {    
-        fetch('http://localhost:8000/carrito/crear', {
+        fetch('https://furniture-insight-app.herokuapp.com/carrito/crear', {
             method:'POST',
             headers: {"Content-Type" : "application/json"},
             body: JSON.stringify(carrito)

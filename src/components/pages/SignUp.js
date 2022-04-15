@@ -13,13 +13,14 @@ function SignUp({ isUserLogged }) {
         Id_Genero: "",
         Nombre: "",
         Apellido: "",
+        Email: "",
         Contraseña: "",
         Edad: "",
         Direccion_Residencia: ""
     });     
 
     const createUsuario = () => {
-        fetch('http://localhost:8000/user/crear', {
+        fetch('https://furniture-insight-app.herokuapp.com/user/crear', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(usuario)
@@ -60,7 +61,15 @@ function SignUp({ isUserLogged }) {
                         type="text"
                         placeholder="Apellido"
                         value={usuario.Apellido}
-                        onChange={(e) => setUsuario({ ...usuario, Apellido: e.target.value })} />                    
+                        onChange={(e) => setUsuario({ ...usuario, Apellido: e.target.value })} />
+                    <input
+                        required
+                        name="email"                        
+                        className="mb-3 form-control rounded-pill border border-dark"
+                        type="text"
+                        placeholder="Email"
+                        value={usuario.Email}
+                        onChange={(e) => setUsuario({ ...usuario, Email: e.target.value })} />                                                              
                     <input
                         required
                         name="contraseña"                        
