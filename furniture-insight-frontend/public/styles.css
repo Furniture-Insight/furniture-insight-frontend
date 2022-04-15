@@ -71,7 +71,11 @@
 }
 
 .carousel {
-    margin-top: 50px;
+    margin: 50px 0 50px 0;
     width: 1365px;
     height: 340px;
+}
+
+.btn-homepage {
+    width: 40%;
 }
