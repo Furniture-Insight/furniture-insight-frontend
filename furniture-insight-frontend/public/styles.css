@@ -1,9 +1,9 @@
 
 .form-login{
     width: 100%;
-    max-width: 330px;
+    max-width: 340px;
     padding: 15px;
-    margin: 100px auto auto auto;  
+    margin: 100px auto auto auto; 
     text-align: center;
 }
 
@@ -22,6 +22,7 @@
     width: 50%;
 }
 
+<<<<<<< HEAD
 .home {
     width: 100%;
     height: 90vh;
@@ -116,4 +117,62 @@
       background-color: rgb(225, 225, 225);
       color: #121619;
     }
+=======
+.img-small{
+    width: 100px;
+    height: 100px;
+}
+
+.login-signup{
+    float: left;
+}
+
+.about-section {
+    padding: 50px;
+}
+
+.welcome-message {
+    padding: 50px 0 0 0;
+    text-align: center;
+}
+
+.cards {
+    text-align: center;
+    padding: 10px;
+    width: 300px;
+    border-radius: 5px;
+    padding: 1em;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.item-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2em;
+}
+
+.footer {
+    text-align: center;
+    padding: 50px 0 20px;
+}
+
+.profile-container {
+    margin: 0 200px 0 200px;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+    filter: invert(100%);
+}
+
+.carousel {
+    margin: 50px 0 50px 0;
+    width: 1365px;
+    height: 340px;
+}
+
+.btn-homepage {
+    width: 40%;
+>>>>>>> e423253eeb3faed8d112a55d80b35f2f39019372
 }
