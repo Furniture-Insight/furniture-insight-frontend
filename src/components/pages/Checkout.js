@@ -10,7 +10,7 @@ function Checkout() {
     const [newTarjeta, setNewTarjeta] = useState({
         Numero_Tarjeta: "",
         CVV_CV2: "",
-        Fecha_Expiracion: "",
+        Fecha_Expiracion: "", 
         Nombre: "",
         UsuarioIdUsuario: cookies.get('Id_Usuario')
     })
