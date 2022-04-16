@@ -1,50 +1,38 @@
 import React from "react";
 import { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import logo from "../images/logo.png";
+import Cookies from 'universal-cookie';
 
 function SignUp({ isUserLogged }) {
-    // let navigate = useNavigate();
+    let navigate = useNavigate();
+
+    const cookies = new Cookies();
 
     const [usuario, setUsuario] = useState({
         Id_Genero: "",
         Nombre: "",
         Apellido: "",
+        Email: "",
         Contraseña: "",
         Edad: "",
         Direccion_Residencia: ""
-    });
-
-    const [cliente, setCliente] = useState({
-        Id_Usuario: "",
-        Email: ""
-    })
-
+    });     
 
     const createUsuario = () => {
-        fetch('http://localhost:8000/user/crear', {
+        fetch('https://furniture-insight-app.herokuapp.com/user/crear', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(usuario)
-        }).then((response) => response.json())
-            .then(data => this.setCliente({ ...cliente, Id_Usuario: data.Id_Usuario }))
-            .then(console.log(cliente))
-    }
-
-    const createCliente = () => {
-        fetch('http://localhost:8000/client/createClient', {
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(cliente)
-        }).then(() => {
-            console.log(cliente)
-        })
+        }).then(response => response.json())
+        .then(data => {
+            cookies.set('Id_Usuario', data.Id_Usuario, {path:'/'})
+        })            
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        createUsuario();
-        createCliente();
+        createUsuario();    
     }
 
     const handleClick = () => {
@@ -79,10 +67,10 @@ function SignUp({ isUserLogged }) {
                         required
                         name="email"                        
                         className="mb-3 form-control rounded-pill border border-dark"
-                        type="email"
+                        type="text"
                         placeholder="Email"
-                        value={cliente.Email}
-                        onChange={(e) => setCliente({ ...cliente, Email: e.target.value })} />
+                        value={usuario.Email}
+                        onChange={(e) => setUsuario({ ...usuario, Email: e.target.value })} />                                                              
                     <input
                         required
                         name="contraseña"                        

@@ -1,55 +1,35 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { useNavigate, Link } from "react-router-dom";
 import logo from "../images/logo.png";
+import Cookies from "universal-cookie";
 
 function Login({ isUserLogged }) {
-    let navigate = useNavigate();
+    //let navigate = useNavigate(); 
+    
+    const cookies = new Cookies();
 
     const [usuario, setUsuario] = useState({
-        Nombre: "",
+        Email: "",
         Contraseña: ""
-    });
-
-    const [usuarioToken, setUsuarioToken] = useState({
-        accessToken: "",
-        refreshToken: ""
-    })
-
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },        
-        body: JSON.stringify(usuario),
-    }
+    });   
 
     const loginUsuario = () => {
-        fetch('http://localhost:8000/login', requestOptions)
-            .then(async response => {
-                const isJson = response.headers.get('content-type')?.includes('application/json');
-                const data = isJson && await response.json();
-                if (!response.ok) {
-                    alert("Nombre o Contraseña invalidos")
-                    const error = (data && data.message) || response.status;
-                    isUserLogged(false)
-                    return Promise.reject(error)
-                }
-                else {
-                    isUserLogged(true)
-                    navigate("/home", { replace: true })
-                }
-            })
+        fetch('https://furniture-insight-app.herokuapp.com/login', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(usuario)
+        }).then(response => response.json())
+        .then(data=> {
+            cookies.set('Id_Usuario', data.Usuario, {path:'/'});
+        })
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
         loginUsuario();
-        console.log(usuario)
+        isUserLogged(true)                  
     }
-    
-    const handleClick = () => {
-        // navigate("/home", {replace:true});         
-    }
-    
     return (
         <div>
             <form onSubmit={handleSubmit}>
@@ -60,9 +40,9 @@ function Login({ isUserLogged }) {
                     <input
                         className="mb-3 form-control rounded-pill border border-dark"
                         type="text"
-                        placeholder="Nombre"
-                        value={usuario.Nombre}
-                        onChange={(e) => setUsuario({ ...usuario, Nombre: e.target.value })} />
+                        placeholder="Email"
+                        value={usuario.Email}
+                        onChange={(e) => setUsuario({ ...usuario, Email: e.target.value })} />
                     <input
                         className="mb-3 form-control rounded-pill border border-dark"
                         type="password"
