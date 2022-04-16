@@ -64,6 +64,12 @@ function Checkout() {
                     className="btn btn-secondary rounded-pill w-25"
                     data-bs-toggle="modal"
                     data-bs-target="#cardModal">Agregar tarjeta</button>
+
+                <button
+                    type="button"
+                    className="btn btn-secondary rounded-pill w-25"
+                    data-bs-toggle="modal"
+                    data-bs-target="#cardModal">Procesar Pago</button>
             </div>
             <form onSubmit={handleSubmit}>
                 <div className="modal fade" id="cardModal" tabIndex="-1" aria-labelledby="cardModalLabel" aria-hidden="true">
