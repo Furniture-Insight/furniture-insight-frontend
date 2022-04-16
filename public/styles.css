@@ -35,7 +35,7 @@
 }
 
 .welcome-message {
-    padding: 50px;
+    padding: 50px 0 0 0;
     text-align: center;
 }
 
@@ -55,7 +55,6 @@
     gap: 2em;
 }
 
-<<<<<<< HEAD:public/styles.css
 .card {
     border-radius: 4px;
     background: #fff;
@@ -73,13 +72,28 @@
 .cart-img{
     height: auto;
     width: 10rem;
-=======
+}
+
 .footer {
     text-align: center;
     padding: 50px 0 20px;
 }
 
-a:hover {
-    background-color: yellow;
->>>>>>> main:furniture-insight-frontend/public/styles.css
+.profile-container {
+    margin: 0 200px 0 200px;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+    filter: invert(100%);
+}
+
+.carousel {
+    margin: 50px 0 50px 0;
+    width: 1365px;
+    height: 340px;
+}
+
+.btn-homepage {
+    width: 40%;
 }

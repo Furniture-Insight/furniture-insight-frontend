@@ -1,9 +1,16 @@
+<<<<<<< HEAD
+import React, { useState, useEffect} from 'react'
+import { Link } from 'react-router-dom';
+// import './Navbar.css';
+import { Button } from './Button';
+=======
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import Cookies from 'universal-cookie';
 import logo from "./images/logo.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStore, faRightToBracket, faUserPlus, faCartShopping, faTableCells, faUserCircle, faUsers } from "@fortawesome/free-solid-svg-icons";
+>>>>>>> e423253eeb3faed8d112a55d80b35f2f39019372
 
 function Navbar({isUserLogged}) {
     const cookies = new Cookies();
@@ -13,6 +20,70 @@ function Navbar({isUserLogged}) {
         isUserLogged(false);        
     }
 
+<<<<<<< HEAD
+  const [click, setClick] = useState(false);
+  const [button, setButton] = useState(true);
+
+  const handleClick = () => setClick(!click);
+  const closeMobileMenu = () => setClick(false);
+
+  const showButton = () => {
+      if(window.innerWidth <= 960) {
+          setButton(false);
+      } else {
+          setButton(true);
+      }
+  };
+
+  useEffect(() => {
+    showButton();
+  }, []);
+
+  window.addEventListener('resize', showButton);
+
+  return (
+    <>
+        <nav className='navbar'>
+            <div className='navbar-container'>
+                <Link to='/' className='navbar-logo' onClick={closeMobileMenu}>
+                    Furniture Insight <i className='fab fa-typo3' />
+                </Link>
+                <div className='menu-icon' onClick={handleClick}>
+                    <i className={click ? 'fas fa-times' : 'fas fas-bars'} />
+                </div>
+                <ul className={click ? 'nav-menu active' : 'nav-menu'}>
+                    <li className='nav-item'>
+                        <Link to='/Store' className='nav-links' onClick={closeMobileMenu}>
+                            Store
+                        </Link>
+                    </li>
+                    <li className='nav-item'>
+                        <Link to='/SmartRoom' className='nav-links' onClick={closeMobileMenu}>
+                            Smart Room
+                        </Link>
+                    </li>
+                    <li className='nav-item'>
+                        <Link to='/ShoppingCart' className='nav-links' onClick={closeMobileMenu}>
+                            Shopping Cart
+                        </Link>
+                    </li>
+                    <li className='nav-item'>
+                        <Link to='/AboutUs' className='nav-links' onClick={closeMobileMenu}>
+                            About Us
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to='/SignUp' className='nav-links' onClick={closeMobileMenu}>
+                            Sign Up
+                        </Link>
+                    </li>
+                </ul>
+                {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
+            </div>
+        </nav>
+    </>
+  )
+=======
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark justify-content-end">
@@ -70,6 +141,7 @@ function Navbar({isUserLogged}) {
             <Outlet />
         </div>
     );
+>>>>>>> e423253eeb3faed8d112a55d80b35f2f39019372
 }
 
 export default Navbar;
