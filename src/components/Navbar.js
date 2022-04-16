@@ -6,15 +6,18 @@ import { Button } from './Button';
 =======
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
+import Cookies from 'universal-cookie';
 import logo from "./images/logo.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStore, faRightToBracket, faUserPlus, faCartShopping, faTableCells, faUserCircle, faUsers } from "@fortawesome/free-solid-svg-icons";
 >>>>>>> e423253eeb3faed8d112a55d80b35f2f39019372
 
 function Navbar({isUserLogged}) {
+    const cookies = new Cookies();
     
     const handleClick = () =>{
-        isUserLogged(false);            
+        cookies.remove('Id_Usuario');
+        isUserLogged(false);        
     }
 
 <<<<<<< HEAD
