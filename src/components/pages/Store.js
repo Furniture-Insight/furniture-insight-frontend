@@ -1,41 +1,10 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { Buffer } from 'buffer';
+import bed from "../images/bed.jpg";
+import chairs from "../images/chairs.jpg";
+import table from "../images/table.jpg";
+import desk from "../images/desk.jpg";
 
-function Store({clickedMueble}) {
-    let navigate = useNavigate();
-    const [muebles, setMuebles] = useState([]);
-    const [busqueda, setBusqueda] = useState("")
-
-    const getMuebles = async () => {
-        const response = await fetch('https://furniture-insight-app.herokuapp.com/mueble/all')
-        const result = await response.json()
-        for (const item of result) {
-            const b64 = Buffer.from(item.data).toString("base64");
-            item.data = b64;
-        }
-        setMuebles(result);
-    }
-
-    useEffect(() => {
-        getMuebles();
-    }, [])
-    
-    const buscarMueblePorNombre = () => {
-        fetch(`http://localhost:8000/mueble/mueble/${busqueda.Nombre}`)
-            .then(async response => {
-                const data = await response.json()
-                console.log(data)
-            })
-    }
-
-    const handleClick = () => {
-        navigate("/mueble", {replace:true})
-    }
+function Store() {
     return (
         <div className="container">
             <div className="row mt-3">
@@ -43,66 +12,43 @@ function Store({clickedMueble}) {
                     <h2 className="h2 text-center">Store</h2>
                 </div>
             </div>
-            <form>
-                <div className="row mt-3 mb-3">
-                    <div className="col-3 search-bar">
-                        <input
-                            className="form-control rounded-pill border border-dark"
-                            type="text"
-                            placeholder="Buscar Mueble"
-                            onChange={event => setBusqueda(event.target.value)} />
-                    </div>
-                    <div className="col-1">
-                        <input
-                            className="form-control rounded-pill border border-dark"
-                            type="text"
-                            placeholder="Ancho" />
-                    </div>
-                    <div className="col-1">
-                        <input
-                            className="form-control rounded-pill border border-dark"
-                            type="text"
-                            placeholder="Largo"
-                        />
-                    </div>
-                    <div className="col">
-                        <button
-                            type="button"
-                            className="btn btn-secondary rounded-pill">
-                            <FontAwesomeIcon icon={faMagnifyingGlass}
-                            /> Search</button>
-                    </div>
+            <div className="row mt-3 mb-3">
+                <div className="col-3 search-bar">                    
+                    <input className="form-control" placeholder="Search"/>
                 </div>
-            </form>
-            <div className="col">
-                <div className="row row-cols-2">
-
-                    {
-                        muebles.filter(mueble => {
-                            if (busqueda === "") {
-                                return mueble
-                            } else if (mueble.Nombre.toString().toLowerCase().includes(busqueda.toLowerCase())) {
-                                return mueble
-                            }
-                        }).map((mueble) => (
-                            <div className="col" key={mueble.Id_Mueble}>
-                                <div onClick={handleClick}>
-                                    <div className="card border-secondary text-center mb-3" style={{ "maxWidth": "33.75rem" }} onClick={() => clickedMueble(mueble)}>
-                                        <div className="row g-0">
-                                            <div className="col-md-4">
-                                                <img src={`data:image/${clickedMueble.mimetype};base64,${mueble.data}`} className="img-fluid rounded-start" />
-                                            </div>
-                                            <div className="col-md-8">
-                                                <div className="card-body">
-                                                    <h5 className="card-title">{mueble.Nombre}</h5>
-                                                    <p className="card-text">{mueble.Precio}</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
+                <div className="col-1">
+                    <input className="form-control" placeholder="width"/>
+                </div>
+                <div className="col-1">
+                    <input className="form-control" placeholder="length"/>
+                </div>
+                <div className="col">
+                    <button type="button" className="btn btn-secondary">Search</button>
+                </div>
+            </div>
+            <div className="row mt-5">
+                <div className="col">
+                    <h3 className="h3 text-center">Categories</h3>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col">   
+                    <img className="center img-thumbnail" src={bed} alt="bed.jpg"/>
+                    <h5 className="h5 text-center">Beds</h5>
+                </div>
+                <div className="col">
+                    <img className="center img-thumbnail" src={chairs} alt="chairs.jpg"/>
+                    <p className="h5 text-center">Chairs</p>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col">
+                    <img className="center img-thumbnail" src={table} alt="table.jpg"/>        
+                    <p className="h5 text-center">Tables</p>
+                </div>
+                <div className="col">
+                    <img className="center img-thumbnail" src={desk} alt="desk.jpg"/>
+                    <p className="h5 text-center">Desks</p>
                 </div>
             </div>
         </div>

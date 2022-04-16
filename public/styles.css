@@ -1,6 +1,6 @@
 .form-login {
     width: 100%;
-    max-width: 330px;
+    max-width: 340px;
     padding: 15px;
     margin: 100px auto auto auto;
     text-align: center;
@@ -35,7 +35,7 @@
 }
 
 .welcome-message {
-    padding: 50px;
+    padding: 50px 0 0 0;
     text-align: center;
 }
 
@@ -72,4 +72,28 @@
 .cart-img{
     height: auto;
     width: 10rem;
+}
+
+.footer {
+    text-align: center;
+    padding: 50px 0 20px;
+}
+
+.profile-container {
+    margin: 0 200px 0 200px;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+    filter: invert(100%);
+}
+
+.carousel {
+    margin: 50px 0 50px 0;
+    width: 1365px;
+    height: 340px;
+}
+
+.btn-homepage {
+    width: 40%;
 }

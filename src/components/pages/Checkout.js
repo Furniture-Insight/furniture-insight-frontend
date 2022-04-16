@@ -1,10 +1,8 @@
 import React from "react";
-import { useState, useEffect } from "react";
-import { YearPicker, MonthPicker } from 'react-dropdown-date';
-import Cookies from 'universal-cookie';
+import { useState } from "react";
+import { MonthPicker, YearPicker } from "react-dropdown-date";
 
-function Checkout() {
-
+function Checkout() {   
     const cookies = new Cookies()
     const [tarjeta, setTarjeta] = useState([])
     const [newTarjeta, setNewTarjeta] = useState({
@@ -40,25 +38,29 @@ function Checkout() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        crearTarjeta();
+        alert("Data entered");
+        console.log(card);
     }
 
-    console.log(newTarjeta);
+    const handleClick = () => {        
+    }
+
     return (
-        <div className="container">
-            <div className="row mt-3">
-                <h3 className="h3">Mis Tarjetas</h3>
-            </div>
-            <div className="row mt-3">
-                {tarjeta.map((item) => (
-                    <div className="form-check" key={item.Id_MetodoPago}>
-                        <input className="form-check-input" type="radio" id="flexTarjetaRadio" />
-                        <label className="form-check-label" for="flexTarjetaRadio">{item.MetodoTarjeta.Numero_Tarjeta}</label>
-                        <label className="form-check-label ms-2" for="flexTarjetaRadio">{item.MetodoTarjeta.Nombre}</label>
-                    </div>
-                ))}
-            </div>
-            <div className="row mt-3">
+        <div className="container lh-lg">
+            <div className="row">
+                <h5 className="h5">Mis tarjetas</h5>
+                <div class="form-check">
+                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="cardRadio" />
+                    <label class="form-check-label" for="cardRadio">
+                        Tarjeta 1
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input className="form-check-input" type="radio" name="flexRadioDefault" id="cardRadio2" checked />
+                    <label class="form-check-label" for="cardRadio2">
+                        Tarjeta 2
+                    </label>
+                </div>
                 <button
                     type="button"
                     className="btn btn-secondary rounded-pill w-25"
@@ -82,64 +84,76 @@ function Checkout() {
                             <div className="modal-body">
                                 <div className="row">
                                     <div className="col">
-                                        <label className="col-form-label">Numero de Tarjeta</label>
+                                        <label for="inputNumeroTarjeta" className="col-form-label">Numero de Tarjeta</label>
                                     </div>
                                     <div className="col">
-                                        <input
-                                            required
-                                            type="text"
+                                        <input 
+                                            required 
+                                            type="text" 
+                                            id="inputNumeroTarjeta" 
                                             className="form-control"
-                                            value={newTarjeta.Numero_Tarjeta}
-                                            onChange={(e) => setNewTarjeta({ ...newTarjeta, Numero_Tarjeta: e.target.value })} />
+                                            value={card.numero}
+                                            onChange={(e) => setCard({...card, numero: e.target.value})} />
                                     </div>
                                 </div>
                                 <div className="row mt-3">
                                     <div className="col">
-                                        <label className="col-form-label">CVV</label>
+                                        <label for="inputNombreTarjeta" className="col-form-label">Nombre en la Tarjeta</label>
                                     </div>
                                     <div className="col">
-                                        <input
-                                            required
-                                            type="text"
-                                            id="inputCvvTarjeta"
+                                        <input 
+                                            required 
+                                            type="text" 
+                                            id="inputNombreTarjeta" 
                                             className="form-control"
-                                            value={newTarjeta.CVV_CV2}
-                                            onChange={(e) => setNewTarjeta({ ...newTarjeta, CVV_CV2: e.target.value })} />
+                                            value={card.nombre}
+                                            onChange={(e) => setCard({...card, nombre: e.target.value})} />
                                     </div>
                                 </div>
                                 <div className="row mt-3">
                                     <div className="col">
-                                        <label className="col-form-label">Fecha de Expiracion</label>
+                                        <label for="inputFechaExpTarjeta" className="col-form-label">Fecha de Expiracion</label>
                                     </div>
-                                    <div className="col">
-                                        <input
-                                            required
-                                            type="text"
+                                    <div className="col">                                        
+                                        <MonthPicker 
+                                            numeric
+                                            id="month" 
+                                            required                                              
+                                            classes="form-select"                                             
+                                            value={card.mes_expiracion}
+                                            onChange={(mes_expiracion) => setCard({...card,mes_expiracion})}/>
+                                        <label for="month">Mes</label>
+                                    </div>
+                                    <div className="col me-0">
+                                        <YearPicker 
+                                            id="year" 
+                                            required 
+                                            start={2022} 
+                                            end={2040} 
+                                            classes="form-select"                                         
+                                            value={card.año_expiracion}
+                                            onChange={(año_expiracion) => setCard({...card,año_expiracion})}/>
+                                        <label for="year">Año</label>
+                                    </div>
+                                    <div className="col me-0">
+                                        <input 
+                                            id="inputCVVTarjeta" 
+                                            required                                             
                                             className="form-control"
-                                            value={newTarjeta.Fecha_Expiracion}
-                                            onChange={(e) => setNewTarjeta({ ...newTarjeta, Fecha_Expiracion: e.target.value })} />                                                                               
-                                    </div>
-                                </div>
-                                <div className="row mt-3">
-                                    <div className="col">
-                                        <label className="col-form-label">Nombre de la Tarjeta</label>
-                                    </div>
-                                    <div className="col">
-                                        <input
-                                            required
-                                            type="text"
-                                            className="form-control"
-                                            value={newTarjeta.Nombre}
-                                            onChange={(e) => setNewTarjeta({ ...newTarjeta, Nombre: e.target.value })} />
+                                            minLength="3"  
+                                            maxLength="3"                                      
+                                            value={card.cvv}
+                                            onChange={(e) => setCard({...card, cvv: e.target.value})}/>
+                                        <label for="inputCVVTarjeta">CVV</label>
                                     </div>
                                 </div>
                             </div>
                             <div className="modal-footer">
-                                <button
-                                    className="btn btn-outline-secondary rounded-pill"
-                                    type="submit"
-                                    data-bs-dismiss="modal"
-                                >Agregar</button>
+                                <button 
+                                className="btn btn-outline-secondary rounded-pill"
+                                type="submit"
+                                data-bs-dismiss="modal"
+                                onClick={handleClick}>Agregar</button>
                             </div>
                         </div>
                     </div>

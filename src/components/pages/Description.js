@@ -2,6 +2,7 @@ import React from "react";
 import bed from "../images/bed.jpg";
 
 function Description() {
+    
     return (
         <div className="container">
             <div className="row">
