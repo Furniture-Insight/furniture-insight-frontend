@@ -1,15 +1,4 @@
 import React from "react";
-<<<<<<< HEAD
-import BannerImage from "../images/bed.jpg"
-
-function Home() {
-    return (
-        <div className="home" style={{ backgroundImage: `url(${BannerImage})` }}>
-            <div className="headerContainer">
-                <h1> Furniture Insight </h1>
-            </div>           
-        </div>  
-=======
 import bed from "../images/bed.jpg";
 import table from "../images/table.jpg";
 import chairs from "../images/chairs.jpg";
@@ -57,7 +46,6 @@ function Home() {
                 </div>
             </div>
         </>
->>>>>>> e423253eeb3faed8d112a55d80b35f2f39019372
     );
 }
 

@@ -5,11 +5,6 @@ import Home from "./components/pages/Home"
 import Login from "./components/pages/Login";
 import SignUp from "./components/pages/SignUp";
 import RecoverPass from "./components/pages/RecoverPass";
-<<<<<<< HEAD
-import Layout from "./components/Layout";
-import Store from "./components/pages/Store";
-import Home from "./components/pages/Home";
-=======
 import Store from "./components/pages/Store";
 import Description from "./components/pages/Description";
 import SmartRoom from './components/pages/SmartRoom';
@@ -19,7 +14,6 @@ import Navbar from './components/Navbar';
 import AboutUs from './components/pages/AboutUs';
 import Profile from './components/pages/Profile';
 import Search from './components/pages/SearchedFurniture';
->>>>>>> e423253eeb3faed8d112a55d80b35f2f39019372
 
 function App() {
     const [userLogged, setUserLogged] = useState();
@@ -32,14 +26,6 @@ function App() {
     return (        
         <BrowserRouter>
             <Routes>
-<<<<<<< HEAD
-                <Route path="/" element={<Layout/>}></Route>
-                <Route path="login" element={<Login/>}></Route>
-                <Route path="signup" element={<SignUp/>}></Route>
-                <Route path="recoverpass" element={<RecoverPass/>}></Route>
-                <Route path="home" element={<Home/>}></Route>
-                <Route path="store" element={<Store/>}></Route>
-=======
                 <Route path="/" element={<Navbar isUserLogged = {userLogged}/>}>
                     <Route path="home" element={<Home/>}></Route>
                     <Route path="login" element={<Login isUserLogged = {isUserLogged}/>}></Route>
@@ -54,7 +40,6 @@ function App() {
                     <Route path="aboutUs" element={<AboutUs/>}></Route>
                     <Route path="profile" element={<Profile/>}></Route>
                 </Route>
->>>>>>> e423253eeb3faed8d112a55d80b35f2f39019372
             </Routes>
         </BrowserRouter>        
     );
