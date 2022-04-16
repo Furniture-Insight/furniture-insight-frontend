@@ -30,11 +30,11 @@ function Login({ isUserLogged }) {
         loginUsuario();
         isUserLogged(true)                  
     }
-
     return (
         <div>
             <form onSubmit={handleSubmit}>
                 <div className="form-login">
+                    <h1> Furniture Insight </h1>
                     <img className="mb-3" src={logo} width="60" height="65" alt="logo" />
                     <h4 className="h4 mb-3">Log In</h4>
                     <input
@@ -46,16 +46,16 @@ function Login({ isUserLogged }) {
                     <input
                         className="mb-3 form-control rounded-pill border border-dark"
                         type="password"
-                        placeholder="Contraseña"
-                        value={usuario.Contraseña}
-                        onChange={(e) => setUsuario({ ...usuario, Contraseña: e.target.value })} />
-                    <div className="mb-3">
-                        <Link to="/recoverpass">Forgot Password?</Link>
-                    </div>
+                        placeholder="Password"
+                        value={user.password}
+                        onChange={(e) => setUser({ ...user, password: e.target.value })} />
                     <button
                         type="submit"
                         className="btn btn-outline-secondary rounded-pill"
-                    >Log In</button>
+                        onClick={handleClick}>Log In</button>
+                    <div className="mb-3">
+                        <Link to="/recoverpass">Forgot Password?</Link>
+                    </div>
                 </div>
             </form>
         </div>
