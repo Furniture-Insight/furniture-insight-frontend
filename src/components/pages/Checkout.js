@@ -11,16 +11,18 @@ function Checkout() {
         Numero_Tarjeta: "",
         CVV_CV2: "",
         Fecha_Expiracion: "",
-        Nombre: ""
+        Nombre: "",
+        UsuarioIdUsuario: cookies.get('Id_Usuario')
     })
-
+    const [clickedTarjeta, setClickedTarjeta] = useState([])
+    
     useEffect(() => {
         const getTarjeta = async () => {
-            const response = await fetch(`https://furniture-insight-app.herokuapp.com/metodopago/obtener/${cookies.get('Id_Usuario')}`);
+            const response = await fetch(`http://localhost:8000/metodopago/obtener/${cookies.get('Id_Usuario')}`);
             const result = await response.json();
             for (const item of result) {
-                const last4Num = String(item.MetodoPagoTarjetum.Numero_Tarjeta).slice(-4);
-                item.MetodoPagoTarjetum.Numero_Tarjeta = last4Num;
+                const last4Num = String(item.MetodoTarjeta.Numero_Tarjeta).slice(-4);
+                item.MetodoTarjeta.Numero_Tarjeta = last4Num;
             }
             setTarjeta(result);
         };
@@ -28,7 +30,7 @@ function Checkout() {
     }, [])
 
     const crearTarjeta = () => {
-        fetch('https://furniture-insight-app.herokuapp.com/metodotarjeta/crear', {
+        fetch('http://localhost:8000/metodotarjeta/crear', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newTarjeta)
@@ -51,8 +53,8 @@ function Checkout() {
                 {tarjeta.map((item) => (
                     <div className="form-check" key={item.Id_MetodoPago}>
                         <input className="form-check-input" type="radio" id="flexTarjetaRadio" />
-                        <label className="form-check-label" for="flexTarjetaRadio">{item.MetodoPagoTarjetum.Numero_Tarjeta}</label>
-                        <label className="form-check-label ms-2" for="flexTarjetaRadio">{item.MetodoPagoTarjetum.Nombre}</label>
+                        <label className="form-check-label" for="flexTarjetaRadio">{item.MetodoTarjeta.Numero_Tarjeta}</label>
+                        <label className="form-check-label ms-2" for="flexTarjetaRadio">{item.MetodoTarjeta.Nombre}</label>
                     </div>
                 ))}
             </div>
@@ -103,31 +105,13 @@ function Checkout() {
                                     <div className="col">
                                         <label className="col-form-label">Fecha de Expiracion</label>
                                     </div>
-                                    <div className="row">
-                                        <div className="col">
-                                            <MonthPicker
-                                                required
-                                                numeric
-                                                classes="form-select"
-
-                                            />
-                                            <label>Mes</label>
-                                            <div className="col me-0">
-                                                <YearPicker
-                                                    required
-                                                    start={2022}
-                                                    end={2035}
-                                                    classes="form-select"
-                                                />
-                                                <label>Año</label>
-                                            </div>
-                                            {/* <input
+                                    <div className="col">
+                                        <input
                                             required
-                                            type="text"                                            
+                                            type="text"
                                             className="form-control"
                                             value={newTarjeta.Fecha_Expiracion}
-                                            onChange={(e) => setNewTarjeta({...newTarjeta, Fecha_Expiracion: e.target.value})}/> */}
-                                        </div>
+                                            onChange={(e) => setNewTarjeta({ ...newTarjeta, Fecha_Expiracion: e.target.value })} />                                                                               
                                     </div>
                                 </div>
                                 <div className="row mt-3">
