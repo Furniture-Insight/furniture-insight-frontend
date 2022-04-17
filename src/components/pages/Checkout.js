@@ -14,8 +14,13 @@ function Checkout() {
         Nombre: "",
         UsuarioIdUsuario: cookies.get('Id_Usuario')
     })
-    const [clickedTarjeta, setClickedTarjeta] = useState([])
-    
+    const [factura, setFactura] = useState({
+        Fecha_Pedido: "",
+        Direccion_Envio: "",
+        Direccion_Facturacion: "",
+        Id_Carrito: ""
+    })
+
     useEffect(() => {
         const getTarjeta = async () => {
             const response = await fetch(`http://localhost:8000/metodopago/obtener/${cookies.get('Id_Usuario')}`);
@@ -35,12 +40,20 @@ function Checkout() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newTarjeta)
         })
+    }
 
+    const crearFactura = () => {
+        
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
         crearTarjeta();
+    }
+
+    const handleSubmit2 = (event) => {
+        event.preventDefault();
+        
     }
 
     console.log(newTarjeta);
@@ -64,6 +77,13 @@ function Checkout() {
                     className="btn btn-secondary rounded-pill w-25"
                     data-bs-toggle="modal"
                     data-bs-target="#cardModal">Agregar tarjeta</button>
+            </div>
+            <div className="row mt-3">
+                <button
+                    type="button"
+                    className="btn btn-secondary rounded-pill w-25"
+                    data-bs-toggle="modal"
+                    data-bs-target="#facturaModal">Terminar Pago</button>
             </div>
             <form onSubmit={handleSubmit}>
                 <div className="modal fade" id="cardModal" tabIndex="-1" aria-labelledby="cardModalLabel" aria-hidden="true">
@@ -111,7 +131,7 @@ function Checkout() {
                                             type="text"
                                             className="form-control"
                                             value={newTarjeta.Fecha_Expiracion}
-                                            onChange={(e) => setNewTarjeta({ ...newTarjeta, Fecha_Expiracion: e.target.value })} />                                                                               
+                                            onChange={(e) => setNewTarjeta({ ...newTarjeta, Fecha_Expiracion: e.target.value })} />
                                     </div>
                                 </div>
                                 <div className="row mt-3">
@@ -134,6 +154,68 @@ function Checkout() {
                                     type="submit"
                                     data-bs-dismiss="modal"
                                 >Agregar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form onSubmit={handleSubmit2}>
+                <div className="modal fade" id="facturaModal" tabIndex="-1" aria-labelledby="facturaModalLabel" aria-hidden="true">
+                    <div className="modal-dialog modal-dialog-centered">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="facturaModalLabel">Terminar Pago</h5>
+                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div className="modal-body">
+                                <div className="row">
+                                    <div className="col">
+                                        <label className="col-form-label">Fecha Pedido</label>
+                                    </div>
+                                    <div className="col">
+                                        <input
+                                            required
+                                            type="date"
+                                            className="form-control"
+                                            value={factura.Fecha_Pedido}
+                                            onChange={(e) => setFactura({ ...factura, Fecha_Pedido: e.target.value })} />
+                                    </div>
+                                </div>
+                                <div className="row mt-3">
+                                    <div className="col">
+                                        <label className="col-form-label">Direccion de Envio</label>
+                                    </div>
+                                    <div className="col">
+                                        <input
+                                            required
+                                            type="text"
+                                            className="form-control"
+                                            value={factura.Direccion_Envio}
+                                            onChange={(e) => setFactura({ ...factura, Direccion_Envio: e.target.value })}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="row mt-3">
+                                    <div className="col">
+                                        <label className="col-form-label">Direccion de Facturacion</label>
+                                    </div>
+                                    <div className="col">
+                                        <input
+                                            required
+                                            type="text"
+                                            className="form-control"
+                                            value={factura.Direccion_Facturacion}
+                                            onChange={(e) => setFactura({ ...factura, Direccion_Facturacion: e.target.value })}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="modal-footer">
+                                    <button
+                                        className="btn btn-outline-secondary rounded-pill"
+                                        type="submit"
+                                        data-bs-dismiss="modal"
+                                    >Pagar</button>
+                                </div>
                             </div>
                         </div>
                     </div>

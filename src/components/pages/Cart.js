@@ -11,6 +11,9 @@ import { faPaypal } from '@fortawesome/free-brands-svg-icons';
 function Cart() {
     let navigate = useNavigate();
     const [carrito, setCarrito] = useState([]);
+    const [subtotal, setSubtotal] = useState();
+    const [ITBIS, setITBIS] = useState();
+    const [total, setTotal] = useState();
 
     const cookies = new Cookies();
 
@@ -24,8 +27,37 @@ function Cart() {
         setCarrito(result);
     }
 
+    const getSubtotal = async () => {
+        const response = await fetch(`https://furniture-insight-app.herokuapp.com/carrito/carrito/${cookies.get('Id_Usuario')}`);
+        const result = await response.json();
+        var subtotal = 0;
+        for (var item of result) {
+            subtotal = subtotal + item.Mueble.Precio
+        }        
+        setSubtotal(subtotal);
+        return subtotal
+    }
+
+    const getITBIS = async () => {
+        var result = await getSubtotal()
+        var itbis = (parseFloat(result) * 0.18).toFixed(2);
+        setITBIS(itbis);
+        return itbis
+    }
+
+    const getTotal = async () => {
+        var result = await getSubtotal()
+        var result2 = await getITBIS()
+        var total = parseFloat(result2) + parseFloat(result)
+        setTotal(total);
+        return total
+    }
+
     useEffect(() => {
-        getCarrito();
+        getCarrito(); 
+        getSubtotal();
+        getITBIS();
+        getTotal();  
     }, [])
 
     console.log(carrito);
@@ -42,7 +74,7 @@ function Cart() {
                     <div className="row">
                         {carrito.map((item) => (
                             <div key={item.Id_Carrito}>
-                                <div className="card mb-3 mt-3" style={{"maxWidth": "31.25rem"}}>
+                                <div className="card mb-3 mt-3" style={{ "maxWidth": "31.25rem" }}>
                                     <div className="row g-0">
                                         <div className="col-md-4">
                                             <img src={`data:image/${item.Mueble.mimetype};base64,${item.Mueble.data}`} className="cart-img" />
@@ -50,7 +82,7 @@ function Cart() {
                                         <div className="col-md-6">
                                             <div className="card-body">
                                                 <div className="row">
-                                                    <label className="card-text">{item.Mueble.Nombre}</label>                                                    
+                                                    <label className="card-text">{item.Mueble.Nombre}</label>
                                                     <label className="card-text">Cantidad: {item.Mueble.Cantidad}</label>
                                                     <label className="card-text">Precio: {item.Mueble.Precio}</label>
                                                 </div>
@@ -64,9 +96,9 @@ function Cart() {
                 </div>
                 <div className="col">
                     <div className="row mt-3">
-                        <label>Subtotal: </label>
-                        <label>ITBIS: </label>
-                        <label>Total: </label>
+                        <label>Subtotal: {subtotal} </label>
+                        <label>ITBIS: {ITBIS}</label>
+                        <label>Total: {total}</label>
                         <button
                             type="button"
                             className="btn btn-success rounded-pill w-50"

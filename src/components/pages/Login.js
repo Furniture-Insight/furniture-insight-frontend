@@ -5,7 +5,7 @@ import logo from "../images/logo.png";
 import Cookies from "universal-cookie";
 
 function Login({ isUserLogged }) {
-    //let navigate = useNavigate(); 
+    let navigate = useNavigate(); 
     
     const cookies = new Cookies();
 
@@ -15,14 +15,32 @@ function Login({ isUserLogged }) {
     });   
 
     const loginUsuario = () => {
-        fetch('https://furniture-insight-app.herokuapp.com/login', {
+
+        const requestOptions = {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(usuario)
-        }).then(response => response.json())
-        .then(data=> {
+        }
+
+        fetch('https://furniture-insight-app.herokuapp.com/login',requestOptions)
+        .then(async response => {
+            const isJson = response.headers.get('content-type')?.includes('application/json');
+            const data = isJson && await response.json();
+
+            if(!response.ok){
+                cookies.set('Session', false, {path:'/'})
+                alert("Email o Contraseña invalidos")
+                const error = (data && data.message) || response.status;
+                return Promise.reject(error);
+            }
+            else{
+                cookies.set('Session', true, {path:'/'})
+                alert("Bienvenido")
+                navigate('/store', {replace:true})            
+            }
             cookies.set('Id_Usuario', data.Usuario, {path:'/'});
-        })
+            cookies.set('Nombre',data.NombreUsuario, {path:'/'})
+        })        
     }
 
     const handleSubmit = (event) => {
@@ -48,10 +66,7 @@ function Login({ isUserLogged }) {
                         type="password"
                         placeholder="Contraseña"
                         value={usuario.Contraseña}
-                        onChange={(e) => setUsuario({ ...usuario, Contraseña: e.target.value })} />
-                    <div className="mb-3">
-                        <Link to="/recoverpass">Forgot Password?</Link>
-                    </div>
+                        onChange={(e) => setUsuario({ ...usuario, Contraseña: e.target.value })} />                    
                     <button
                         type="submit"
                         className="btn btn-outline-secondary rounded-pill"

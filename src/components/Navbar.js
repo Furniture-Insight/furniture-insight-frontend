@@ -6,13 +6,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStore, faRightToBracket, faUserPlus, faCartShopping, faHouse, faTableCells, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
 function Navbar({isUserLogged}) {
-    const cookies = new Cookies();
-    
+    const cookies = new Cookies();    
     const handleClick = () =>{
         cookies.remove('Id_Usuario');
+        cookies.remove('Nombre');
+        cookies.set('Session', false, {path:'/'});
         isUserLogged(false);        
-    }
-
+    }    
+    
+    const usuarioNombre = cookies.get('Nombre');
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark justify-content-end">
@@ -54,7 +56,7 @@ function Navbar({isUserLogged}) {
                                 </ul>                                
                             </li>
                             <li className="nav-item"></li>
-                            <Link className="nav-link" to="/login">User name</Link>                                        
+                            <Link className="nav-link" to="/profile">{usuarioNombre}</Link>                                        
                         </ul>
                     </div>:
                     <div className="collapse navbar-collapse navbarToggler">

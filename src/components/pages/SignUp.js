@@ -20,14 +20,32 @@ function SignUp({ isUserLogged }) {
     });     
 
     const createUsuario = () => {
-        fetch('https://furniture-insight-app.herokuapp.com/user/crear', {
+
+        const requestOptions = {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(usuario)
-        }).then(response => response.json())
-        .then(data => {
-            cookies.set('Id_Usuario', data.Id_Usuario, {path:'/'})
-        })            
+        }
+
+        fetch('https://furniture-insight-app.herokuapp.com/user/crear', requestOptions)
+        .then(async response => {
+            const isJson = response.headers.get('content-type')?.includes('application/json');
+            const data = isJson && await response.json();
+
+            if(!response.ok) {
+                cookies.set('Session', false, {path:'/'})
+                alert("Verificar que todos los campos esten llenos")
+                const error = (data && data.message) || response.status;
+                return Promise.reject(error);
+            }
+            else{
+                cookies.set('Session', true, {path:'/'})
+                alert("Bienvenido")
+                navigate('/store', {replace:true})
+            }
+            cookies.set('Id_Usuario', data.Id_Usuario, {path:'/'});
+            cookies.set('Nombre',usuario.Nombre, {path:'/'})
+        })               
     }
 
     const handleSubmit = (event) => {
@@ -36,8 +54,7 @@ function SignUp({ isUserLogged }) {
     }
 
     const handleClick = () => {
-        isUserLogged(true);
-        // navigate("/home", {replace:true});      
+        isUserLogged(true);             
     }
 
     return (
