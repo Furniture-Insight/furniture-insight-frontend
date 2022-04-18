@@ -38,7 +38,7 @@ function Navbar({isUserLogged}) {
                                 <Link className="nav-link" to="/cart"><FontAwesomeIcon icon={faCartShopping} /> Cart</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/smartRoom"><FontAwesomeIcon icon={faTableCells} /> Smart Room</Link>
+                                <Link className="nav-link" to="/drawSpace"><FontAwesomeIcon icon={faTableCells} /> Smart Room</Link>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/description">Description</Link>
