@@ -8,18 +8,20 @@ function Mueble({ clickedMueble}) {
 
     const [carrito, setCarrito] = useState({
         Cantidad_Mueble: "",
-        UsuarioIdUsuario: cookies.get('Id_Usuario'),      
-        MuebleIdMueble: clickedMueble.Id_Mueble
+        Id_Usuario: cookies.get('Id_Usuario'),      
+        Id_Mueble: clickedMueble.Id_Mueble
     });         
 
     const crearCarrito = () => {    
-        fetch('https://furniture-insight-app.herokuapp.com/carrito/crear', {
+        fetch('http://localhost:8000/carrito/crear', {
             method:'POST',
             headers: {"Content-Type" : "application/json"},
             body: JSON.stringify(carrito)
         })
 
     }
+
+    console.log(carrito);
 
     const handleClick = (event) => {
         event.preventDefault();
@@ -51,10 +53,10 @@ function Mueble({ clickedMueble}) {
                                 <dd className="col-sm-9">{clickedMueble.Color}</dd>
 
                                 <dt className="col-sm-3">Material</dt>
-                                <dd className="col-sm-9">{clickedMueble.Material.Material}</dd>
+                                <dd className="col-sm-9">{clickedMueble.Materiales.Material}</dd>
 
                                 <dt className="col-sm-3">Categoria</dt>
-                                <dd className="col-sm-9">{clickedMueble.SubCategorium.SubCategoria}</dd>
+                                <dd className="col-sm-9">{clickedMueble.Subcategoria.SubCategoria}</dd>
 
                                 <dt className="col-sm-3">Ancho</dt>
                                 <dd className="col-sm-9">{clickedMueble.Anchura}</dd>
@@ -70,15 +72,10 @@ function Mueble({ clickedMueble}) {
 
                                 <dt className="col-sm-3">Cantidad</dt>
                                 <dd className="col-sm-9">
-                                    <select                                        
-                                        className="form-select w-25 text-center"
+                                    <input                                     
+                                        className="form-control w-25"
                                         value={carrito.Cantidad_Mueble}
-                                        onChange={(e) => setCarrito({...carrito, Cantidad_Mueble: e.target.value})}>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                    </select>
+                                        onChange={(e) => setCarrito({...carrito, Cantidad_Mueble: e.target.value})}/>                                    
                                 </dd>
                             </dl>
                         </div>

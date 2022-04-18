@@ -18,23 +18,24 @@ function Cart() {
     const cookies = new Cookies();
 
     const getCarrito = async () => {
-        const response = await fetch(`https://furniture-insight-app.herokuapp.com/carrito/carrito/${cookies.get('Id_Usuario')}`);
+        const response = await fetch(`http://localhost:8000/carrito/carrito/${cookies.get('Id_Usuario')}`);
         const result = await response.json();
         for (const item of result) {
-            const b64 = Buffer.from(item.Mueble.data).toString("base64");
-            item.Mueble.data = b64;
+            const b64 = Buffer.from(item.MuebleCarrito.data).toString("base64");
+            item.MuebleCarrito.data = b64;
         }
         setCarrito(result);
     }
 
     const getSubtotal = async () => {
-        const response = await fetch(`https://furniture-insight-app.herokuapp.com/carrito/carrito/${cookies.get('Id_Usuario')}`);
+        const response = await fetch(`http://localhost:8000/carrito/carrito/${cookies.get('Id_Usuario')}`);
         const result = await response.json();
         var subtotal = 0;
         for (var item of result) {
-            subtotal = subtotal + item.Mueble.Precio
+            subtotal = subtotal + item.MuebleCarrito.Precio
         }        
         setSubtotal(subtotal);
+        cookies.set('Subtotal', subtotal, {path:'/'})
         return subtotal
     }
 
@@ -42,6 +43,7 @@ function Cart() {
         var result = await getSubtotal()
         var itbis = (parseFloat(result) * 0.18).toFixed(2);
         setITBIS(itbis);
+        cookies.set('ITBIS', itbis, {path:'/'})
         return itbis
     }
 
@@ -50,6 +52,7 @@ function Cart() {
         var result2 = await getITBIS()
         var total = parseFloat(result2) + parseFloat(result)
         setTotal(total);
+        cookies.set('Total', total, {path:'/'})  
         return total
     }
 
@@ -57,13 +60,17 @@ function Cart() {
         getCarrito(); 
         getSubtotal();
         getITBIS();
-        getTotal();  
+        getTotal();        
     }, [])
 
     console.log(carrito);
 
     const handleClick = () => {
         navigate("/checkout", { replace: true });
+    }
+
+    const handleClick2 = () => {
+        navigate("/checkoutpaypal", { replace: true });
     }
 
     return (
@@ -77,14 +84,14 @@ function Cart() {
                                 <div className="card mb-3 mt-3" style={{ "maxWidth": "31.25rem" }}>
                                     <div className="row g-0">
                                         <div className="col-md-4">
-                                            <img src={`data:image/${item.Mueble.mimetype};base64,${item.Mueble.data}`} className="cart-img" />
+                                            <img src={`data:image/${item.MuebleCarrito.mimetype};base64,${item.MuebleCarrito.data}`} className="cart-img" />
                                         </div>
                                         <div className="col-md-6">
-                                            <div className="card-body">
+                                            <div className="card-body ms-4">
                                                 <div className="row">
-                                                    <label className="card-text">{item.Mueble.Nombre}</label>
-                                                    <label className="card-text">Cantidad: {item.Mueble.Cantidad}</label>
-                                                    <label className="card-text">Precio: {item.Mueble.Precio}</label>
+                                                    <label className="card-text">{item.MuebleCarrito.Nombre}</label>
+                                                    <label className="card-text">Cantidad: {item.MuebleCarrito.Cantidad}</label>
+                                                    <label className="card-text">Precio: {item.MuebleCarrito.Precio}</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -114,8 +121,8 @@ function Cart() {
                                 </div>
                                 <div className="modal-body">
                                     <p className="h5">Seleccione un metodo de pago:</p>
-                                    <button className="btn btn-primary me-3">
-                                        <FontAwesomeIcon icon={faPaypal} className="me-1" />
+                                    <button className="btn btn-primary me-3" onClick={handleClick2} data-bs-dismiss="modal">
+                                        <FontAwesomeIcon icon={faPaypal} className="me-1"/>
                                         Pagar con Paypal</button>
                                     <button className="btn btn-secondary" onClick={handleClick} data-bs-dismiss="modal">
                                         <FontAwesomeIcon icon={faCreditCard} className="me-1" />

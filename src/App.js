@@ -9,6 +9,7 @@ import Store from "./components/pages/Store";
 import Drawspace from './components/pages/Drawspace';
 import Cart from "./components/pages/Cart";
 import Checkout from "./components/pages/Checkout";
+import CheckoutPaypal from './components/pages/CheckoutPaypal';
 import Navbar from './components/Navbar';
 import AboutUs from './components/pages/AboutUs';
 import Profile from './components/pages/Profile';
@@ -41,6 +42,7 @@ function App() {
                     <Route path="drawspace" element={<Drawspace />}></Route>
                     <Route path="cart" element={<Cart />}></Route>
                     <Route path="checkout" element={<Checkout />}></Route>
+                    <Route path="checkoutpaypal" element={<CheckoutPaypal />}></Route>
                     <Route path="aboutUs" element={<AboutUs/>}></Route>
                     <Route path="profile" element={<Profile/>}></Route>
                 </Route>

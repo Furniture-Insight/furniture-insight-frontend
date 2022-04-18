@@ -6,6 +6,7 @@ import Cookies from 'universal-cookie';
 function Checkout() {
 
     const cookies = new Cookies()
+    const current = new Date()
     const [tarjeta, setTarjeta] = useState([])
     const [newTarjeta, setNewTarjeta] = useState({
         Numero_Tarjeta: "",
@@ -13,29 +14,40 @@ function Checkout() {
         Fecha_Expiracion: "",
         Nombre: "",
         UsuarioIdUsuario: cookies.get('Id_Usuario')
-    })
-    const [factura, setFactura] = useState({
-        Fecha_Pedido: "",
-        Direccion_Envio: "",
-        Direccion_Facturacion: "",
-        Id_Carrito: ""
-    })
+    })    
 
     useEffect(() => {
         const getTarjeta = async () => {
-            const response = await fetch(`http://localhost:5000/metodopago/obtener/${cookies.get('Id_Usuario')}`);
+            const response = await fetch(`http://localhost:8000/metodopago/obtener/${cookies.get('Id_Usuario')}`);
             const result = await response.json();
             for (const item of result) {
                 const last4Num = String(item.MetodoTarjeta.Numero_Tarjeta).slice(-4);
                 item.MetodoTarjeta.Numero_Tarjeta = last4Num;
             }
+            for(const item of result) {
+                cookies.set('Id_MetodoPagoTarjeta', item.Id_MetodoPagoTarjeta)
+            }            
             setTarjeta(result);
         };
         getTarjeta();
     }, [])
 
+    const [factura, setFactura] = useState({
+        Fecha_Pedido: `${current.getMonth()}/${current.getDate()+1}/${current.getFullYear()}`,
+        Direccion_Envio: "",
+        Direccion_Facturacion: "",
+        Id_Usuario: cookies.get('Id_Usuario'),        
+        Id_MetodoPagoTarjeta: cookies.get('Id_MetodoPagoTarjeta'),
+        Fecha_Emision: `${current.getMonth()}/${current.getDate()+1}/${current.getFullYear()}`,
+        Subtotal: cookies.get('Subtotal'),
+        ITBIS: cookies.get('ITBIS'),
+        Total: cookies.get('Total')                        
+    })
+
+    console.log(tarjeta);
+    console.log(current.getDate())
     const crearTarjeta = () => {
-        fetch('http://localhost:5000/metodotarjeta/crear', {
+        fetch('http://localhost:8000/metodotarjeta/crear', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newTarjeta)
@@ -43,7 +55,11 @@ function Checkout() {
     }
 
     const crearFactura = () => {
-        
+        fetch('http://localhost:8000/masterfactura/crear', {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(factura)
+        })        
     }
 
     const handleSubmit = (event) => {
@@ -53,7 +69,8 @@ function Checkout() {
 
     const handleSubmit2 = (event) => {
         event.preventDefault();
-        
+        crearFactura();
+        console.log(factura)
     }
 
     console.log(newTarjeta);
@@ -66,8 +83,8 @@ function Checkout() {
                 {tarjeta.map((item) => (
                     <div className="form-check" key={item.Id_MetodoPago}>
                         <input className="form-check-input" type="radio" id="flexTarjetaRadio" />
-                        <label className="form-check-label" for="flexTarjetaRadio">{item.MetodoTarjeta.Numero_Tarjeta}</label>
-                        <label className="form-check-label ms-2" for="flexTarjetaRadio">{item.MetodoTarjeta.Nombre}</label>
+                        <label className="form-check-label">{item.MetodoTarjeta.Numero_Tarjeta}</label>
+                        <label className="form-check-label ms-2">{item.MetodoTarjeta.Nombre}</label>
                     </div>
                 ))}
             </div>
@@ -167,21 +184,8 @@ function Checkout() {
                                 <h5 className="modal-title" id="facturaModalLabel">Terminar Pago</h5>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
-                            <div className="modal-body">
+                            <div className="modal-body">                                
                                 <div className="row">
-                                    <div className="col">
-                                        <label className="col-form-label">Fecha Pedido</label>
-                                    </div>
-                                    <div className="col">
-                                        <input
-                                            required
-                                            type="date"
-                                            className="form-control"
-                                            value={factura.Fecha_Pedido}
-                                            onChange={(e) => setFactura({ ...factura, Fecha_Pedido: e.target.value })} />
-                                    </div>
-                                </div>
-                                <div className="row mt-3">
                                     <div className="col">
                                         <label className="col-form-label">Direccion de Envio</label>
                                     </div>
@@ -195,7 +199,7 @@ function Checkout() {
                                         />
                                     </div>
                                 </div>
-                                <div className="row mt-3">
+                                <div className="row mt-3 mb-3">
                                     <div className="col">
                                         <label className="col-form-label">Direccion de Facturacion</label>
                                     </div>

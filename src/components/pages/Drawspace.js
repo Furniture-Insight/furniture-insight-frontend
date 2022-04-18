@@ -369,7 +369,7 @@ const Drawspace = () => {
   };
 
   const getMuebles = async () => {
-    const response = await fetch('http://localhost:5000/mueble/all')
+    const response = await fetch('http://localhost:8000/mueble/all')
     const result = await response.json()
     for (const item of result) {
       const b64 = Buffer.from(item.data).toString("base64");

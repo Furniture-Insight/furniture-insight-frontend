@@ -22,7 +22,7 @@ function Login({ isUserLogged }) {
             body: JSON.stringify(usuario)
         }
 
-        fetch('https://furniture-insight-app.herokuapp.com/login',requestOptions)
+        fetch('http://localhost:8000/login',requestOptions)
         .then(async response => {
             const isJson = response.headers.get('content-type')?.includes('application/json');
             const data = isJson && await response.json();
