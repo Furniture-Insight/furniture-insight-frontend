@@ -78,6 +78,7 @@ function Store({clickedMueble}) {
                 <div className="row row-cols-2">
 
                     {
+                        // eslint-disable-next-line array-callback-return
                         muebles.filter(mueble => {
                             if (busqueda === "") {
                                 return mueble

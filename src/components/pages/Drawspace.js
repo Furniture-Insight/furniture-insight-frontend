@@ -1,6 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import rough from "roughjs/bundled/rough.esm";
 import getStroke from "perfect-freehand";
+import { Buffer } from 'buffer';
 
 const generator = rough.generator();
 
@@ -188,6 +189,8 @@ const Drawspace = () => {
   const [tool, setTool] = useState("text");
   const [selectedElement, setSelectedElement] = useState(null);
   const textAreaRef = useRef();
+  const [muebles, setMuebles] = useState([])
+  const [busqueda, setBusqueda] = useState("")
 
   useLayoutEffect(() => {
     const canvas = document.getElementById("canvas");
@@ -363,6 +366,20 @@ const Drawspace = () => {
     updateElement(id, x1, y1, null, null, type, { text: event.target.value });
   };
 
+  const getMuebles = async () => {
+    const response = await fetch('https://furniture-insight-app.herokuapp.com/mueble/all')
+    const result = await response.json()
+    for (const item of result) {
+      const b64 = Buffer.from(item.data).toString("base64");
+      item.data = b64;
+    }
+    setMuebles(result);
+  }
+
+  useEffect(() => {
+    getMuebles();
+  }, [])
+
   return (
     <div>
       <div className="row">
@@ -430,7 +447,41 @@ const Drawspace = () => {
           </canvas>
         </div>
         <div className="col">
-          Search
+          <div className="row row-cols-2">
+            <input
+                className="form-control rounded-pill border border-dark"
+                type="text"
+                placeholder="Buscar Mueble"
+                onChange={event => setBusqueda(event.target.value)} />
+
+            {
+              // eslint-disable-next-line array-callback-return
+              muebles.filter(mueble => {
+                if (busqueda === "") {
+                  return mueble
+                } else if (mueble.Nombre.toString().toLowerCase().includes(busqueda.toLowerCase())) {
+                  return mueble
+                }
+              }).map((mueble) => (
+                  <div className="col" key={mueble.Id_Mueble}>
+                    <div>
+                      <div className="card border-secondary text-center mb-3" style={{ "maxWidth": "33.75rem" }}>
+                        <div className="row g-0">
+                          <div className="col-md-4">
+                            <img src={`data:image/${mueble.mimetype};base64,${mueble.data}`} className="img-fluid rounded-start" />
+                          </div>
+                          <div className="col-md-8">
+                            <div className="card-body">
+                              <h5 className="card-title">{mueble.Nombre}</h5>
+                              <p className="card-text">{mueble.Precio}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              ))}
+          </div>
         </div>
       </div>
     </div>
