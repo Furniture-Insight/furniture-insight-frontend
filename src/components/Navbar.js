@@ -3,7 +3,7 @@ import { Link, Outlet } from "react-router-dom";
 import Cookies from 'universal-cookie';
 import logo from "./images/logo.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStore, faRightToBracket, faUserPlus, faCartShopping, faHouse, faTableCells, faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import { faStore, faRightToBracket, faUserPlus, faCartShopping, faUsers, faTableCells, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 
 function Navbar({isUserLogged}) {
     const cookies = new Cookies();    
@@ -29,19 +29,16 @@ function Navbar({isUserLogged}) {
                     <div className="collapse navbar-collapse navbarToggler" >
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0 nav nav-tabs">
                             <li className="nav-item">
-                                <Link className="nav-link" to="/home"><FontAwesomeIcon icon={faHouse} /> Home</Link>
+                                <Link className="nav-link" aria-current="page" to="/store"><FontAwesomeIcon icon={faStore}/> Store </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" aria-current="page" to="/store"><FontAwesomeIcon icon={faStore} /> Store</Link>
+                                <Link className="nav-link" to="/cart"><FontAwesomeIcon icon={faCartShopping}/> Shopping Cart </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/cart"><FontAwesomeIcon icon={faCartShopping} /> Cart</Link>
+                                <Link className="nav-link" to="/drawSpace"><FontAwesomeIcon icon={faTableCells}/> Smart Room </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/drawSpace"><FontAwesomeIcon icon={faTableCells} /> Smart Room</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/description">Description</Link>
+                                <Link className="nav-link" to="/aboutUs"><FontAwesomeIcon icon={faUsers} /> About Us </Link>
                             </li>
                         </ul>
                     </div>
@@ -62,10 +59,10 @@ function Navbar({isUserLogged}) {
                     <div className="collapse navbar-collapse navbarToggler">
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0 nav nav-tabs">                        
                             <li className="nav-item">                             
-                                <Link className="nav-link" to="/login"><FontAwesomeIcon icon={faRightToBracket} /> Login</Link>                                                           
+                                <Link className="nav-link" to="/login"><FontAwesomeIcon icon={faRightToBracket}/> Login </Link>                                                           
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/signup"><FontAwesomeIcon icon={faUserPlus}/> Signup</Link>                                
+                                <Link className="nav-link" to="/signup"><FontAwesomeIcon icon={faUserPlus}/> Signup </Link>                                
                             </li>                       
                         </ul>
                     </div>

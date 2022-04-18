@@ -6,8 +6,6 @@ import Login from "./components/pages/Login";
 import SignUp from "./components/pages/SignUp";
 import RecoverPass from "./components/pages/RecoverPass";
 import Store from "./components/pages/Store";
-import Description from "./components/pages/Description";
-import SmartRoom from './components/pages/SmartRoom';
 import Drawspace from './components/pages/Drawspace';
 import Cart from "./components/pages/Cart";
 import Checkout from "./components/pages/Checkout";
@@ -40,13 +38,11 @@ function App() {
                     <Route path="recoverpass" element={<RecoverPass />}></Route>
                     <Route path="store" element={<Store clickedMueble={clickedMueble} />}></Route>
                     <Route path="mueble" element={<Mueble clickedMueble={mueble} />}></Route>
-                    <Route path="description" element={<Description />}></Route>
                     <Route path="drawspace" element={<Drawspace />}></Route>
                     <Route path="cart" element={<Cart />}></Route>
                     <Route path="checkout" element={<Checkout />}></Route>
                     <Route path="aboutUs" element={<AboutUs/>}></Route>
                     <Route path="profile" element={<Profile/>}></Route>
-                    {/*<Route path="drawSpace" element={<drawSpace/>}></Route>*/}
                 </Route>
             </Routes>
         </BrowserRouter>        
