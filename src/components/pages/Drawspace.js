@@ -1,6 +1,9 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import rough from "roughjs/bundled/rough.esm";
 import getStroke from "perfect-freehand";
+import { Buffer } from 'buffer';
+import interact from 'interactjs'
+
 
 const generator = rough.generator();
 
@@ -188,6 +191,8 @@ const Drawspace = () => {
   const [tool, setTool] = useState("text");
   const [selectedElement, setSelectedElement] = useState(null);
   const textAreaRef = useRef();
+  const [muebles, setMuebles] = useState([])
+  const [busqueda, setBusqueda] = useState("")
 
   useLayoutEffect(() => {
     const canvas = document.getElementById("canvas");
@@ -363,10 +368,130 @@ const Drawspace = () => {
     updateElement(id, x1, y1, null, null, type, { text: event.target.value });
   };
 
+  const getMuebles = async () => {
+    const response = await fetch('http://localhost:5000/mueble/all')
+    const result = await response.json()
+    for (const item of result) {
+      const b64 = Buffer.from(item.data).toString("base64");
+      item.data = b64;
+    }
+    setMuebles(result);
+  }
+
+  const position = { x: 0, y: 0 }
+  interact('.draggable').draggable({
+    listeners: {
+      start (event) {
+        console.log(event.type, event.target)
+      },
+      move (event) {
+        position.x += event.dx
+        position.y += event.dy
+
+        event.target.style.transform =
+            `translate(${position.x}px, ${position.y}px)`
+      },
+    }
+  })
+
+  interact('.dropzone').dropzone({
+    // only accept elements matching this CSS selector
+    accept: '#yes-drop',
+    // Require a 75% element overlap for a drop to be possible
+    overlap: 0.75,
+
+    // listen for drop related events:
+
+    ondropactivate: function (event) {
+      // add active dropzone feedback
+      event.target.classList.add('drop-active')
+    },
+    ondragenter: function (event) {
+      var draggableElement = event.relatedTarget
+      var dropzoneElement = event.target
+
+      // feedback the possibility of a drop
+      dropzoneElement.classList.add('drop-target')
+      draggableElement.classList.add('can-drop')
+      draggableElement.textContent = 'Dragged in'
+    },
+    ondragleave: function (event) {
+      // remove the drop feedback style
+      event.target.classList.remove('drop-target')
+      event.relatedTarget.classList.remove('can-drop')
+      event.relatedTarget.textContent = 'Dragged out'
+    },
+    ondrop: function (event) {
+      event.relatedTarget.textContent = 'Dropped'
+    },
+    ondropdeactivate: function (event) {
+      // remove active dropzone feedback
+      event.target.classList.remove('drop-active')
+      event.target.classList.remove('drop-target')
+    }
+  })
+
+  interact('.resize-drag')
+      .resizable({
+        // resize from all edges and corners
+        edges: { left: true, right: true, bottom: true, top: true },
+
+        listeners: {
+          move (event) {
+            var target = event.target
+            var x = (parseFloat(target.getAttribute('data-x')) || 0)
+            var y = (parseFloat(target.getAttribute('data-y')) || 0)
+
+            // update the element's style
+            target.style.width = event.rect.width + 'px'
+            target.style.height = event.rect.height + 'px'
+
+            // translate when resizing from top or left edges
+            x += event.deltaRect.left
+            y += event.deltaRect.top
+
+            target.style.transform = 'translate(' + x + 'px,' + y + 'px)'
+
+            target.setAttribute('data-x', x)
+            target.setAttribute('data-y', y)
+            target.textContent = Math.round(event.rect.width) + '\u00D7' + Math.round(event.rect.height)
+          }
+        },
+        modifiers: [
+          // keep the edges inside the parent
+          interact.modifiers.restrictEdges({
+            outer: 'parent'
+          }),
+
+          // minimum size
+          interact.modifiers.restrictSize({
+            min: { width: 100, height: 50 }
+          })
+        ],
+
+        inertia: true
+      })
+      .draggable({
+        listeners: { move: window.dragMoveListener },
+        inertia: true,
+        modifiers: [
+          interact.modifiers.restrictRect({
+            restriction: 'parent',
+            endOnly: true
+          })
+        ]
+      })
+
+
+  useEffect(() => {
+    getMuebles();
+  }, [])
+
   return (
     <div>
+      {/*<script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"/>*/}
       <div className="row">
-        <div className="col-10">        
+        <div className="col-10 dropzone">
           <div style={{ position: "absolute" }}>
             <input
               type="radio"
@@ -395,8 +520,8 @@ const Drawspace = () => {
             <label htmlFor="text">Text</label>
           </div>
           <div style={{ position: "absolute", bottom: 0, padding: 10 }}>
-            <button onClick={undo}>Undo</button>
-            <button onClick={redo}>Redo</button>
+            <button className="btn btn-outline-secondary me-1" onClick={undo}>Undo</button>
+            <button className="btn btn-outline-secondary" onClick={redo}>Redo</button>
           </div>
           {action === "writing" ? (
             <textarea
@@ -418,19 +543,50 @@ const Drawspace = () => {
               }}
             />
           ) : null}
-          <canvas
-            id="canvas"
-            width={window.innerWidth}
-            height={window.innerHeight}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-          >
-            Canvas
-          </canvas>
+          <div id={"yes-drop"}>
+            <canvas
+                id="canvas"
+                width={window.innerWidth}
+                height={window.innerHeight}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+            >
+              Canvas
+            </canvas>
+          </div>
+
         </div>
-        <div className="col">
-          Search
+
+        <div className="col" align="center">
+          <div className="row row-cols-1 mt-3 me-3">
+            <input
+              className="form-control rounded-pill border border-dark"
+              type="text"
+              placeholder="Buscar Mueble"
+              onChange={event => setBusqueda(event.target.value)} />
+
+            {
+              // eslint-disable-next-line array-callback-return
+              muebles.filter(mueble => {
+                if (busqueda === "") {
+                  return mueble
+                } else if (mueble.Nombre.toString().toLowerCase().includes(busqueda.toLowerCase())) {
+                  return mueble
+                }
+              }).map((mueble) => (
+                <div className="col" key={mueble.Id_Mueble}>
+                  <div>
+                    <div className="card border-secondary text-center mt-3 mb-3 draggable" style={{ "width": "136.5px"}}>
+                      <img id="imgtodrag" src={`data:image/${mueble.mimetype};base64,${mueble.data}`} className="img-fluid rounded-start" />
+                      <div className="card-body">
+                        <p className="card-text fs-6" style={{"color":"black"}}>{mueble.Nombre}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+          </div>
         </div>
       </div>
     </div>
