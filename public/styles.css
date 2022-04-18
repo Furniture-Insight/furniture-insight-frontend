@@ -112,3 +112,35 @@
     /* This makes things *much* easier */
     box-sizing: border-box;
 }
+
+.footer {
+    text-align: center;
+    padding: 50px 0 20px;
+}
+
+.profile-container {
+    margin: 0 200px 0 200px;
+}
+
+.carousel-control-next,
+.carousel-control-prev {
+    filter: invert(100%);
+}
+
+.carousel-indicators {
+    filter: invert(100%);
+}
+
+.carousel {
+    margin: 50px 0 50px 0;
+    height: 400px;
+}
+
+.carousel-img {
+    height: 350px;
+    min-width: 500px;
+}
+
+.btn-homepage {
+    width: 40%;
+}

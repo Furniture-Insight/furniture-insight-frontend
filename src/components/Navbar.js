@@ -15,11 +15,12 @@ function Navbar({isUserLogged}) {
     }    
     
     const usuarioNombre = cookies.get('Nombre');
+    
     return (
         <div>
             <nav className="navbar navbar-expand-lg navbar-dark bg-dark justify-content-end">
                 <div className="container-fluid">
-                    <Link className="navbar-brand" to="/home">
+                    <Link className="navbar-brand" to="/">
                         <img src={logo} width="40" height="40" alt="logo" className="me-2" />
                         Furniture Insight
                     </Link>
@@ -48,8 +49,8 @@ function Navbar({isUserLogged}) {
                             <li className="nav-item dropdown">
                                 <Link className="nav-link dropdown-toggle" id="userDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false" to="#"><FontAwesomeIcon icon={faUserCircle} /></Link>
                                 <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdownMenuLink">                            
-                                <li><Link className="dropdown-item" to="/home">Profile</Link></li>
-                                <li><Link className="dropdown-item" to="/home" onClick={handleClick}>Logout</Link></li>
+                                <li><Link className="dropdown-item" to="/profile">Profile</Link></li>
+                                <li><Link className="dropdown-item" to="/" onClick={handleClick}>Logout</Link></li>
                                 </ul>                                
                             </li>
                             <li className="nav-item"></li>
