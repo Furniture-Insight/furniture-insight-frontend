@@ -365,68 +365,74 @@ const Drawspace = () => {
 
   return (
     <div>
-
-      <div style={{ position: "absolute" }}>
-        <input
-          type="radio"
-          id="selection"
-          checked={tool === "selection"}
-          onChange={() => setTool("selection")}
-        />
-        <label htmlFor="selection">Selection</label>
-        <input type="radio" id="line" checked={tool === "line"} onChange={() => setTool("line")} />
-        <label htmlFor="line">Line</label>
-        <input
-          type="radio"
-          id="rectangle"
-          checked={tool === "rectangle"}
-          onChange={() => setTool("rectangle")}
-        />
-        <label htmlFor="rectangle">Rectangle</label>
-        <input
-          type="radio"
-          id="pencil"
-          checked={tool === "pencil"}
-          onChange={() => setTool("pencil")}
-        />
-        <label htmlFor="pencil">Pencil</label>
-        <input type="radio" id="text" checked={tool === "text"} onChange={() => setTool("text")} />
-        <label htmlFor="text">Text</label>
+      <div className="row">
+        <div className="col-10">        
+          <div style={{ position: "absolute" }}>
+            <input
+              type="radio"
+              id="selection"
+              checked={tool === "selection"}
+              onChange={() => setTool("selection")}
+            />
+            <label htmlFor="selection">Selection</label>
+            <input type="radio" id="line" checked={tool === "line"} onChange={() => setTool("line")} />
+            <label htmlFor="line">Line</label>
+            <input
+              type="radio"
+              id="rectangle"
+              checked={tool === "rectangle"}
+              onChange={() => setTool("rectangle")}
+            />
+            <label htmlFor="rectangle">Rectangle</label>
+            <input
+              type="radio"
+              id="pencil"
+              checked={tool === "pencil"}
+              onChange={() => setTool("pencil")}
+            />
+            <label htmlFor="pencil">Pencil</label>
+            <input type="radio" id="text" checked={tool === "text"} onChange={() => setTool("text")} />
+            <label htmlFor="text">Text</label>
+          </div>
+          <div style={{ position: "absolute", bottom: 0, padding: 10 }}>
+            <button onClick={undo}>Undo</button>
+            <button onClick={redo}>Redo</button>
+          </div>
+          {action === "writing" ? (
+            <textarea
+              ref={textAreaRef}
+              onBlur={handleBlur}
+              style={{
+                position: "fixed",
+                top: selectedElement.y1 - 2,
+                left: selectedElement.x1,
+                font: "24px sans-serif",
+                margin: 0,
+                padding: 0,
+                border: 0,
+                outline: 0,
+                resize: "auto",
+                overflow: "hidden",
+                whiteSpace: "pre",
+                background: "transparent",
+              }}
+            />
+          ) : null}
+          <canvas
+            id="canvas"
+            width={window.innerWidth}
+            height={window.innerHeight}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+          >
+            Canvas
+          </canvas>
+        </div>
+        <div className="col">
+          Search
+        </div>
       </div>
-      <div style={{ position: "absolute", bottom: 0, padding: 10 }}>
-        <button onClick={undo}>Undo</button>
-        <button onClick={redo}>Redo</button>
-      </div>
-      {action === "writing" ? (
-        <textarea
-          ref={textAreaRef}
-          onBlur={handleBlur}
-          style={{
-            position: "fixed",
-            top: selectedElement.y1 - 2,
-            left: selectedElement.x1,
-            font: "24px sans-serif",
-            margin: 0,
-            padding: 0,
-            border: 0,
-            outline: 0,
-            resize: "auto",
-            overflow: "hidden",
-            whiteSpace: "pre",
-            background: "transparent",
-          }}
-        />
-      ) : null}
-      <canvas
-        id="canvas"
-        width={window.innerWidth}
-        height={window.innerHeight}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-      >
-        Canvas
-      </canvas>
     </div>
   );
 };
