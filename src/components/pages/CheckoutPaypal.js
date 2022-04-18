@@ -21,7 +21,7 @@ function CheckoutPaypal() {
 
     useEffect(() => {
         const getPaypal = async () => {
-            const response = await fetch(`http://localhost:8000/metodopago/obtener/${cookies.get('Id_Usuario')}`);
+            const response = await fetch(`http://localhost:5000/metodopago/obtener/${cookies.get('Id_Usuario')}`);
             const result = await response.json();           
             setPaypal(result);
         };
@@ -29,7 +29,7 @@ function CheckoutPaypal() {
     }, [])
 
     const crearPaypal = () => {
-        fetch('http://localhost:8000/metodopaypal/crear', {
+        fetch('http://localhost:5000/metodopaypal/crear', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newTarjeta)

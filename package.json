@@ -20,6 +20,7 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
     "enzyme-to-json": "^3.6.2",
+    "interactjs": "^1.10.11",
     "perfect-freehand": "^1.0.16",
     "react": "^17.0.2",
     "react-beautiful-dnd": "^13.1.0",

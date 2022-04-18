@@ -23,7 +23,7 @@ function Checkout() {
 
     useEffect(() => {
         const getTarjeta = async () => {
-            const response = await fetch(`http://localhost:8000/metodopago/obtener/${cookies.get('Id_Usuario')}`);
+            const response = await fetch(`http://localhost:5000/metodopago/obtener/${cookies.get('Id_Usuario')}`);
             const result = await response.json();
             for (const item of result) {
                 const last4Num = String(item.MetodoTarjeta.Numero_Tarjeta).slice(-4);
@@ -35,7 +35,7 @@ function Checkout() {
     }, [])
 
     const crearTarjeta = () => {
-        fetch('http://localhost:8000/metodotarjeta/crear', {
+        fetch('http://localhost:5000/metodotarjeta/crear', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newTarjeta)
