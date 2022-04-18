@@ -3,6 +3,7 @@ import rough from "roughjs/bundled/rough.esm";
 import getStroke from "perfect-freehand";
 import { Buffer } from 'buffer';
 
+
 const generator = rough.generator();
 
 const createElement = (id, x1, y1, x2, y2, type) => {
@@ -367,7 +368,7 @@ const Drawspace = () => {
   };
 
   const getMuebles = async () => {
-    const response = await fetch('https://furniture-insight-app.herokuapp.com/mueble/all')
+    const response = await fetch('http://localhost:8000/mueble/all')
     const result = await response.json()
     for (const item of result) {
       const b64 = Buffer.from(item.data).toString("base64");
@@ -383,7 +384,7 @@ const Drawspace = () => {
   return (
     <div>
       <div className="row">
-        <div className="col-10">        
+        <div className="col-10">
           <div style={{ position: "absolute" }}>
             <input
               type="radio"
@@ -412,8 +413,8 @@ const Drawspace = () => {
             <label htmlFor="text">Text</label>
           </div>
           <div style={{ position: "absolute", bottom: 0, padding: 10 }}>
-            <button onClick={undo}>Undo</button>
-            <button onClick={redo}>Redo</button>
+            <button className="btn btn-outline-secondary me-1" onClick={undo}>Undo</button>
+            <button className="btn btn-outline-secondary" onClick={redo}>Redo</button>
           </div>
           {action === "writing" ? (
             <textarea
@@ -434,25 +435,25 @@ const Drawspace = () => {
                 background: "transparent",
               }}
             />
-          ) : null}
-          <canvas
-            id="canvas"
-            width={window.innerWidth}
-            height={window.innerHeight}
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-          >
-            Canvas
-          </canvas>
+          ) : null}      
+            <canvas
+              id="canvas"
+              width={window.innerWidth}
+              height={window.innerHeight}
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMouseMove}
+              onMouseUp={handleMouseUp}             
+            >
+              Canvas
+            </canvas>          
         </div>
-        <div className="col">
-          <div className="row row-cols-2">
+        <div className="col" align="center">
+          <div className="row row-cols-1 mt-3 me-3">
             <input
-                className="form-control rounded-pill border border-dark"
-                type="text"
-                placeholder="Buscar Mueble"
-                onChange={event => setBusqueda(event.target.value)} />
+              className="form-control rounded-pill border border-dark"
+              type="text"
+              placeholder="Buscar Mueble"
+              onChange={event => setBusqueda(event.target.value)} />
 
             {
               // eslint-disable-next-line array-callback-return
@@ -463,23 +464,16 @@ const Drawspace = () => {
                   return mueble
                 }
               }).map((mueble) => (
-                  <div className="col" key={mueble.Id_Mueble}>
-                    <div>
-                      <div className="card border-secondary text-center mb-3" style={{ "maxWidth": "33.75rem" }}>
-                        <div className="row g-0">
-                          <div className="col-md-4">
-                            <img src={`data:image/${mueble.mimetype};base64,${mueble.data}`} className="img-fluid rounded-start" />
-                          </div>
-                          <div className="col-md-8">
-                            <div className="card-body">
-                              <h5 className="card-title">{mueble.Nombre}</h5>
-                              <p className="card-text">{mueble.Precio}</p>
-                            </div>
-                          </div>
-                        </div>
+                <div className="col" key={mueble.Id_Mueble}>
+                  <div>
+                    <div className="card border-secondary text-center mt-3 mb-3" style={{ "width": "12.5rem"}}>
+                      <img id="imgtodrag" src={`data:image/${mueble.mimetype};base64,${mueble.data}`} className="img-fluid rounded-start" />
+                      <div className="card-body">
+                        <p className="card-text fs-6">{mueble.Nombre}</p>
                       </div>
                     </div>
                   </div>
+                </div>
               ))}
           </div>
         </div>
