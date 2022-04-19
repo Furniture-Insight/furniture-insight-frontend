@@ -18,7 +18,7 @@ function Checkout() {
 
     useEffect(() => {
         const getTarjeta = async () => {
-            const response = await fetch(`http://localhost:8000/metodopago/obtener/${cookies.get('Id_Usuario')}`);
+            const response = await fetch(`https://furniture-insight-app.herokuapp.com/metodopago/obtener/${cookies.get('Id_Usuario')}`);
             const result = await response.json();
             for (const item of result) {
                 const last4Num = String(item.MetodoTarjeta.Numero_Tarjeta).slice(-4);
@@ -54,7 +54,7 @@ function Checkout() {
             body: JSON.stringify(newTarjeta)
         }
 
-        fetch('http://localhost:8000/metodotarjeta/crear', requestOptions)
+        fetch('https://furniture-insight-app.herokuapp.com/metodotarjeta/crear', requestOptions)
             .then(async response => {
                 const isJson = response.headers.get('content-type')?.includes('application/json');
                 const data = isJson && await response.json();
@@ -78,7 +78,7 @@ function Checkout() {
             body: JSON.stringify(factura)
         }
 
-        fetch('http://localhost:8000/masterfactura/crear', requestOptions)
+        fetch('https://furniture-insight-app.herokuapp.com/masterfactura/crear', requestOptions)
             .then(async response => {
                 const isJson = response.headers.get('content-type')?.includes('application/json');
                 const data = isJson && await response.json();

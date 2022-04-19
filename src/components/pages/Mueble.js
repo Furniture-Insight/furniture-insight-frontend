@@ -20,7 +20,7 @@ function Mueble({ clickedMueble}) {
             body: JSON.stringify(carrito)
         }
 
-        fetch('http://localhost:8000/carrito/crear', requestOptions)
+        fetch('https://furniture-insight-app.herokuapp.com/carrito/crear', requestOptions)
         .then(async response => {
             const isJson = response.headers.get('content-type')?.includes('application/json');
             const data = isJson && await response.json();

@@ -21,7 +21,7 @@ function CheckoutPaypal() {
 
     useEffect(() => {
         const getPaypal = async () => {
-            const response = await fetch(`http://localhost:8000/metodopago/obtener/${cookies.get('Id_Usuario')}`);
+            const response = await fetch(`https://furniture-insight-app.herokuapp.com/metodopago/obtener/${cookies.get('Id_Usuario')}`);
             const result = await response.json();           
             setPaypal(result);
         };
@@ -29,7 +29,7 @@ function CheckoutPaypal() {
     }, [])
 
     const crearPaypal = () => {
-        fetch('http://localhost:8000/metodopaypal/crear', {
+        fetch('https://furniture-insight-app.herokuapp.com/metodopaypal/crear', {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newPaypal)

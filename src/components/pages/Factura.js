@@ -8,7 +8,7 @@ function Factura() {
     const [factura, setFactura] = useState([])
     const [sfactura, setSFactura] = useState({})
     const getFactura = async () => {
-        const response = await fetch(`http://localhost:8000/masterfactura/obtener/${cookies.get('Id_Usuario')}`);
+        const response = await fetch(`https://furniture-insight-app.herokuapp.com/masterfactura/obtener/${cookies.get('Id_Usuario')}`);
         const result = await response.json();
         const property = {
             nombre: result["0"].Usuario.Nombre,
