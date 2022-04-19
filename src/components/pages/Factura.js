@@ -31,18 +31,18 @@ function Factura() {
     console.log(factura);
 
     return (
-        <div>
-            <dl className='row border border-dark mt-3'>
-                <dt className='col-sm-3'>Fecha_Emision</dt>
+        <div className="m-5 p-5 text-center">
+            <dl className='row border border-dark mt-3 p-5'>
+                <dt className='col-sm-3'>Fecha de Impresion</dt>
                 <dd className='col-sm-9'>{sfactura.fecha_emision}</dd>
 
-                <dt className='col-sm-3'>Cliente</dt>
+                <dt className='col-sm-3'>Nombre de cliente</dt>
                 <dd className='col-sm-9'>{sfactura.nombre} {sfactura.apellido}</dd>
 
                 <dt className='col-sm-3'>Direcion de Envio</dt>
                 <dd className='col-sm-9'>{sfactura.direccion_envio}</dd>
-
-                <dt className="col-sm-3">Muebles</dt>
+                <hr/>
+                <dt className="col-sm-3">Lista de Productos</dt>
 
                 {factura.map((item) => (
                     <div key={item.Id_MasterDetailFactura}>
@@ -52,14 +52,16 @@ function Factura() {
                         </dl>
                     </div>
                 ))}
+                <hr/>
                 <dt className='col-sm-3'>Subtotal</dt>
                 <dd className='col-sm-9'>{sfactura.subtotal}</dd>
 
-                <dt className='col-sm-3'>Itbis</dt>
+                <dt className='col-sm-3'>ITBIS</dt>
                 <dd className='col-sm-9'>{sfactura.itbis}</dd>
-
-                <dt className='col-sm-3'>Total</dt>
+                <hr/>
+                <dt className='col-sm-3'>TOTAL</dt>
                 <dd className='col-sm-9'>{sfactura.total}</dd>
+                <hr/>
             </dl>
         </div>
     )

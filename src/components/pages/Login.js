@@ -69,7 +69,7 @@ function Login({ isUserLogged }) {
                         onChange={(e) => setUsuario({ ...usuario, Contraseña: e.target.value })} />                    
                     <button
                         type="submit"
-                        className="btn btn-outline-secondary rounded-pill"
+                        className="btn btn-outline-success rounded-pill"
                     >Log In</button>
                 </div>
             </form>

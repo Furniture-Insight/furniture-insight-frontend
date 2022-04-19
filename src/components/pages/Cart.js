@@ -90,7 +90,7 @@ function Cart() {
                                             <div className="card-body ms-4">
                                                 <div className="row">
                                                     <label className="card-text">{item.MuebleCarrito.Nombre}</label>
-                                                    <label className="card-text">Cantidad: {item.MuebleCarrito.Cantidad}</label>
+                                                    <label className="card-text">Cantidad: {item.Cantidad_Mueble}</label>
                                                     <label className="card-text">Precio: {item.MuebleCarrito.Precio}</label>
                                                 </div>
                                             </div>

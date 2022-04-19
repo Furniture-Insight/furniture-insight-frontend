@@ -127,7 +127,7 @@ function Checkout() {
             <div className="row mt-3">
                 <button
                     type="button"
-                    className="btn btn-secondary rounded-pill w-25"
+                    className="btn btn-outline-success rounded-pill w-25"
                     data-bs-toggle="modal"
                     data-bs-target="#cardModal">Agregar tarjeta</button>
             </div>
@@ -162,13 +162,13 @@ function Checkout() {
                                 />
                             </div>
                         </div>
-                        <div className="">
+                        <div className="m-2">
                             <button
-                                className="btn btn-outline-secondary rounded-pill"
+                                className="btn btn-outline-success rounded-pill"
                                 type="submit"
                             >Pagar</button>
                         </div>
-                        <div className="">
+                        <div className="m-2">
                             <button
                                 className="btn btn-outline-secondary rounded-pill"
                                 type="button"

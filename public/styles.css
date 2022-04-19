@@ -6,6 +6,16 @@ h4 {
     font-weight: bold;
 }
 
+.hr-about {
+    border: dotted 6px;
+    color: black;
+    border-bottom: none;
+    width: 4%;
+    opacity: 0.50;
+    margin: 50px auto;
+    background-color: white;
+}
+
 .form-login {
     width: 100%;
     max-width: 330px;
@@ -39,7 +49,7 @@ h4 {
 }
 
 .about-section {
-    padding: 50px;
+    padding: 50px 0 50px 0;
 }
 
 .welcome-message {
@@ -68,13 +78,25 @@ h4 {
     background: #fff;
     box-shadow: 0 6px 10px rgba(0, 0, 0, .08), 0 0 6px rgba(0, 0, 0, .05);
     transition: .3s transform cubic-bezier(.155, 1.105, .295, 1.12), .3s box-shadow, .3s -webkit-transform cubic-bezier(.155, 1.105, .295, 1.12);
-    padding: 14px 80px 18px 36px;
+    padding: 14px 36px 18px 36px;
     cursor: pointer;
     z-index: 1;
 }
 
 .card:hover {
     transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
+}
+
+.card-static{
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, .08), 0 0 6px rgba(0, 0, 0, .05);
+    transition: .3s transform cubic-bezier(.155, 1.105, .295, 1.12), .3s box-shadow, .3s -webkit-transform cubic-bezier(.155, 1.105, .295, 1.12);
+    z-index: 1;
+}
+
+.card-static:hover {
     box-shadow: 0 10px 20px rgba(0, 0, 0, .12), 0 4px 8px rgba(0, 0, 0, .06);
 }
 
@@ -121,9 +143,10 @@ h4 {
     box-sizing: border-box;
 }
 
-.footer {
+.bottom-container {
     text-align: center;
-    padding: 50px 0 20px;
+    padding: 50px 0 65px;
+    background-color: lightgrey;
 }
 
 .profile-container {
@@ -140,7 +163,7 @@ h4 {
 }
 
 .carousel {
-    margin: 50px 0 50px 0;
+    margin: 50px 0 25px 0;
     height: 400px;
 }
 

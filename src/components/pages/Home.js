@@ -13,7 +13,7 @@ function Home({clickedMueble}) {
     const [muebles, setMuebles] = useState([]);
 
     const getMuebles = async () => {
-        const response = await fetch('http://localhost:8000/mueble/all')
+        const response = await fetch('http://furniture-insight-app.herokuapp.com/mueble/all')
         const result = await response.json()
         for (const item of result) {
             const b64 = Buffer.from(item.data).toString("base64");
@@ -63,25 +63,25 @@ function Home({clickedMueble}) {
                         <span className="visually-hidden">Next</span>                    
                     </button>
                 </div>
-            </div>
-            <div>
-                {muebles.filter(mueble => mueble.Id_Mueble === 4).map((mueble) => (
-                    <div className="container justify-content-center" key={mueble.Id_Mueble}>
-                        <div className="row px-5">
-                            <div className="col p-5">
-                                <img src={`data:image/${clickedMueble.mimetype};base64,${mueble.data}`} className="mx-auto d-block w-50 pb-5" alt="mueble.jpg"/>
-                                <div className="d-flex justify-content-around">
-                                    <a type="button" className="btn btn-dark btn-homepage" href="/store">See more like this</a>
-                                    <a type="button" className="btn btn-dark btn-homepage" onClick={handleClick}>Details</a>
+                <div className="card-static border-dark h-25 w-75 m-3">
+                    {muebles.filter(mueble => mueble.Id_Mueble === 4).map((mueble) => (
+                        <div className="container justify-content-center" key={mueble.Id_Mueble}>
+                            <div className="row px-5">
+                                <div className="col p-5">
+                                    <img src={`data:image/${clickedMueble.mimetype};base64,${mueble.data}`} className="mx-auto d-block w-50 pb-5" alt="mueble.jpg"/>
+                                    <div className="d-flex justify-content-around">
+                                        <a type="button" className="btn btn-outline-dark btn-homepage" href="/store">See more like this</a>
+                                        <a type="button" className="btn btn-outline-dark btn-homepage" onClick={handleClick}>Details</a>
+                                    </div>
+                                </div>
+                                <div className="col text-center p-5 mt-5">
+                                    <h3 className="mt-5">{mueble.Nombre}</h3>
+                                    <h5 className="my-3">{mueble.Descripcion}</h5>
                                 </div>
                             </div>
-                            <div className="col text-center p-5 mt-5">
-                                <h3 className="mt-5">{mueble.Nombre}</h3>
-                                <p className="my-3">{mueble.Descripcion}</p>
-                            </div>
                         </div>
-                    </div>
-                ))}
+                    ))}
+            </div>
             </div>
         </>
     );

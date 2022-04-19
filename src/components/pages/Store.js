@@ -40,7 +40,7 @@ function Store({clickedMueble}) {
         <div className="container">
             <div className="row mt-3">
                 <div className="col mb-3">
-                    <h2 className="h2 text-center">Store</h2>
+                    <h2 className="h2 text-center my-4">Tienda de Muebles</h2>
                 </div>
             </div>
             <form>
@@ -75,8 +75,7 @@ function Store({clickedMueble}) {
                 </div>
             </form>
             <div className="col">
-                <div className="row row-cols-2">
-
+                <div className="row card-deck row-cols-2 mt-5">
                     {
                         // eslint-disable-next-line array-callback-return
                         muebles.filter(mueble => {
@@ -88,12 +87,12 @@ function Store({clickedMueble}) {
                         }).map((mueble) => (
                             <div className="col" key={mueble.Id_Mueble}>
                                 <div onClick={handleClick}>
-                                    <div className="card border-secondary text-center mb-3" style={{ "maxWidth": "33.75rem" }} onClick={() => clickedMueble(mueble)}>
-                                        <div className="row g-0">
+                                    <div className="card border-secondary text-center mb-5" style={{ "maxWidth": "33.75rem" , "minHeight": "200px"}} onClick={() => clickedMueble(mueble)}>
+                                        <div className="row mt-3 g-0">
                                             <div className="col-md-4">
                                                 <img src={`data:image/${clickedMueble.mimetype};base64,${mueble.data}`} className="img-fluid rounded-start" />
                                             </div>
-                                            <div className="col-md-8">
+                                            <div className="col-md-8 align-self-center">
                                                 <div className="card-body">
                                                     <h5 className="card-title">{mueble.Nombre}</h5>
                                                     <p className="card-text">{mueble.Precio}</p>

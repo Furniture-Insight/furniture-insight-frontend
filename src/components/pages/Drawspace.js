@@ -493,31 +493,52 @@ const Drawspace = () => {
       <div className="row">
         <div className="col-10 dropzone">
           <div style={{ position: "absolute" }}>
-            <input
-              type="radio"
-              id="selection"
-              checked={tool === "selection"}
-              onChange={() => setTool("selection")}
-            />
-            <label htmlFor="selection">Selection</label>
-            <input type="radio" id="line" checked={tool === "line"} onChange={() => setTool("line")} />
-            <label htmlFor="line">Line</label>
-            <input
-              type="radio"
-              id="rectangle"
-              checked={tool === "rectangle"}
-              onChange={() => setTool("rectangle")}
-            />
-            <label htmlFor="rectangle">Rectangle</label>
-            <input
-              type="radio"
-              id="pencil"
-              checked={tool === "pencil"}
-              onChange={() => setTool("pencil")}
-            />
-            <label htmlFor="pencil">Pencil</label>
-            <input type="radio" id="text" checked={tool === "text"} onChange={() => setTool("text")} />
-            <label htmlFor="text">Text</label>
+            <h3 className="m-3"> Grid Tools </h3>
+            <div className="row m-2">
+              <div className="col">
+                <input
+                  type="radio"
+                  id="selection"
+                  checked={tool === "selection"}
+                  onChange={() => setTool("selection")}
+                />
+                <label htmlFor="selection">Selection</label>
+              </div>
+            </div>
+            <div className="row m-2">
+              <div className="col">
+                <input type="radio" id="line" checked={tool === "line"} onChange={() => setTool("line")} />
+                <label htmlFor="line">Line</label>
+              </div>
+            </div>
+            <div className="row m-2">
+              <div className="col">
+                <input
+                  type="radio"
+                  id="rectangle"
+                  checked={tool === "rectangle"}
+                  onChange={() => setTool("rectangle")}
+                />
+                <label htmlFor="rectangle">Rectangle</label>
+              </div>
+            </div>
+            <div className="row m-2">
+              <div className="col">
+                <input
+                  type="radio"
+                  id="pencil"
+                  checked={tool === "pencil"}
+                  onChange={() => setTool("pencil")}
+                />
+                <label htmlFor="pencil">Pencil</label>
+              </div>
+            </div>
+            <div className="row m-2">
+              <div className="col">
+                <input type="radio" id="text" checked={tool === "text"} onChange={() => setTool("text")} />
+                <label htmlFor="text">Text</label>
+              </div>
+            </div>
           </div>
           <div style={{ position: "absolute", bottom: 0, padding: 10 }}>
             <button className="btn btn-outline-secondary me-1" onClick={undo}>Undo</button>

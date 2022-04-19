@@ -19,17 +19,17 @@ function Profile({ isUserLogged }) {
 
     const[usuario, setUsuario] = useState({});
     const[newUsuario, setNewUsuario] = useState({
-        Id_Genero: null,
-        Nombre: null,
-        Apellido: null,
-        Contraseña: null,
-        Contraseña_nueva: null,
-        Edad: null,
-        Direccion_Residencia: null
+        Id_Genero: "",
+        Nombre: "",
+        Apellido: "",
+        Contraseña: "",
+        Contraseña_nueva: "",
+        Edad: "",
+        Direccion_Residencia: ""
     });
     
     const getUsuario = async () => {
-        const response = await fetch(`http://localhost:8000/user/${cookies.get('Id_Usuario')}`)
+        const response = await fetch(`http://furniture-insight-app.herokuapp.com/user/${cookies.get('Id_Usuario')}`)
         const result = await response.json()
         setUsuario(result);
     }
@@ -42,7 +42,7 @@ function Profile({ isUserLogged }) {
             body: JSON.stringify(newUsuario)
         }
 
-        fetch(`http://localhost:8000/user/editar/${cookies.get('Id_Usuario')}`, requestOptions)
+        fetch(`http://furniture-insight-app.herokuapp.com/user/editar/${cookies.get('Id_Usuario')}`, requestOptions)
             .then(async response => {
                 const isJson = response.headers.get('content-type')?.includes('application/json');
                 const data = isJson && await response.json();
@@ -71,7 +71,7 @@ function Profile({ isUserLogged }) {
         <>
             <h1 className="welcome-message">¡Bienvenido a tu perfil, {usuario.Nombre}!</h1>
             <div className="row card-deck justify-content-around">
-                <div className="col-3 card border-dark m-5">
+                <div className="col-3 card-static border-dark m-5">
                     <div className="card-body">
                         <div>
                             <h4 className="card-title pb-3">Account Details</h4>
@@ -83,13 +83,13 @@ function Profile({ isUserLogged }) {
                         </div>
                     </div>
                 </div>
-                <div className="col-3 card border-dark m-5">
+                <div className="col-3 card-static border-dark m-5">
                     <div className="card-body">
                         <h4 className="card-title pb-3">Tu Lista</h4>
                         <p className="card-text"> COMING SOON </p>
                     </div>
                 </div>
-                <div className="col-3 card border-dark m-5">
+                <div className="col-3 card-static border-dark m-5">
                     <div className="card-body">
                         <h4 className="card-title pb-3">Ajustes</h4>
                         <div className="d-grid col-5">

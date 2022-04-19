@@ -123,7 +123,7 @@ function SignUp({ isUserLogged }) {
                         onChange={(e) => setUsuario({ ...usuario, Direccion_Residencia: e.target.value })} />
                     <button
                         type="submit"                        
-                        className="btn btn-outline-secondary rounded-pill"
+                        className="btn btn-outline-success rounded-pill"
                         onClick={handleClick}
                     >Sign Up</button>
                 </div>
