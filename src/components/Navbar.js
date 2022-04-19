@@ -14,11 +14,11 @@ function Navbar({isUserLogged}) {
         cookies.remove('ITBIS');
         cookies.remove('Subtotal');
         cookies.remove('Total');
-        cookies.set('Session', false, {path:'/'});
-        isUserLogged(false);        
+        cookies.set('Session', false, {path:'/'})       
+        isUserLogged(cookies.get('Session'));        
     }    
     
-    const usuarioNombre = cookies.get('Nombre');
+    const usuarioNombre = cookies.get('Nombre');   
     
     return (
         <div>
@@ -47,7 +47,7 @@ function Navbar({isUserLogged}) {
                             </li>
                         </ul>
                     </div>
-                    {isUserLogged?
+                    {isUserLogged ?
                     <div className="collapse navbar-collapse navbarToggler">
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">                        
                             <li className="nav-item dropdown">

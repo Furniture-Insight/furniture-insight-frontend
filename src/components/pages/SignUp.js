@@ -54,7 +54,7 @@ function SignUp({ isUserLogged }) {
     }
 
     const handleClick = () => {
-        isUserLogged(true);             
+        isUserLogged(cookies.get('Session'));             
     }
 
     return (
