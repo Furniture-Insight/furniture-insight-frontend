@@ -1,43 +1,90 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { YearPicker, MonthPicker } from 'react-dropdown-date';
+import { useNavigate } from "react-router-dom";
 import Cookies from 'universal-cookie';
 
-function CheckoutPaypal() {
-
+function Checkout() {
+    let navigate = useNavigate();
     const cookies = new Cookies()
+    const current = new Date()
     const [paypal, setPaypal] = useState([])
     const [newPaypal, setNewPaypal] = useState({
         Mail: "",
         Contraseña: "",        
-        UsuarioIdUsuario: cookies.get('Id_Usuario')
-    })
-    const [factura, setFactura] = useState({
-        Fecha_Pedido: "",
-        Direccion_Envio: "",
-        Direccion_Facturacion: "",
-        Id_Carrito: ""
+        Id_Usuario: cookies.get('Id_Usuario')
     })
 
     useEffect(() => {
         const getPaypal = async () => {
             const response = await fetch(`https://furniture-insight-app.herokuapp.com/metodopago/obtener/${cookies.get('Id_Usuario')}`);
-            const result = await response.json();           
+            const result = await response.json();            
+            for (const item of result) {
+                cookies.set('Id_MetodoPagoPaypal', item.Id_MetodoPagoPaypal)
+            }
             setPaypal(result);
         };
         getPaypal();
     }, [])
 
+    const [factura, setFactura] = useState({
+        Fecha_Pedido: `${current.getMonth() + 1}/${current.getDate()}/${current.getFullYear()}`,
+        Direccion_Envio: "",
+        Direccion_Facturacion: "",
+        Id_Usuario: cookies.get('Id_Usuario'),
+        Id_MetodoPagoPaypal: cookies.get('Id_MetodoPagoPaypal'),
+        Fecha_Emision: `${current.getMonth() + 1}/${current.getDate()}/${current.getFullYear()}`,
+        Subtotal: cookies.get('Subtotal'),
+        ITBIS: cookies.get('ITBIS'),
+        Total: cookies.get('Total')
+    })
+
+    console.log(paypal);    
     const crearPaypal = () => {
-        fetch('https://furniture-insight-app.herokuapp.com/metodopaypal/crear', {
+
+        const requestOptions = {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newPaypal)
-        })
+        }
+
+        fetch('https://furniture-insight-app.herokuapp.com/metodopaypal/crear', requestOptions)
+            .then(async response => {
+                const isJson = response.headers.get('content-type')?.includes('application/json');
+                const data = isJson && await response.json();
+
+                if (!response.ok) {
+                    alert("Verificar que todos los campos esten llenos");
+                    const error = (data && data.message) || response.status;
+                    return Promise.reject(error);
+                }
+                else {
+                    alert("Cuenta Paypal agregada")
+                }
+            })
     }
 
     const crearFactura = () => {
-        
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(factura)
+        }
+
+        fetch('https://furniture-insight-app.herokuapp.com/masterfactura/crear', requestOptions)
+            .then(async response => {
+                const isJson = response.headers.get('content-type')?.includes('application/json');
+                const data = isJson && await response.json();
+
+                if (!response.ok) {
+                    alert("Verificar que todos los campos esten llenos");
+                    const error = (data && data.message) || response.status;
+                    return Promise.reject(error);
+                }
+                else {
+                    alert("Factura creada")
+                }
+            })
     }
 
     const handleSubmit = (event) => {
@@ -47,7 +94,12 @@ function CheckoutPaypal() {
 
     const handleSubmit2 = (event) => {
         event.preventDefault();
-        
+        crearFactura();
+        console.log(factura)
+    }
+
+    const handleClick = () => {
+        navigate("/factura", { replace: true });
     }
 
     console.log(newPaypal);
@@ -60,7 +112,7 @@ function CheckoutPaypal() {
                 {paypal.map((item) => (
                     <div className="form-check" key={item.Id_MetodoPago}>
                         <input className="form-check-input" type="radio" id="flexTarjetaRadio" />
-                        <label className="form-check-label" for="flexTarjetaRadio">{item.MetodoPaypal.Mail}</label>                        
+                        <label className="form-check-label">{item.MetodoPaypal.Mail}</label>                       
                     </div>
                 ))}
             </div>
@@ -69,21 +121,61 @@ function CheckoutPaypal() {
                     type="button"
                     className="btn btn-secondary rounded-pill w-25"
                     data-bs-toggle="modal"
-                    data-bs-target="#paypalModal">Agregar cuenta</button>
+                    data-bs-target="#cardModal">Agregar Cuenta</button>
             </div>
             <div className="row mt-3">
-                <button
-                    type="button"
-                    className="btn btn-secondary rounded-pill w-25"
-                    data-bs-toggle="modal"
-                    data-bs-target="#facturaModal">Terminar Pago</button>
+                <form onSubmit={handleSubmit2}>
+                    <div className="">
+                        <div className="row">
+                            <div className="col">
+                                <label className="col-form-label">Direccion de Envio</label>
+                            </div>
+                            <div className="col">
+                                <input
+                                    required
+                                    type="text"
+                                    className="form-control"
+                                    value={factura.Direccion_Envio}
+                                    onChange={(e) => setFactura({ ...factura, Direccion_Envio: e.target.value })}
+                                />
+                            </div>
+                        </div>
+                        <div className="row mt-3 mb-3">
+                            <div className="col">
+                                <label className="col-form-label">Direccion de Facturacion</label>
+                            </div>
+                            <div className="col">
+                                <input
+                                    required
+                                    type="text"
+                                    className="form-control"
+                                    value={factura.Direccion_Facturacion}
+                                    onChange={(e) => setFactura({ ...factura, Direccion_Facturacion: e.target.value })}
+                                />
+                            </div>
+                        </div>
+                        <div className="">
+                            <button
+                                className="btn btn-outline-secondary rounded-pill"
+                                type="submit"
+                            >Pagar</button>
+                        </div>
+                        <div className="">
+                            <button
+                                className="btn btn-outline-secondary rounded-pill"
+                                type="button"
+                                onClick={handleClick}
+                            >Ver Factura</button>
+                        </div>
+                    </div>
+                </form>
             </div>
             <form onSubmit={handleSubmit}>
-                <div className="modal fade" id="paypalModal" tabIndex="-1" aria-labelledby="cardModalLabel" aria-hidden="true">
+                <div className="modal fade" id="cardModal" tabIndex="-1" aria-labelledby="cardModalLabel" aria-hidden="true">
                     <div className="modal-dialog modal-dialog-centered">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="cardModalLabel">Agregar cuenta</h5>
+                                <h5 className="modal-title" id="cardModalLabel">Agregar tarjeta de credito o debito</h5>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div className="modal-body">
@@ -94,7 +186,7 @@ function CheckoutPaypal() {
                                     <div className="col">
                                         <input
                                             required
-                                            type="text"
+                                            type="email"
                                             className="form-control"
                                             value={newPaypal.Mail}
                                             onChange={(e) => setNewPaypal({ ...newPaypal, Mail: e.target.value })} />
@@ -107,7 +199,8 @@ function CheckoutPaypal() {
                                     <div className="col">
                                         <input
                                             required
-                                            type="text"                                            
+                                            type="text"
+                                            id="inputCvvTarjeta"
                                             className="form-control"
                                             value={newPaypal.Contraseña}
                                             onChange={(e) => setNewPaypal({ ...newPaypal, Contraseña: e.target.value })} />
@@ -117,71 +210,8 @@ function CheckoutPaypal() {
                             <div className="modal-footer">
                                 <button
                                     className="btn btn-outline-secondary rounded-pill"
-                                    type="submit"
-                                    data-bs-dismiss="modal"
+                                    type="submit"                                    
                                 >Agregar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-            <form onSubmit={handleSubmit2}>
-                <div className="modal fade" id="facturaModal" tabIndex="-1" aria-labelledby="facturaModalLabel" aria-hidden="true">
-                    <div className="modal-dialog modal-dialog-centered">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title" id="facturaModalLabel">Terminar Pago</h5>
-                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div className="modal-body">
-                                <div className="row">
-                                    <div className="col">
-                                        <label className="col-form-label">Fecha Pedido</label>
-                                    </div>
-                                    <div className="col">
-                                        <input
-                                            required
-                                            type="date"
-                                            className="form-control"
-                                            value={factura.Fecha_Pedido}
-                                            onChange={(e) => setFactura({ ...factura, Fecha_Pedido: e.target.value })} />
-                                    </div>
-                                </div>
-                                <div className="row mt-3">
-                                    <div className="col">
-                                        <label className="col-form-label">Direccion de Envio</label>
-                                    </div>
-                                    <div className="col">
-                                        <input
-                                            required
-                                            type="text"
-                                            className="form-control"
-                                            value={factura.Direccion_Envio}
-                                            onChange={(e) => setFactura({ ...factura, Direccion_Envio: e.target.value })}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="row mt-3">
-                                    <div className="col">
-                                        <label className="col-form-label">Direccion de Facturacion</label>
-                                    </div>
-                                    <div className="col">
-                                        <input
-                                            required
-                                            type="text"
-                                            className="form-control"
-                                            value={factura.Direccion_Facturacion}
-                                            onChange={(e) => setFactura({ ...factura, Direccion_Facturacion: e.target.value })}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="modal-footer">
-                                    <button
-                                        className="btn btn-outline-secondary rounded-pill"
-                                        type="submit"
-                                        data-bs-dismiss="modal"
-                                    >Pagar</button>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -191,4 +221,4 @@ function CheckoutPaypal() {
     );
 };
 
-export default CheckoutPaypal;
+export default Checkout;
