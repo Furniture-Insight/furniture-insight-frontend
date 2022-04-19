@@ -15,7 +15,7 @@ function Navbar({isUserLogged}) {
         cookies.remove('Subtotal');
         cookies.remove('Total');
         cookies.set('Session', false, {path:'/'})       
-        isUserLogged(cookies.get('Session'));        
+        isUserLogged(false);        
     }    
     
     const usuarioNombre = cookies.get('Nombre');   

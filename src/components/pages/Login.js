@@ -46,7 +46,7 @@ function Login({ isUserLogged }) {
     const handleSubmit = (event) => {
         event.preventDefault();
         loginUsuario();
-        isUserLogged(cookies.get('Session'))                
+        isUserLogged(true)                
     }
 
     return (
