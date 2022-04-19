@@ -1,4 +1,3 @@
-import { response } from "msw";
 import React from "react";
 import { useState } from "react";
 import Cookies from "universal-cookie";

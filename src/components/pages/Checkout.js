@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { YearPicker, MonthPicker } from 'react-dropdown-date';
 import Cookies from 'universal-cookie';
 
 function Checkout() {
@@ -14,7 +13,7 @@ function Checkout() {
         CVV_CV2: "",
         Fecha_Expiracion: "",
         Nombre: "",
-        UsuarioIdUsuario: cookies.get('Id_Usuario')
+        Id_Usuario: cookies.get('Id_Usuario')
     })
 
     useEffect(() => {
@@ -34,12 +33,12 @@ function Checkout() {
     }, [])
 
     const [factura, setFactura] = useState({
-        Fecha_Pedido: `${current.getMonth()}/${current.getDate() + 1}/${current.getFullYear()}`,
+        Fecha_Pedido: `${current.getMonth() + 1}/${current.getDate()}/${current.getFullYear()}`,
         Direccion_Envio: "",
         Direccion_Facturacion: "",
         Id_Usuario: cookies.get('Id_Usuario'),
         Id_MetodoPagoTarjeta: cookies.get('Id_MetodoPagoTarjeta'),
-        Fecha_Emision: `${current.getMonth()}/${current.getDate() + 1}/${current.getFullYear()}`,
+        Fecha_Emision: `${current.getMonth() + 1}/${current.getDate()}/${current.getFullYear()}`,
         Subtotal: cookies.get('Subtotal'),
         ITBIS: cookies.get('ITBIS'),
         Total: cookies.get('Total')
@@ -48,19 +47,51 @@ function Checkout() {
     console.log(tarjeta);
     console.log(current.getDate())
     const crearTarjeta = () => {
-        fetch('http://localhost:8000/metodotarjeta/crear', {
+
+        const requestOptions = {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newTarjeta)
-        })
+        }
+
+        fetch('http://localhost:8000/metodotarjeta/crear', requestOptions)
+            .then(async response => {
+                const isJson = response.headers.get('content-type')?.includes('application/json');
+                const data = isJson && await response.json();
+
+                if (!response.ok) {
+                    alert("Verificar que todos los campos esten llenos");
+                    const error = (data && data.message) || response.status;
+                    return Promise.reject(error);
+                }
+                else {
+                    alert("Tarjeta agregada")
+                }
+            })
     }
 
     const crearFactura = () => {
-        fetch('http://localhost:8000/masterfactura/crear', {
+
+        const requestOptions = {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(factura)
-        })
+        }
+
+        fetch('http://localhost:8000/masterfactura/crear', requestOptions)
+            .then(async response => {
+                const isJson = response.headers.get('content-type')?.includes('application/json');
+                const data = isJson && await response.json();
+
+                if (!response.ok) {
+                    alert("Verificar que todos los campos esten llenos");
+                    const error = (data && data.message) || response.status;
+                    return Promise.reject(error);
+                }
+                else {
+                    alert("Factura creada")
+                }
+            })
     }
 
     const handleSubmit = (event) => {
@@ -71,7 +102,7 @@ function Checkout() {
     const handleSubmit2 = (event) => {
         event.preventDefault();
         crearFactura();
-        console.log(factura)        
+        console.log(factura)
     }
 
     const handleClick = () => {
@@ -134,14 +165,14 @@ function Checkout() {
                         <div className="">
                             <button
                                 className="btn btn-outline-secondary rounded-pill"
-                                type="submit"                                
+                                type="submit"
                             >Pagar</button>
                         </div>
                         <div className="">
                             <button
                                 className="btn btn-outline-secondary rounded-pill"
                                 type="button"
-                                onClick={handleClick}                                
+                                onClick={handleClick}
                             >Ver Factura</button>
                         </div>
                     </div>
@@ -213,8 +244,7 @@ function Checkout() {
                             <div className="modal-footer">
                                 <button
                                     className="btn btn-outline-secondary rounded-pill"
-                                    type="submit"
-                                    data-bs-dismiss="modal"
+                                    type="submit"                                    
                                 >Agregar</button>
                             </div>
                         </div>
