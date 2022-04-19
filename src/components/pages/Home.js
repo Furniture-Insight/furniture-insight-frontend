@@ -65,13 +65,17 @@ function Home({clickedMueble}) {
                 </div>
                 <div className="card-static border-dark h-25 w-75 m-3">
                     {muebles.filter(mueble => mueble.Id_Mueble === 4).map((mueble) => (
-                        <div className="container justify-content-center" key={mueble.Id_Mueble}>
+                        <div className="container" key={mueble.Id_Mueble}>
                             <div className="row px-5">
                                 <div className="col p-5">
                                     <img src={`data:image/${clickedMueble.mimetype};base64,${mueble.data}`} className="mx-auto d-block w-50 pb-5" alt="mueble.jpg"/>
-                                    <div className="d-flex justify-content-around">
-                                        <a type="button" className="btn btn-outline-dark btn-homepage" href="/store">See more like this</a>
-                                        <a type="button" className="btn btn-outline-dark btn-homepage" onClick={handleClick}>Details</a>
+                                    <div className="row">
+                                        <div className="col">
+                                            <a type="button" className="btn btn-outline-dark btn-homepage" href="/store">See more like this</a>
+                                        </div>
+                                        <div className="col" onClick={handleClick}>
+                                            <a type="button" className="btn btn-outline-dark btn-homepage" onClick={() => clickedMueble(mueble)}>Details</a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="col text-center p-5 mt-5">
