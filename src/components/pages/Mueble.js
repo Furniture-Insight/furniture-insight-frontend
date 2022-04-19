@@ -1,3 +1,4 @@
+import { response } from "msw";
 import React from "react";
 import { useState } from "react";
 import Cookies from "universal-cookie";
@@ -12,11 +13,27 @@ function Mueble({ clickedMueble}) {
         Id_Mueble: clickedMueble.Id_Mueble
     });         
 
-    const crearCarrito = () => {    
-        fetch('http://localhost:8000/carrito/crear', {
-            method:'POST',
-            headers: {"Content-Type" : "application/json"},
+    const crearCarrito = () => { 
+        
+        const requestOptions = {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify(carrito)
+        }
+
+        fetch('http://localhost:8000/carrito/crear', requestOptions)
+        .then(async response => {
+            const isJson = response.headers.get('content-type')?.includes('application/json');
+            const data = isJson && await response.json();
+
+            if(!response.ok){
+                alert("Verificar que todos los campos esten llenos");
+                const error = (data && data.message) || response.status;
+                return Promise.reject(error);
+            }
+            else{
+                alert("Mueble agregado al carrito")
+            }
         })
 
     }
@@ -72,7 +89,8 @@ function Mueble({ clickedMueble}) {
 
                                 <dt className="col-sm-3">Cantidad</dt>
                                 <dd className="col-sm-9">
-                                    <input                                     
+                                    <input
+                                        required                                
                                         className="form-control w-25"
                                         value={carrito.Cantidad_Mueble}
                                         onChange={(e) => setCarrito({...carrito, Cantidad_Mueble: e.target.value})}/>                                    
