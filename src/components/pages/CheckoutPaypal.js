@@ -10,14 +10,14 @@ function Checkout() {
     const [paypal, setPaypal] = useState([])
     const [newPaypal, setNewPaypal] = useState({
         Mail: "",
-        Contraseña: "",        
+        Contraseña: "",
         Id_Usuario: cookies.get('Id_Usuario')
     })
 
     useEffect(() => {
         const getPaypal = async () => {
             const response = await fetch(`https://furniture-insight-app.herokuapp.com/metodopago/obtener/${cookies.get('Id_Usuario')}`);
-            const result = await response.json();            
+            const result = await response.json();
             for (const item of result) {
                 cookies.set('Id_MetodoPagoPaypal', item.Id_MetodoPagoPaypal)
             }
@@ -38,7 +38,7 @@ function Checkout() {
         Total: cookies.get('Total')
     })
 
-    console.log(paypal);    
+    console.log(paypal);
     const crearPaypal = () => {
 
         const requestOptions = {
@@ -105,118 +105,123 @@ function Checkout() {
     console.log(newPaypal);
     return (
         <div className="container">
-            <div className="row mt-3">
-                <h3 className="h3">Mi Cuenta Paypal</h3>
-            </div>
-            <div className="row mt-3">
-                {paypal.map((item) => (
-                    <div className="form-check" key={item.Id_MetodoPago}>
-                        <input className="form-check-input" type="radio" id="flexTarjetaRadio" />
-                        <label className="form-check-label">{item.MetodoPaypal.Mail}</label>                       
+            <div className="row">
+                <div className="col" align="center">
+                    <div className="row mt-3">
+                        <h3 className="h3">Mi Cuenta Paypal</h3>
                     </div>
-                ))}
-            </div>
-            <div className="row mt-3">
-                <button
-                    type="button"
-                    className="btn btn-secondary rounded-pill w-25"
-                    data-bs-toggle="modal"
-                    data-bs-target="#cardModal">Agregar Cuenta</button>
-            </div>
-            <div className="row mt-3">
-                <form onSubmit={handleSubmit2}>
-                    <div className="">
-                        <div className="row">
-                            <div className="col">
-                                <label className="col-form-label">Direccion de Envio</label>
+                    <div className="row mt-3">
+                        {paypal.map((item) => (
+                            <div className="form-check" key={item.Id_MetodoPago}>                                
+                                <label className="form-check-label">{item.MetodoPaypal.Mail}</label>
                             </div>
-                            <div className="col">
-                                <input
-                                    required
-                                    type="text"
-                                    className="form-control"
-                                    value={factura.Direccion_Envio}
-                                    onChange={(e) => setFactura({ ...factura, Direccion_Envio: e.target.value })}
-                                />
-                            </div>
-                        </div>
-                        <div className="row mt-3 mb-3">
-                            <div className="col">
-                                <label className="col-form-label">Direccion de Facturacion</label>
-                            </div>
-                            <div className="col">
-                                <input
-                                    required
-                                    type="text"
-                                    className="form-control"
-                                    value={factura.Direccion_Facturacion}
-                                    onChange={(e) => setFactura({ ...factura, Direccion_Facturacion: e.target.value })}
-                                />
-                            </div>
-                        </div>
-                        <div className="">
-                            <button
-                                className="btn btn-outline-secondary rounded-pill"
-                                type="submit"
-                            >Pagar</button>
-                        </div>
-                        <div className="">
-                            <button
-                                className="btn btn-outline-secondary rounded-pill"
-                                type="button"
-                                onClick={handleClick}
-                            >Ver Factura</button>
-                        </div>
+                        ))}
                     </div>
-                </form>
-            </div>
-            <form onSubmit={handleSubmit}>
-                <div className="modal fade" id="cardModal" tabIndex="-1" aria-labelledby="cardModalLabel" aria-hidden="true">
-                    <div className="modal-dialog modal-dialog-centered">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title" id="cardModalLabel">Agregar tarjeta de credito o debito</h5>
-                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div className="modal-body">
+                    <div className="row mt-3 justify-content-center">
+                        <button
+                            type="button"
+                            className="btn btn-secondary rounded-pill w-50"
+                            data-bs-toggle="modal"
+                            data-bs-target="#cardModal">Agregar Cuenta</button>
+                    </div>
+                </div>
+                <div className="col">
+                    <div className="row mt-3">
+                        <form onSubmit={handleSubmit2}>
+                            <div className="">
                                 <div className="row">
-                                    <div className="col">
-                                        <label className="col-form-label">Email</label>
-                                    </div>
-                                    <div className="col">
-                                        <input
-                                            required
-                                            type="email"
-                                            className="form-control"
-                                            value={newPaypal.Mail}
-                                            onChange={(e) => setNewPaypal({ ...newPaypal, Mail: e.target.value })} />
-                                    </div>
-                                </div>
-                                <div className="row mt-3">
-                                    <div className="col">
-                                        <label className="col-form-label">Contraseña</label>
+                                    <div className="col-2">
+                                        <label className="col-form-label">Direccion de Envio</label>
                                     </div>
                                     <div className="col">
                                         <input
                                             required
                                             type="text"
-                                            id="inputCvvTarjeta"
                                             className="form-control"
-                                            value={newPaypal.Contraseña}
-                                            onChange={(e) => setNewPaypal({ ...newPaypal, Contraseña: e.target.value })} />
+                                            value={factura.Direccion_Envio}
+                                            onChange={(e) => setFactura({ ...factura, Direccion_Envio: e.target.value })}
+                                        />
                                     </div>
-                                </div>                                
+                                </div>
+                                <div className="row mt-3 mb-3">
+                                    <div className="col">
+                                        <label className="col-form-label">Direccion de Facturacion</label>
+                                    </div>
+                                    <div className="col">
+                                        <input
+                                            required
+                                            type="text"
+                                            className="form-control"
+                                            value={factura.Direccion_Facturacion}
+                                            onChange={(e) => setFactura({ ...factura, Direccion_Facturacion: e.target.value })}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="">
+                                    <button
+                                        className="btn btn-outline-secondary rounded-pill"
+                                        type="submit"
+                                    >Pagar</button>
+                                </div>
+                                <div className="">
+                                    <button
+                                        className="btn btn-outline-secondary rounded-pill"
+                                        type="button"
+                                        onClick={handleClick}
+                                    >Ver Factura</button>
+                                </div>
                             </div>
-                            <div className="modal-footer">
-                                <button
-                                    className="btn btn-outline-secondary rounded-pill"
-                                    type="submit"                                    
-                                >Agregar</button>
+                        </form>
+                    </div>
+                </div>
+                <form onSubmit={handleSubmit}>
+                    <div className="modal fade" id="cardModal" tabIndex="-1" aria-labelledby="cardModalLabel" aria-hidden="true">
+                        <div className="modal-dialog modal-dialog-centered">
+                            <div className="modal-content">
+                                <div className="modal-header">
+                                    <h5 className="modal-title" id="cardModalLabel">Agregar tarjeta de credito o debito</h5>
+                                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div className="modal-body">
+                                    <div className="row">
+                                        <div className="col">
+                                            <label className="col-form-label">Email</label>
+                                        </div>
+                                        <div className="col">
+                                            <input
+                                                required
+                                                type="email"
+                                                className="form-control"
+                                                value={newPaypal.Mail}
+                                                onChange={(e) => setNewPaypal({ ...newPaypal, Mail: e.target.value })} />
+                                        </div>
+                                    </div>
+                                    <div className="row mt-3">
+                                        <div className="col">
+                                            <label className="col-form-label">Contraseña</label>
+                                        </div>
+                                        <div className="col">
+                                            <input
+                                                required
+                                                type="password"
+                                                id="inputCvvTarjeta"
+                                                className="form-control"
+                                                value={newPaypal.Contraseña}
+                                                onChange={(e) => setNewPaypal({ ...newPaypal, Contraseña: e.target.value })} />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="modal-footer">
+                                    <button
+                                        className="btn btn-outline-secondary rounded-pill"
+                                        type="submit"
+                                    >Agregar</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     );
 };

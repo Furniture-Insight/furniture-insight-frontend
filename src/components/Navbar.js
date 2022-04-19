@@ -11,6 +11,7 @@ function Navbar({isUserLogged}) {
         cookies.remove('Id_Usuario');
         cookies.remove('Nombre');
         cookies.remove('Id_MetodoPagoTarjeta');
+        cookies.remove('Id_MetodoPagoPaypal');
         cookies.remove('ITBIS');
         cookies.remove('Subtotal');
         cookies.remove('Total');
