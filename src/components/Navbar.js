@@ -10,6 +10,10 @@ function Navbar({isUserLogged}) {
     const handleClick = () =>{
         cookies.remove('Id_Usuario');
         cookies.remove('Nombre');
+        cookies.remove('Id_MetodoPagoTarjeta');
+        cookies.remove('ITBIS');
+        cookies.remove('Subtotal');
+        cookies.remove('Total');
         cookies.set('Session', false, {path:'/'});
         isUserLogged(false);        
     }    

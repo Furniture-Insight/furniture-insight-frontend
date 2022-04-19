@@ -14,6 +14,7 @@ import Navbar from './components/Navbar';
 import AboutUs from './components/pages/AboutUs';
 import Profile from './components/pages/Profile';
 import Mueble from './components/pages/Mueble';
+import Factura from './components/pages/Factura';
 
 function App() {
     const [userLogged, setUserLogged] = useState();
@@ -42,9 +43,10 @@ function App() {
                     <Route path="drawspace" element={<Drawspace />}></Route>
                     <Route path="cart" element={<Cart />}></Route>
                     <Route path="checkout" element={<Checkout />}></Route>
-                    <Route path="/checkoutpaypal" element={<CheckoutPaypal/>}></Route>
+                    <Route path="checkoutpaypal" element={<CheckoutPaypal/>}></Route>
                     <Route path="aboutUs" element={<AboutUs/>}></Route>
-                    <Route path="profile" element={<Profile isUserLogged = {isUserLogged}/>}></Route>
+                    <Route path="profile" element={<Profile isUserLogged = {isUserLogged}/>}></Route>   
+                    <Route path="factura" element={<Factura/>}></Route>                 
                 </Route>
             </Routes>
         </BrowserRouter>        

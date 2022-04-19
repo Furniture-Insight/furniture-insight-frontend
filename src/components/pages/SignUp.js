@@ -41,7 +41,7 @@ function SignUp({ isUserLogged }) {
             else{
                 cookies.set('Session', true, {path:'/'})
                 alert("Bienvenido")
-                navigate('/store', {replace:true})
+                navigate('/', {replace:true})
             }
             cookies.set('Id_Usuario', data.Id_Usuario, {path:'/'});
             cookies.set('Nombre',usuario.Nombre, {path:'/'})

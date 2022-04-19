@@ -1,10 +1,11 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { YearPicker, MonthPicker } from 'react-dropdown-date';
 import Cookies from 'universal-cookie';
 
 function Checkout() {
-
+    let navigate = useNavigate();
     const cookies = new Cookies()
     const current = new Date()
     const [tarjeta, setTarjeta] = useState([])
@@ -14,7 +15,7 @@ function Checkout() {
         Fecha_Expiracion: "",
         Nombre: "",
         UsuarioIdUsuario: cookies.get('Id_Usuario')
-    })    
+    })
 
     useEffect(() => {
         const getTarjeta = async () => {
@@ -24,24 +25,24 @@ function Checkout() {
                 const last4Num = String(item.MetodoTarjeta.Numero_Tarjeta).slice(-4);
                 item.MetodoTarjeta.Numero_Tarjeta = last4Num;
             }
-            for(const item of result) {
+            for (const item of result) {
                 cookies.set('Id_MetodoPagoTarjeta', item.Id_MetodoPagoTarjeta)
-            }            
+            }
             setTarjeta(result);
         };
         getTarjeta();
     }, [])
 
     const [factura, setFactura] = useState({
-        Fecha_Pedido: `${current.getMonth()}/${current.getDate()+1}/${current.getFullYear()}`,
+        Fecha_Pedido: `${current.getMonth()}/${current.getDate() + 1}/${current.getFullYear()}`,
         Direccion_Envio: "",
         Direccion_Facturacion: "",
-        Id_Usuario: cookies.get('Id_Usuario'),        
+        Id_Usuario: cookies.get('Id_Usuario'),
         Id_MetodoPagoTarjeta: cookies.get('Id_MetodoPagoTarjeta'),
-        Fecha_Emision: `${current.getMonth()}/${current.getDate()+1}/${current.getFullYear()}`,
+        Fecha_Emision: `${current.getMonth()}/${current.getDate() + 1}/${current.getFullYear()}`,
         Subtotal: cookies.get('Subtotal'),
         ITBIS: cookies.get('ITBIS'),
-        Total: cookies.get('Total')                        
+        Total: cookies.get('Total')
     })
 
     console.log(tarjeta);
@@ -59,7 +60,7 @@ function Checkout() {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(factura)
-        })        
+        })
     }
 
     const handleSubmit = (event) => {
@@ -70,7 +71,11 @@ function Checkout() {
     const handleSubmit2 = (event) => {
         event.preventDefault();
         crearFactura();
-        console.log(factura)
+        console.log(factura)        
+    }
+
+    const handleClick = () => {
+        navigate("/factura", { replace: true });
     }
 
     console.log(newTarjeta);
@@ -96,11 +101,51 @@ function Checkout() {
                     data-bs-target="#cardModal">Agregar tarjeta</button>
             </div>
             <div className="row mt-3">
-                <button
-                    type="button"
-                    className="btn btn-secondary rounded-pill w-25"
-                    data-bs-toggle="modal"
-                    data-bs-target="#facturaModal">Terminar Pago</button>
+                <form onSubmit={handleSubmit2}>
+                    <div className="">
+                        <div className="row">
+                            <div className="col">
+                                <label className="col-form-label">Direccion de Envio</label>
+                            </div>
+                            <div className="col">
+                                <input
+                                    required
+                                    type="text"
+                                    className="form-control"
+                                    value={factura.Direccion_Envio}
+                                    onChange={(e) => setFactura({ ...factura, Direccion_Envio: e.target.value })}
+                                />
+                            </div>
+                        </div>
+                        <div className="row mt-3 mb-3">
+                            <div className="col">
+                                <label className="col-form-label">Direccion de Facturacion</label>
+                            </div>
+                            <div className="col">
+                                <input
+                                    required
+                                    type="text"
+                                    className="form-control"
+                                    value={factura.Direccion_Facturacion}
+                                    onChange={(e) => setFactura({ ...factura, Direccion_Facturacion: e.target.value })}
+                                />
+                            </div>
+                        </div>
+                        <div className="">
+                            <button
+                                className="btn btn-outline-secondary rounded-pill"
+                                type="submit"                                
+                            >Pagar</button>
+                        </div>
+                        <div className="">
+                            <button
+                                className="btn btn-outline-secondary rounded-pill"
+                                type="button"
+                                onClick={handleClick}                                
+                            >Ver Factura</button>
+                        </div>
+                    </div>
+                </form>
             </div>
             <form onSubmit={handleSubmit}>
                 <div className="modal fade" id="cardModal" tabIndex="-1" aria-labelledby="cardModalLabel" aria-hidden="true">
@@ -171,55 +216,6 @@ function Checkout() {
                                     type="submit"
                                     data-bs-dismiss="modal"
                                 >Agregar</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-            <form onSubmit={handleSubmit2}>
-                <div className="modal fade" id="facturaModal" tabIndex="-1" aria-labelledby="facturaModalLabel" aria-hidden="true">
-                    <div className="modal-dialog modal-dialog-centered">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title" id="facturaModalLabel">Terminar Pago</h5>
-                                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div className="modal-body">                                
-                                <div className="row">
-                                    <div className="col">
-                                        <label className="col-form-label">Direccion de Envio</label>
-                                    </div>
-                                    <div className="col">
-                                        <input
-                                            required
-                                            type="text"
-                                            className="form-control"
-                                            value={factura.Direccion_Envio}
-                                            onChange={(e) => setFactura({ ...factura, Direccion_Envio: e.target.value })}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="row mt-3 mb-3">
-                                    <div className="col">
-                                        <label className="col-form-label">Direccion de Facturacion</label>
-                                    </div>
-                                    <div className="col">
-                                        <input
-                                            required
-                                            type="text"
-                                            className="form-control"
-                                            value={factura.Direccion_Facturacion}
-                                            onChange={(e) => setFactura({ ...factura, Direccion_Facturacion: e.target.value })}
-                                        />
-                                    </div>
-                                </div>
-                                <div className="modal-footer">
-                                    <button
-                                        className="btn btn-outline-secondary rounded-pill"
-                                        type="submit"
-                                        data-bs-dismiss="modal"
-                                    >Pagar</button>
-                                </div>
                             </div>
                         </div>
                     </div>
