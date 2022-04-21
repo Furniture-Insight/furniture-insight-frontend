@@ -23,7 +23,12 @@ function Checkout() {
             }
             setPaypal(result);
         };
-        getPaypal();
+        if(cookies.get("Id_Usuario") === undefined){
+            alert("Debe realizar Log In o Sign Up para continuar.")
+        }
+        else{
+            getPaypal();
+        }        
     }, [])
 
     const [factura, setFactura] = useState({

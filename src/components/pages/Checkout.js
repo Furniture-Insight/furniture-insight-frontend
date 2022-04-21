@@ -29,7 +29,12 @@ function Checkout() {
             }
             setTarjeta(result);
         };
-        getTarjeta();
+        if(cookies.get("Id_Usuario") === undefined){
+            alert("Debe hacer Log In o Sign Up para continuar.")
+        }
+        else{
+            getTarjeta();
+        }        
     }, [])
 
     const [factura, setFactura] = useState({

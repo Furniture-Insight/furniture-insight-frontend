@@ -33,9 +33,9 @@ function Cart() {
         var subtotal = 0;
         for (var item of result) {
             subtotal = subtotal + item.MuebleCarrito.Precio
-        }        
+        }
         setSubtotal(subtotal);
-        cookies.set('Subtotal', subtotal, {path:'/'})
+        cookies.set('Subtotal', subtotal, { path: '/' })
         return subtotal
     }
 
@@ -43,7 +43,7 @@ function Cart() {
         var result = await getSubtotal()
         var itbis = (parseFloat(result) * 0.18).toFixed(2);
         setITBIS(itbis);
-        cookies.set('ITBIS', itbis, {path:'/'})
+        cookies.set('ITBIS', itbis, { path: '/' })
         return itbis
     }
 
@@ -52,15 +52,20 @@ function Cart() {
         var result2 = await getITBIS()
         var total = parseFloat(result2) + parseFloat(result)
         setTotal(total);
-        cookies.set('Total', total, {path:'/'})  
+        cookies.set('Total', total, { path: '/' })
         return total
     }
 
     useEffect(() => {
-        getCarrito(); 
-        getSubtotal();
-        getITBIS();
-        getTotal();        
+        if (cookies.get("Id_Usuario") === undefined) {
+            alert("Debe hacer Log In o Sign Up para continuar.")
+        }
+        else {
+            getCarrito();
+            getSubtotal();
+            getITBIS();
+            getTotal();
+        }
     }, [])
 
     console.log(carrito);
@@ -122,7 +127,7 @@ function Cart() {
                                 <div className="modal-body">
                                     <p className="h5">Seleccione un metodo de pago:</p>
                                     <button className="btn btn-primary me-3" onClick={handleClick2} data-bs-dismiss="modal">
-                                        <FontAwesomeIcon icon={faPaypal} className="me-1"/>
+                                        <FontAwesomeIcon icon={faPaypal} className="me-1" />
                                         Pagar con Paypal</button>
                                     <button className="btn btn-secondary" onClick={handleClick} data-bs-dismiss="modal">
                                         <FontAwesomeIcon icon={faCreditCard} className="me-1" />

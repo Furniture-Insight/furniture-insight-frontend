@@ -24,7 +24,12 @@ function Factura() {
     }
 
     useEffect(() => {
-        getFactura();
+        if(cookies.get("Id_Usuario") === undefined){
+            alert("Debe hacer Log In o Sign Up para continuar.")
+        }
+        else{
+            getFactura();
+        }        
     }, [])
 
     console.log(sfactura);
