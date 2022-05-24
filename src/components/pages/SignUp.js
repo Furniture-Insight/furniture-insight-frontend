@@ -48,14 +48,28 @@ function SignUp({ isUserLogged }) {
         })               
     }
 
+    const validarContraseña = (contraseña) => {
+        var contraseñaValida = false;
+        if(/[!@#$%^&*(),.?":{}|<>]/g.test(contraseña) && /\d+/g.test(contraseña) && /[a-zA-Z]/g.test(contraseña) && contraseña.length >= 8){
+            contraseñaValida = true;
+        }
+        else{
+            alert("Asegurese que el campo de la contraseña tenga simbolos, numeros, letras y que al menos 8 caracteres.")
+        }
+        return contraseñaValida;
+    }
+
     const handleSubmit = (event) => {
         event.preventDefault();
-        createUsuario();    
+        if(validarContraseña(usuario.Contraseña) === true){
+            createUsuario();
+        }        
     }
 
     const handleClick = () => {
         isUserLogged(true);             
-    }
+    }    
+    
 
     return (
         <div>
@@ -87,7 +101,7 @@ function SignUp({ isUserLogged }) {
                         placeholder="Email"
                         value={usuario.Email}
                         onChange={(e) => setUsuario({ ...usuario, Email: e.target.value })} />                                                              
-                    <input
+                    <input 
                         required
                         name="contraseña"                        
                         className="mb-3 form-control rounded-pill border border-dark"
