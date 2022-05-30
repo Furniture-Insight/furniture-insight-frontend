@@ -50,9 +50,9 @@ function Login({ isUserLogged }) {
     }
 
     return (
-        <div>
+        <div>        
             <form onSubmit={handleSubmit}>
-                <div className="form-login">
+                <div className="form-login">                    
                     <img className="mb-3" src={logo} width="60" height="65" alt="logo" />
                     <h4 className="h4 mb-3">Log In</h4>
                     <input
@@ -69,8 +69,8 @@ function Login({ isUserLogged }) {
                         onChange={(e) => setUsuario({ ...usuario, Contraseña: e.target.value })} />                    
                     <button
                         type="submit"
-                        className="btn btn-outline-success rounded-pill"
-                    >Log In</button>
+                        className="btn btn-outline-secondary rounded-pill"
+                    >Log In</button>                                    
                 </div>
             </form>
         </div>
