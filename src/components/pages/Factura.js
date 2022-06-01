@@ -59,13 +59,13 @@ function Factura() {
                 ))}
                 <hr/>
                 <dt className='col-sm-3'>Subtotal</dt>
-                <dd className='col-sm-9'>{sfactura.subtotal}</dd>
+                <dd className='col-sm-9'>RD$ {sfactura.subtotal}</dd>
 
                 <dt className='col-sm-3'>ITBIS</dt>
-                <dd className='col-sm-9'>{sfactura.itbis}</dd>
+                <dd className='col-sm-9'>RD$ {sfactura.itbis}</dd>
                 <hr/>
                 <dt className='col-sm-3'>TOTAL</dt>
-                <dd className='col-sm-9'>{sfactura.total}</dd>
+                <dd className='col-sm-9'>RD$ {sfactura.total}</dd>
                 <hr/>
             </dl>
         </div>

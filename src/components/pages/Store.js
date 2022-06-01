@@ -23,15 +23,9 @@ function Store({clickedMueble}) {
 
     useEffect(() => {
         getMuebles();
-    }, [])
-    
-    const buscarMueblePorNombre = () => {
-        fetch(`http://localhost:5000/mueble/mueble/${busqueda.Nombre}`)
-            .then(async response => {
-                const data = await response.json()
-                console.log(data)
-            })
-    }    
+    }, [])    
+
+    console.log(muebles)
 
     const handleClick = () => {
         navigate("/mueble", {replace:true})
@@ -51,26 +45,13 @@ function Store({clickedMueble}) {
                             type="text"
                             placeholder="Buscar Mueble"
                             onChange={event => setBusqueda(event.target.value)} />
-                    </div>
-                    <div className="col-1">
-                        <input
+                    </div>                                        
+                    <div className="col-3">
+                    <input
                             className="form-control rounded-pill border border-dark"
                             type="text"
-                            placeholder="Ancho" />
-                    </div>
-                    <div className="col-1">
-                        <input
-                            className="form-control rounded-pill border border-dark"
-                            type="text"
-                            placeholder="Largo"
-                        />
-                    </div>
-                    <div className="col">
-                        <button
-                            type="button"
-                            className="btn btn-secondary rounded-pill">
-                            <FontAwesomeIcon icon={faMagnifyingGlass}
-                            /> Search</button>
+                            placeholder="Buscar Mueble por Categoria"
+                            onChange={event => setBusqueda(event.target.value)} />                        
                     </div>
                 </div>
             </form>
@@ -82,6 +63,8 @@ function Store({clickedMueble}) {
                             if (busqueda === "") {
                                 return mueble
                             } else if (mueble.Nombre.toString().toLowerCase().includes(busqueda.toLowerCase())) {
+                                return mueble
+                            }else if (mueble.Subcategoria.SubCategoria.toString().toLowerCase().includes(busqueda.toLowerCase())) {
                                 return mueble
                             }
                         }).map((mueble) => (
@@ -95,7 +78,7 @@ function Store({clickedMueble}) {
                                             <div className="col-md-8 align-self-center">
                                                 <div className="card-body">
                                                     <h5 className="card-title">{mueble.Nombre}</h5>
-                                                    <p className="card-text">{mueble.Precio}</p>
+                                                    <p className="card-text">RD$ {mueble.Precio}</p>
                                                 </div>
                                             </div>
                                         </div>
