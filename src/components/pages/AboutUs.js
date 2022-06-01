@@ -7,27 +7,47 @@ function AboutUs() {
     return (
         <div>
             <div className="about-section text-center">
-                <div className="m-5">
-                    <h1> ¿Quiénes Somos? </h1>
-                    <h4>Furniture Insight se dedica a proveer 
-                    a las personas un mejor día a día, 
-                    proveyendo lo que todo espacio necesita 
-                    para sentirse como un hogar.</h4>
+                <h1>Acerca de Furniture Insight</h1>
+                <h5>Nos dedicamos a proveer a nuestros clientes un mejor día a día, 
+                brindandoles todo lo necesario para convertir cualquier espacio en un hogar.</h5>
+            </div>
+
+            <h2 className="text-center">Quiénes Somos</h2>
+            
+            <div className="row my-3">
+                <div className="column d-flex justify-content-center">
+                    <div className="card-about">
+                        <div className="container-about">
+                            <h2> Nuestra Misión </h2>
+                            <h5>Furniture Insight se dedica a proveer 
+                            a las personas un mejor día a día, 
+                            proveyendo lo que todo espacio necesita 
+                            para sentirse como un hogar.</h5>
+                        </div>
+                    </div>
                 </div>
-                <hr className="hr-about"/>
-                <div className="m-5">
-                    <h1> ¿Qué hacemos? </h1>
-                    <h4>Nos dedicamos a proveer a todos nuestro 
-                    clientes los muebles que necesitan 
-                    para cualquier situación en la que se encuentren.</h4>
+                <div className="column d-flex justify-content-center">
+                    <div className="card-about">
+                        <div className="container-about">
+                            <h2> ¿Qué Hacemos? </h2>
+                            <h5>Nos dedicamos a proveer a todos nuestro 
+                            clientes los muebles que necesitan 
+                            para cualquier situación en la que se encuentren.</h5>
+                        </div>
+                    </div>
                 </div>
-                <hr className="hr-about"/>
-                <div className="m-5">
-                    <h1> Valores </h1>
-                    <h4>Nuestro trabajo se basa en la honestidad, el entusiasmo y el trabajo en equipo.</h4>
+                <div className="column d-flex justify-content-center">
+                    <div className="card-about">
+                        <div className="container-about">
+                            <h2> Valores </h2>
+                            <h5>Nuestro trabajo se basa en la honestidad, 
+                            el entusiasmo y el trabajo en equipo.</h5>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="bottom-container">
+
+            <footer>
                 <h5 className="text-center"> Contáctanos </h5>
                 <div className="row justify-content-center">
                     <div className="col-6 col-sm-3" align="right">
@@ -45,7 +65,7 @@ function AboutUs() {
                         <a href="https://www.instagram.com/furnitureinsight/"><FontAwesomeIcon icon={faCamera}/> Instagram </a>
                     </div>
                 </div>
-            </div>
+            </footer>
         </div>
     );
 };
