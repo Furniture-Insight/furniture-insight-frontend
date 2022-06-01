@@ -108,9 +108,9 @@ function Cart() {
                 </div>
                 <div className="col">
                     <div className="row mt-3">
-                        <label>Subtotal: {subtotal} </label>
-                        <label>ITBIS: {ITBIS}</label>
-                        <label>Total: {total}</label>
+                        <label>Subtotal: RD$ {subtotal} </label>
+                        <label>ITBIS: RD$ {ITBIS}</label>
+                        <label>Total: RD$ {total}</label>
                         <button
                             type="button"
                             className="btn btn-success rounded-pill w-50"

@@ -51,7 +51,7 @@ function Mueble({ clickedMueble}) {
                         <img src={`data:image/${clickedMueble.mimetype};base64,${clickedMueble.data}`} className="img-fluid rounded-start" style={{ "maxWidth": "33.75rem" }} />
                         <div className="row">
                             <div className="col">
-                                <h3 className="h3">{clickedMueble.Precio}</h3>
+                                <h3 className="h3">RD$ {clickedMueble.Precio}</h3>
                             </div>
                             <div className="col">
                                 <button className="btn btn-secondary" onClick={handleClick}>Agregar al Carrito</button>
