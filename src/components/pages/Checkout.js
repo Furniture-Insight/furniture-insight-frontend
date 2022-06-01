@@ -2,6 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'universal-cookie';
+import mc from '../images/mc.jpg';
+import vs from '../images/vs.png';
 
 function Checkout() {
     let navigate = useNavigate();
@@ -116,9 +118,9 @@ function Checkout() {
 
     console.log(newTarjeta);
     return (
-        <div className="container">
+        <div className="container-checkout">
             <div className="row mt-3">
-                <h3 className="h3">Mis Tarjetas</h3>
+                <h3 className="h3">Mis Tarjetas:</h3>
             </div>
             <div className="row mt-3">
                 {tarjeta.map((item) => (
@@ -132,7 +134,7 @@ function Checkout() {
             <div className="row mt-3">
                 <button
                     type="button"
-                    className="btn btn-outline-success rounded-pill w-25"
+                    className="btn btn-outline-secondary rounded-pill w-25"
                     data-bs-toggle="modal"
                     data-bs-target="#cardModal">Agregar tarjeta</button>
             </div>
@@ -142,8 +144,6 @@ function Checkout() {
                         <div className="row">
                             <div className="col">
                                 <label className="col-form-label">Direccion de Envio</label>
-                            </div>
-                            <div className="col">
                                 <input
                                     required
                                     type="text"
@@ -156,8 +156,6 @@ function Checkout() {
                         <div className="row mt-3 mb-3">
                             <div className="col">
                                 <label className="col-form-label">Direccion de Facturacion</label>
-                            </div>
-                            <div className="col">
                                 <input
                                     required
                                     type="text"
@@ -188,61 +186,63 @@ function Checkout() {
                     <div className="modal-dialog modal-dialog-centered">
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" id="cardModalLabel">Agregar tarjeta de credito o debito</h5>
+                                <h4 className="modal-title" id="cardModalLabel">Agregar tarjeta de credito o debito</h4>
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div className="modal-body">
-                                <div className="row">
-                                    <div className="col">
-                                        <label className="col-form-label">Numero de Tarjeta</label>
+                                <div class="first-row">
+                                    <div class="owner">
+                                        <h5>Nombre en Tarjeta</h5>
+                                        <div class="input-field mb-3">
+                                            <input
+                                                required
+                                                type="text"
+                                                className="form-control"
+                                                value={newTarjeta.Nombre}
+                                                onChange={(e) => setNewTarjeta({ ...newTarjeta, Nombre: e.target.value })} />
+                                        </div>
                                     </div>
-                                    <div className="col">
-                                        <input
-                                            required
-                                            type="text"
-                                            className="form-control"
-                                            value={newTarjeta.Numero_Tarjeta}
-                                            onChange={(e) => setNewTarjeta({ ...newTarjeta, Numero_Tarjeta: e.target.value })} />
-                                    </div>
-                                </div>
-                                <div className="row mt-3">
-                                    <div className="col">
-                                        <label className="col-form-label">CVV</label>
-                                    </div>
-                                    <div className="col">
-                                        <input
-                                            required
-                                            type="text"
-                                            id="inputCvvTarjeta"
-                                            className="form-control"
-                                            value={newTarjeta.CVV_CV2}
-                                            onChange={(e) => setNewTarjeta({ ...newTarjeta, CVV_CV2: e.target.value })} />
+                                    <div class="cvv">
+                                        <h5>CVV</h5>
+                                        <div class="input-field mb-3">
+                                            <input
+                                                required
+                                                type="password"
+                                                id="inputCvvTarjeta"
+                                                className="form-control"
+                                                value={newTarjeta.CVV_CV2}
+                                                onChange={(e) => setNewTarjeta({ ...newTarjeta, CVV_CV2: e.target.value })}/>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="row mt-3">
-                                    <div className="col">
-                                        <label className="col-form-label">Fecha de Expiracion</label>
-                                    </div>
-                                    <div className="col">
-                                        <input
-                                            required
-                                            type="text"
-                                            className="form-control"
-                                            value={newTarjeta.Fecha_Expiracion}
-                                            onChange={(e) => setNewTarjeta({ ...newTarjeta, Fecha_Expiracion: e.target.value })} />
+                                <div class="second-row">
+                                    <div class="card-number">
+                                        <h5>Numero de Tarjeta</h5>
+                                        <div class="input-field mb-3">
+                                            <input
+                                                required
+                                                type="text"
+                                                className="form-control"
+                                                value={newTarjeta.Numero_Tarjeta}
+                                                onChange={(e) => setNewTarjeta({ ...newTarjeta, Numero_Tarjeta: e.target.value })}/>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="row mt-3">
-                                    <div className="col">
-                                        <label className="col-form-label">Nombre de la Tarjeta</label>
-                                    </div>
-                                    <div className="col">
-                                        <input
-                                            required
-                                            type="text"
-                                            className="form-control"
-                                            value={newTarjeta.Nombre}
-                                            onChange={(e) => setNewTarjeta({ ...newTarjeta, Nombre: e.target.value })} />
+                                <div class="third-row">
+                                    <h5>Fecha de Expiración</h5>
+                                    <div class="input-date mb-3">
+                                        <div class="date">
+                                            <input
+                                                required
+                                                type="text"
+                                                className="form-control"
+                                                value={newTarjeta.Fecha_Expiracion}
+                                                onChange={(e) => setNewTarjeta({ ...newTarjeta, Fecha_Expiracion: e.target.value })}/>
+                                        </div>
+                                        <div class="cards-cc">
+                                            <img src={mc} alt="mc.jpg"/>
+                                            <img src={vs} alt="vs.png"/>
+                                        </div>   
                                     </div>
                                 </div>
                             </div>

@@ -79,10 +79,11 @@ function Cart() {
     }
 
     return (
-        <div className="container lh-lg">
+        <div className="container-cart lh-lg">
+            <h1 className="welcome-text"> ¡Bienvenido a su Carrito de Compras!</h1>
             <div className="row">
                 <div className="col">
-                    <h3 className="h3 mt-3">Mis Muebles: </h3>
+                    <h3 className="h3 mt-3 text-center">Mis Muebles:</h3>
                     <div className="row">
                         {carrito.map((item) => (
                             <div key={item.Id_Carrito}>
@@ -113,7 +114,7 @@ function Cart() {
                         <label>Total: RD$ {total}</label>
                         <button
                             type="button"
-                            className="btn btn-success rounded-pill w-50"
+                            className="btn btn-outline-success rounded-pill w-50 m-5"
                             data-bs-toggle="modal"
                             data-bs-target="#checkoutModal">Proceder al Checkout</button>
                     </div>

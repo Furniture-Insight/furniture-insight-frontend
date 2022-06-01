@@ -36,37 +36,38 @@ function Factura() {
     console.log(factura);
 
     return (
-        <div className="m-5 p-5 text-center">
-            <dl className='row border border-dark mt-3 p-5'>
-                <dt className='col-sm-3'>Fecha de Impresion</dt>
-                <dd className='col-sm-9'>{sfactura.fecha_emision}</dd>
+        <div className="container-factura">
+        <h1> ¡Gracias por tu preferencia! </h1>
+            <dl className='row mt-3 p-5'>
+                <dt className='col-sm-3 p-3'>Fecha de Impresion</dt>
+                <dd className='col-sm-9 p-3'>{sfactura.fecha_emision}</dd>
 
-                <dt className='col-sm-3'>Nombre de cliente</dt>
-                <dd className='col-sm-9'>{sfactura.nombre} {sfactura.apellido}</dd>
+                <dt className='col-sm-3 p-3'>Nombre de cliente</dt>
+                <dd className='col-sm-9 p-3'>{sfactura.nombre} {sfactura.apellido}</dd>
 
-                <dt className='col-sm-3'>Direcion de Envio</dt>
-                <dd className='col-sm-9'>{sfactura.direccion_envio}</dd>
-                <hr/>
-                <dt className="col-sm-3">Lista de Productos</dt>
+                <dt className='col-sm-3 p-3'>Direcion de Envio</dt>
+                <dd className='col-sm-9 p-3'>{sfactura.direccion_envio}</dd>
+                <hr className='hr'/>
+                <dt className="col-sm-3 p-3">Lista de Productos</dt>
 
                 {factura.map((item) => (
                     <div key={item.Id_MasterDetailFactura}>
-                        <dl className='row'>
-                            <dt className='col-sm-3'></dt>
-                            <dd className="col-sm-9">{item.Mueble.Nombre} {item.Mueble.Precio}</dd>
+                        <dl className='row p-3'>
+                            <dt className='col-sm-3 p-3'></dt>
+                            <dd className="col-sm-9 p-3">{item.Mueble.Nombre} {item.Mueble.Precio}</dd>
                         </dl>
                     </div>
                 ))}
-                <hr/>
-                <dt className='col-sm-3'>Subtotal</dt>
-                <dd className='col-sm-9'>RD$ {sfactura.subtotal}</dd>
+                <hr className='hr'/>
+                <dt className='col-sm-3 p-3'>Subtotal</dt>
+                <dd className='col-sm-9 p-3'>RD$ {sfactura.subtotal}</dd>
 
-                <dt className='col-sm-3'>ITBIS</dt>
-                <dd className='col-sm-9'>RD$ {sfactura.itbis}</dd>
-                <hr/>
-                <dt className='col-sm-3'>TOTAL</dt>
-                <dd className='col-sm-9'>RD$ {sfactura.total}</dd>
-                <hr/>
+                <dt className='col-sm-3 p-3'>ITBIS</dt>
+                <dd className='col-sm-9 p-3'>RD$ {sfactura.itbis}</dd>
+                <hr className='hr'/>
+                <dt className='col-sm-3 p-3'>TOTAL</dt>
+                <dd className='col-sm-9 p-3'>RD$ {sfactura.total}</dd>
+                <hr className='hr'/>
             </dl>
         </div>
     )

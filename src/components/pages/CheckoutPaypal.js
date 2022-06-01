@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from 'universal-cookie';
+import pp from '../images/pp.png'
 
 function Checkout() {
     let navigate = useNavigate();
@@ -109,7 +110,7 @@ function Checkout() {
 
     console.log(newPaypal);
     return (
-        <div className="container">
+        <div className="container-paypal">
             <div className="row">
                 <div className="col" align="center">
                     <div className="row mt-3">
@@ -135,10 +136,8 @@ function Checkout() {
                         <form onSubmit={handleSubmit2}>
                             <div className="">
                                 <div className="row">
-                                    <div className="col-2">
+                                    <div className="col-7">
                                         <label className="col-form-label">Direccion de Envio</label>
-                                    </div>
-                                    <div className="col">
                                         <input
                                             required
                                             type="text"
@@ -149,10 +148,8 @@ function Checkout() {
                                     </div>
                                 </div>
                                 <div className="row mt-3 mb-3">
-                                    <div className="col">
+                                    <div className="col-7">
                                         <label className="col-form-label">Direccion de Facturacion</label>
-                                    </div>
-                                    <div className="col">
                                         <input
                                             required
                                             type="text"
@@ -162,15 +159,15 @@ function Checkout() {
                                         />
                                     </div>
                                 </div>
-                                <div className="">
+                                <div>
                                     <button
-                                        className="btn btn-outline-secondary rounded-pill"
+                                        className="btn btn-outline-success rounded-pill m-2"
                                         type="submit"
                                     >Pagar</button>
                                 </div>
-                                <div className="">
+                                <div>
                                     <button
-                                        className="btn btn-outline-secondary rounded-pill"
+                                        className="btn btn-outline-secondary rounded-pill m-2"
                                         type="button"
                                         onClick={handleClick}
                                     >Ver Factura</button>
@@ -184,15 +181,13 @@ function Checkout() {
                         <div className="modal-dialog modal-dialog-centered">
                             <div className="modal-content">
                                 <div className="modal-header">
-                                    <h5 className="modal-title" id="cardModalLabel">Agregar tarjeta de credito o debito</h5>
+                                    <h4 className="modal-title" id="cardModalLabel">Agregar cuenta</h4>
                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div className="modal-body">
-                                    <div className="row">
+                                    <div className="row m-3">
                                         <div className="col">
                                             <label className="col-form-label">Email</label>
-                                        </div>
-                                        <div className="col">
                                             <input
                                                 required
                                                 type="email"
@@ -201,11 +196,9 @@ function Checkout() {
                                                 onChange={(e) => setNewPaypal({ ...newPaypal, Mail: e.target.value })} />
                                         </div>
                                     </div>
-                                    <div className="row mt-3">
+                                    <div className="row m-3">
                                         <div className="col">
                                             <label className="col-form-label">Contraseña</label>
-                                        </div>
-                                        <div className="col">
                                             <input
                                                 required
                                                 type="password"
@@ -215,6 +208,9 @@ function Checkout() {
                                                 onChange={(e) => setNewPaypal({ ...newPaypal, Contraseña: e.target.value })} />
                                         </div>
                                     </div>
+                                    <div class="cards-cc ms-4 mb-4">
+                                        <img src={pp} alt="pp.png"/>
+                                    </div>   
                                 </div>
                                 <div className="modal-footer">
                                     <button
