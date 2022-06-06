@@ -1,6 +1,6 @@
 # Furniture Insight Frontend
 
-Furniture Insight es un proyecto, Elaborado como una página web, que permite al usuario buscar inmuebles a partir de sus necesidades específicas ya sea la medida del espacio necesario, el espacio de la habitación o el tipo de mobiliario deseado de forma que la página le permite dar una sugerencia de productos que le pueden ser de interés. 
+Furniture Insight es una página web, que permite al usuario buscar inmuebles a partir de sus necesidades específicas, ya sea la medida del espacio necesario, el espacio de la habitación o el tipo de mobiliario deseado de forma que la página le permite dar una sugerencia de productos que le pueden ser de interés. 
 
 El repositorio actual contiene los componentes que utilizamos para realizar la sección frontend del proyecto.
 
