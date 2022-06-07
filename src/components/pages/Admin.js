@@ -30,6 +30,7 @@ function Admin() {
             }
             else{
                 alert("Bienvenido, admin")
+                navigate("/admindashboard", {replace:true})
             }
         })
     }
