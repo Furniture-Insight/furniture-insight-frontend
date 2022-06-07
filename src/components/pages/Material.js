@@ -1,17 +1,27 @@
-import React, { useState } from "react";
-import { useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 function Material() {
 
-    const [material, setMaterial] = useState({
+    const [material, setMaterial] = useState([]);
+    const [nuevomaterial, setNuevoMaterial] = useState({
         Material: ""
     })
+
+    const getMateriales = async () => {
+        const response = await fetch('http://localhost:8000/material/all')
+        const result = await response.json()
+        setMaterial(result);
+    }
+
+    useEffect(() => {
+        getMateriales();
+    }, [])
 
     const crearMaterial = () => {
         const requestOptions = {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(material)
+            body: JSON.stringify(nuevomaterial)
         }
 
         fetch('http://localhost:8000/material/crear', requestOptions)
@@ -49,6 +59,7 @@ function Material() {
                                     data-bs-target="#crearmaterialModal">Crear Material</button>
                             </div>
                         </div>
+
                         <form onSubmit={handleSubmit}>
                             <div className="modal fade" id="crearmaterialModal" tabIndex="-1" aria-labelledby="crearmaterialModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-dialog-centered">
@@ -65,8 +76,8 @@ function Material() {
                                                         required
                                                         type="text"
                                                         className="form-control"
-                                                        value={material.Material}
-                                                        onChange={(e) => setMaterial({ ...material, Material: e.target.value })} />
+                                                        value={nuevomaterial.Material}
+                                                        onChange={(e) => setNuevoMaterial({ ...nuevomaterial, Material: e.target.value })} />
                                                 </div>
                                             </div>
                                             <div className="modal-footer">
@@ -80,6 +91,40 @@ function Material() {
                                 </div>
                             </div>
                         </form>
+                    </div>
+                    <div className="admin-option col-lg-3 col-md-4 m-3">
+                        <div className="box-part text-center">
+                            <div className="title">
+                                <button
+                                    className="btn btn-secondary"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#vermaterialesModal">Ver Materiales</button>
+                            </div>
+                        </div>
+
+                        <div className="modal fade" id="vermaterialesModal" tabIndex="-1" aria-labelledby="vermaterialesModalLabel" aria-hidden="true">
+                            <div className="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                                <div className="modal-content">
+                                    <div className="modal-header">
+                                        <h4 className="modal-title" id="vermaterialesModalLabel">Ver Materiales</h4>
+                                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div className="modal-body">
+                                        {material.map((item) =>  (
+                                            <div key={item.Id_Material}>
+                                                <dl className="row p-3">
+                                                    <dt className="col-sm-3 p-3">Id de Material</dt>
+                                                    <dd className="col-sm-9 p-3">{item.Id_Material}</dd> 
+
+                                                    <dt className="col-sm-3 p-3">Material</dt>
+                                                    <dd className="col-sm-9 p-3">{item.Material}</dd>                                                   
+                                                </dl>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
