@@ -15,6 +15,7 @@ import AboutUs from './components/pages/AboutUs';
 import Profile from './components/pages/Profile';
 import Mueble from './components/pages/Mueble';
 import Factura from './components/pages/Factura';
+import Admin from './components/pages/Admin';
 
 function App() {
     const [userLogged, setUserLogged] = useState();
@@ -48,6 +49,7 @@ function App() {
                     <Route path="profile" element={<Profile isUserLogged = {isUserLogged}/>}></Route>   
                     <Route path="factura" element={<Factura/>}></Route>                 
                 </Route>
+                <Route path="/admin" element={<Admin/>}></Route>
             </Routes>
         </BrowserRouter>        
     );
