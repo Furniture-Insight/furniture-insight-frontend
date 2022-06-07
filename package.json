@@ -16,6 +16,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.1",
     "babel-jest": "^27.5.1",
+    "bootstrap-icons": "^1.8.3",
     "buffer": "^6.0.3",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",

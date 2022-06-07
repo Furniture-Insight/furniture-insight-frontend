@@ -1,3 +1,22 @@
 body{
     background-color: rgb(242,242,242);
 }
+
+.box{
+    padding: 30px 0px;
+}
+
+.box-part{
+    background:#FFF;
+    border-radius:0;
+    padding:60px 10px;
+    margin:30px 0px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 1.5625rem;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, .08), 0 0 6px rgba(0, 0, 0, .05);
+}
+
+.admin-option{
+    cursor: pointer;
+}
