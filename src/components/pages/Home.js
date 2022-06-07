@@ -64,7 +64,7 @@ function Home({clickedMueble}) {
                     </button>
                 </div>
                 <div className="card-static border-dark h-25 w-75 m-3">
-                    {muebles.filter(mueble => mueble.Id_Mueble === 4).map((mueble) => (
+                    {muebles.filter(mueble => mueble.Id_Mueble === 9).map((mueble) => (
                         <div className="container" key={mueble.Id_Mueble}>
                             <div className="row px-5">
                                 <div className="col p-5">

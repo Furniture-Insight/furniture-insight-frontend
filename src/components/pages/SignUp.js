@@ -50,11 +50,11 @@ function SignUp({ isUserLogged }) {
 
     const validarContraseña = (contraseña) => {
         var contraseñaValida = false;
-        if(/[!@#$%^&*(),.?":{}|<>]/g.test(contraseña) && /\d+/g.test(contraseña) && /[a-zA-Z]/g.test(contraseña) && contraseña.length >= 8){
+        if(/[!_@#$%^&*(),.?":{}|<>]/g.test(contraseña) && /\d+/g.test(contraseña) && /[a-zA-Z]/g.test(contraseña) && contraseña.length >= 8){
             contraseñaValida = true;
         }
         else{
-            alert("Asegurese que el campo de la contraseña tenga simbolos, numeros, letras y que al menos 8 caracteres.")
+            alert("Asegurese que su contraseña tenga simbolos, numeros, letras y un minimo de 8 caracteres.")
         }
         return contraseñaValida;
     }

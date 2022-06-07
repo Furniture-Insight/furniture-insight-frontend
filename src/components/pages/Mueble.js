@@ -45,15 +45,15 @@ function Mueble({ clickedMueble}) {
     }
     return (
         <div>
-            <div className="container">
+            <div className="container-mueble">
                 <div className="row">
                     <div className="col">
-                        <img src={`data:image/${clickedMueble.mimetype};base64,${clickedMueble.data}`} className="img-fluid rounded-start" style={{ "maxWidth": "33.75rem" }} />
+                        <img src={`data:image/${clickedMueble.mimetype};base64,${clickedMueble.data}`} className="img-fluid rounded-start m-5" style={{ "maxWidth": "33.75rem" }} />
                         <div className="row">
-                            <div className="col">
+                            <div className="col text-center">
                                 <h3 className="h3">RD$ {clickedMueble.Precio}</h3>
                             </div>
-                            <div className="col">
+                            <div className="col justify-content-center">
                                 <button className="btn btn-secondary" onClick={handleClick}>Agregar al Carrito</button>
                             </div>
                         </div>
