@@ -1,7 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
 
 function Admins() {
+    let navigate = useNavigate();
+
+    const gotoDashboard = () => {
+        navigate("/admindashboard", {replace:true})
+    }
     const [admin, setAdmin] = useState({});
 
     const getAdmin = async () => {
@@ -16,6 +22,9 @@ function Admins() {
 
     return(
         <div className="box text-center">
+            <button
+            className="btn btn-outline-secondary rounded-pill m-3"
+            onClick={gotoDashboard}>Back to Dashboard</button>
             <h1 className="m-5">Admins</h1>
             <div className="container-mueble">
                 <div className="row justify-content-center">

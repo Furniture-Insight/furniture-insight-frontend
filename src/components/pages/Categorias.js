@@ -1,7 +1,14 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+
 
 function Categorias() {
+    let navigate = useNavigate();
+
+    const gotoDashboard = () => {
+        navigate("/admindashboard", {replace:true})
+    }
     const [categoria, setCategoria] = useState({});
     const [nuevacategoria, setNuevaCategoria] = useState({
         Categoria:""
@@ -47,6 +54,9 @@ function Categorias() {
 
     return(
         <div className="box text-center">
+            <button
+            className="btn btn-outline-secondary rounded-pill m-3"
+            onClick={gotoDashboard}>Back to Dashboard</button>
             <h1 className="m-5">Categorias</h1>
             <div className="container-mueble">
                 <div className="row justify-content-center">
