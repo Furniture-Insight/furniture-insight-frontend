@@ -11,6 +11,10 @@ function Material() {
         Material: ""
     })
 
+    const [eliminarMaterial, setEliminarMaterial] = useState({
+        Id_Material: ""
+    })
+
     const getMateriales = async () => {
         const response = await fetch('http://localhost:8000/material/all')
         const result = await response.json()
@@ -67,6 +71,23 @@ function Material() {
             })
     }
 
+    const eliminarMateriales = () => {
+        fetch(`http://localhost:8000/material/delete/${eliminarMaterial.Id_Material}`, {method: 'DELETE'})
+        .then(async response => {
+            const isJson = response.headers.get('content-type')?.includes('application/json');
+            const data = isJson && await response.json();
+
+            if (!response.ok) {
+                alert("Verificar que todos los campos esten llenos");
+                const error = (data && data.message) || response.status;
+                return Promise.reject(error);
+            }
+            else {
+                alert("Material eliminado.")
+            }
+        })
+    }
+
     const crearSubmit = (event) => {
         event.preventDefault();
         crearMaterial();
@@ -75,6 +96,11 @@ function Material() {
     const editarSubmit = (event) => {
         event.preventDefault();
         editarMateriales();
+    }
+    
+    const eliminarSubmit = (event) => {
+        event.preventDefault();
+        eliminarMateriales();
     }
     return (
         <div className="box">
@@ -209,6 +235,49 @@ function Material() {
                             </div>
                         </form>
                     </div>
+                    <div className="admin-option col-lg-3 col-md-4 m-3">
+                        <div className="box-part text-center">
+                            <div className="title">
+                                <button
+                                    className="btn btn-secondary"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#eliminarmaterialesModal">Eliminar Materiales</button>
+                            </div>
+                        </div>
+
+                        <form onSubmit={eliminarSubmit}>
+                            <div className="modal fade" id="eliminarmaterialesModal" tabIndex="-1" aria-labelledby="eliminarmaterialesModalLabel" aria-hidden="true">
+                                <div className="modal-dialog modal-dialog-centered">
+                                    <div className="modal-content">
+                                        <div className="modal-header">
+                                            <h4 className="modal-title" id="eliminarmaterialesModalLabel">Eliminar Material</h4>
+                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div className="modal-body">
+                                            <div className="row m-3">
+                                                <div className="col">
+                                                    <label className="col-form-label">Ingrese el ID del material a eliminar</label>
+                                                    <input
+                                                        required
+                                                        type="text"
+                                                        className="form-control"
+                                                        value={eliminarMaterial.Id_Material}
+                                                        onChange={(e)=> setEliminarMaterial({...eliminarMaterial, Id_Material:e.target.value})}
+                                                    />                                                   
+                                                </div>                                                
+                                            </div>
+                                            <div className="modal-footer">
+                                                <button
+                                                    className="btn btn-outline-secondary rounded-pill"
+                                                    type="submit"
+                                                >Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>                    
                 </div>
             </div>
         </div>
