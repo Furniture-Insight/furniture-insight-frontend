@@ -3,6 +3,9 @@ import { useState, useEffect } from "react";
 
 function Categorias() {
     const [categoria, setCategoria] = useState({});
+    const [nuevacategoria, setNuevaCategoria] = useState({
+        Categoria:""
+    })
 
     const getCategoria = async () => {
         const response = await fetch('http://localhost:8000/categoria/1')
@@ -10,9 +13,37 @@ function Categorias() {
         setCategoria(result);
     }
 
+    const crearCategoria = () => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(nuevacategoria)
+        }
+
+        fetch('http://localhost:8000/categoria/crear', requestOptions)
+            .then(async response => {
+                const isJson = response.headers.get('content-type')?.includes('application/json');
+                const data = isJson && await response.json();
+
+                if (!response.ok) {
+                    alert("Verificar que todos los campos esten llenos");
+                    const error = (data && data.message) || response.status;
+                    return Promise.reject(error);
+                }
+                else {
+                    alert("Categoria creada.")
+                }
+            })
+    }
+
     useEffect(() => {
         getCategoria();
     }, [])
+
+    const crearSubmit = (event) => {
+        event.preventDefault();
+        crearCategoria();
+    }
 
     return(
         <div className="box text-center">
@@ -54,9 +85,40 @@ function Categorias() {
                         <button
                             className="btn btn-outline-secondary rounded-pill w-50 py-3"
                             data-bs-toggle="modal"
-                            data-bs-target="#createModal">
+                            data-bs-target="#crearcategoriaModal">
                             Crear Categoria
                         </button>
+                        <form onSubmit={crearSubmit}>
+                            <div className="modal fade" id="crearcategoriaModal" tabIndex="-1" aria-labelledby="crearcategoriaModalLabel" aria-hidden="true">
+                                <div className="modal-dialog modal-dialog-centered">
+                                    <div className="modal-content">
+                                        <div className="modal-header">
+                                            <h4 className="modal-title" id="crearcategoriaModalLabel">Crear Categoria</h4>
+                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div className="modal-body">
+                                            <div className="row m-3">
+                                                <div className="col">
+                                                    <label className="col-form-label">Categoria</label>
+                                                    <input
+                                                        required
+                                                        type="text"
+                                                        className="form-control"
+                                                        value={nuevacategoria.Categoria}
+                                                        onChange={(e) => setNuevaCategoria({ ...nuevacategoria, Categoria: e.target.value })} />
+                                                </div>
+                                            </div>
+                                            <div className="modal-footer">
+                                                <button
+                                                    className="btn btn-outline-secondary rounded-pill"
+                                                    type="submit"
+                                                >Agregar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
 
                     <div className="admin-option col-lg-3 col-md-3 m-3">
