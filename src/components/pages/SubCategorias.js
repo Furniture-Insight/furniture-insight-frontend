@@ -15,6 +15,14 @@ function SubCategorias() {
         Id_Categoria: "",
         SubCategoria: ""
     })
+    const [editarSubCategoria, setEditarSubcategoria] = useState({
+        Id_SubCategoria: "",
+        Id_Categoria: "",
+        SubCategoria: ""
+    })
+    const [eliminarSubCategoria, setEliminarSubCategoria] = useState({
+        Id_SubCategoria: ""
+    })
 
     const getSubCategorias = async () => {
         const response = await fetch('http://localhost:8000/subcategoria/all')
@@ -49,11 +57,60 @@ function SubCategorias() {
             })
     }
 
+    const editarSubCategorias = () => {
+        const requestOptions = {
+            method: 'PUT',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(editarSubCategoria)
+        }
+
+        fetch(`http://localhost:8000/subcategoria/update/${editarSubCategoria.Id_SubCategoria}`, requestOptions)
+        .then(async response => {
+            const isJson = response.headers.get('content-type')?.includes('application/json');
+            const data = isJson && await response.json();
+
+            if (!response.ok) {
+                alert("Verificar que todos los campos esten llenos");
+                const error = (data && data.message) || response.status;
+                return Promise.reject(error);
+            }
+            else {
+                alert("SubCategoria editada.")
+            }
+        })
+    }
+
+    const eliminarSubCategorias = () => {
+        fetch(`http://localhost:8000/subcategoria/delete/${eliminarSubCategoria.Id_SubCategoria}`, {method: 'DELETE'})
+        .then(async response => {
+            const isJson = response.headers.get('content-type')?.includes('application/json');
+            const data = isJson && await response.json();
+
+            if (!response.ok) {
+                alert("Verificar que todos los campos esten llenos");
+                const error = (data && data.message) || response.status;
+                return Promise.reject(error);
+            }
+            else {
+                alert("SubCategoria eliminada.")
+            }
+        })
+    }
+
     const crearSubmit = (event) => {
         event.preventDefault();
         crearSubCategoria();
     }
 
+    const editarSubmit = (event) => {
+        event.preventDefault();
+        editarSubCategorias();
+    }
+
+    const eliminarSubmit = (event) => {
+        event.preventDefault();
+        eliminarSubCategorias();
+    }
     return(
         <div className="box text-center">
             <button
@@ -150,17 +207,97 @@ function SubCategorias() {
                         <button 
                         className="btn btn-outline-secondary rounded-pill w-50 py-3"
                         data-bs-toggle="modal"
-                        data-bs-target="#editModal">
-                            Editar Subcategoria
+                        data-bs-target="#editarsubcategoriaModal">
+                            Editar SubCategoria
                         </button>
+                        <form onSubmit={editarSubmit}>
+                            <div className="modal fade" id="editarsubcategoriaModal" tabIndex="-1" aria-labelledby="editarsubcategoriaModalLabel" aria-hidden="true">
+                                <div className="modal-dialog modal-dialog-centered">
+                                    <div className="modal-content">
+                                        <div className="modal-header">
+                                            <h4 className="modal-title" id="editarmaterialesModalLabel">Editar SubCategoria</h4>
+                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div className="modal-body">
+                                            <div className="row m-3">
+                                                <div className="col">
+                                                    <label className="col-form-label">Ingrese el Id de la subcategoria a editar</label>
+                                                    <input
+                                                        required
+                                                        type="text"
+                                                        className="form-control"
+                                                        value={editarSubCategoria.Id_SubCategoria}
+                                                        onChange={(e)=> setEditarSubcategoria({...editarSubCategoria, Id_SubCategoria:e.target.value})}
+                                                    />
+                                                    <label className="col-form-label mt-3">Ingrese el Id de la categoria de la subcategotia a editar</label>
+                                                    <input
+                                                        required
+                                                        type="text"
+                                                        className="form-control"
+                                                        value={editarSubCategoria.Id_Categoria}
+                                                        onChange={(e)=> setEditarSubcategoria({...editarSubCategoria, Id_Categoria:e.target.value})}
+                                                    />
+                                                    <label className="col-form-label">SubCategoria</label>
+                                                    <input
+                                                        required
+                                                        type="text"
+                                                        className="form-control"
+                                                        value={editarSubCategoria.SubCategoria}
+                                                        onChange={(e)=> setEditarSubcategoria({...editarSubCategoria, SubCategoria:e.target.value})}
+                                                    />
+                                                </div>                                                
+                                            </div>
+                                            <div className="modal-footer">
+                                                <button
+                                                    className="btn btn-outline-secondary rounded-pill"
+                                                    type="submit"
+                                                >Editar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                     
                     <div className="admin-option col-lg-3 col-md-3 m-3">
                         <button className="btn btn-outline-secondary rounded-pill w-50 py-3"
                         data-bs-toggle="modal"
-                        data-bs-target="#deleteModal">
+                        data-bs-target="#eliminarsubcategoriaModal">
                             Borrar Subcategoria
                         </button>
+                        <form onSubmit={eliminarSubmit}>
+                            <div className="modal fade" id="eliminarsubcategoriaModal" tabIndex="-1" aria-labelledby="eliminarsubcategoriaModalLabel" aria-hidden="true">
+                                <div className="modal-dialog modal-dialog-centered">
+                                    <div className="modal-content">
+                                        <div className="modal-header">
+                                            <h4 className="modal-title" id="eliminarsubcategoriaModalLabel">Eliminar SubCategoria</h4>
+                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div className="modal-body">
+                                            <div className="row m-3">
+                                                <div className="col">
+                                                    <label className="col-form-label">Ingrese el Id de la subcategoria a eliminar</label>
+                                                    <input
+                                                        required
+                                                        type="text"
+                                                        className="form-control"
+                                                        value={eliminarSubCategoria.Id_SubCategoria}
+                                                        onChange={(e)=> setEliminarSubCategoria({...eliminarSubCategoria, Id_SubCategoria:e.target.value})}
+                                                    />                                                   
+                                                </div>                                                
+                                            </div>
+                                            <div className="modal-footer">
+                                                <button
+                                                    className="btn btn-outline-secondary rounded-pill"
+                                                    type="submit"
+                                                >Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
