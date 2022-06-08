@@ -10,17 +10,49 @@ function SubCategorias() {
         navigate("/admindashboard", {replace:true})
     }
 
-    const [subCategorias, setSubcategorias] = useState([]);
+    const [subCategorias, setSubCategorias] = useState([]);
+    const [nuevaSubCategoria, setNuevaSubCategoria] = useState({
+        Id_Categoria: "",
+        SubCategoria: ""
+    })
 
-    const getSubcategorias = async () => {
-        const response = await fetch('http://localhost:8000/subcategorias/all')
+    const getSubCategorias = async () => {
+        const response = await fetch('http://localhost:8000/subcategoria/all')
         const result = await response.json()
-        setSubcategorias(result);
+        setSubCategorias(result);
     }
 
     useEffect(() => {
-        getSubcategorias();
-    }, [])
+        getSubCategorias();
+    }, [setSubCategorias])
+
+    const crearSubCategoria = () => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(nuevaSubCategoria)
+        }
+
+        fetch('http://localhost:8000/subcategoria/crear', requestOptions)
+            .then(async response => {
+                const isJson = response.headers.get('content-type')?.includes('application/json');
+                const data = isJson && await response.json();
+
+                if (!response.ok) {
+                    alert("Verificar que todos los campos esten llenos");
+                    const error = (data && data.message) || response.status;
+                    return Promise.reject(error);
+                }
+                else {
+                    alert("SubCategoria creada.")
+                }
+            })
+    }
+
+    const crearSubmit = (event) => {
+        event.preventDefault();
+        crearSubCategoria();
+    }
 
     return(
         <div className="box text-center">
@@ -35,7 +67,7 @@ function SubCategorias() {
                             className="btn btn-outline-secondary rounded-pill w-50 py-3"
                             data-bs-toggle="modal"
                             data-bs-target="#viewsubModal">
-                            Ver Subcategorias
+                            Ver SubCategorias
                         </button>
 
                         <div className="modal fade" id="viewsubModal" tabIndex="-1" aria-labelledby="cardModalLabel" aria-hidden="true">
@@ -46,17 +78,20 @@ function SubCategorias() {
                                     <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div className="modal-body">
-                                    {/* {subCategorias.map((item) =>  (
+                                    {subCategorias.map((item) =>  (
                                         <div key={item.Id_SubCategoria}>
                                             <dl className="row p-3">
                                                 <dt className="col-sm-3 p-3">ID</dt>
                                                 <dd className="col-sm-9 p-3">{item.Id_SubCategoria}</dd> 
 
+                                                <dt className="col-sm-3 p-3">ID Categoria</dt>
+                                                <dd className="col-sm-9 p-3">{item.Id_Categoria}</dd> 
+
                                                 <dt className="col-sm-3 p-3">SubCategoria</dt>
-                                                <dd className="col-sm-9 p-3">{item.SubCategoria}</dd>                                    
+                                                <dd className="col-sm-9 p-3">{item.SubCategoria}</dd>                                  
                                             </dl>
                                         </div>
-                                    ))} */}
+                                    ))}
                                 </div>
                             </div>
                         </div>
@@ -67,9 +102,48 @@ function SubCategorias() {
                         <button
                             className="btn btn-outline-secondary rounded-pill w-50 py-3"
                             data-bs-toggle="modal"
-                            data-bs-target="#createModal">
+                            data-bs-target="#crearsubcategoriaModal">
                             Crear Subcategoria
                         </button>
+                        <form onSubmit={crearSubmit}>
+                            <div className="modal fade" id="crearsubcategoriaModal" tabIndex="-1" aria-labelledby="crearsubcategoriaModalLabel" aria-hidden="true">
+                                <div className="modal-dialog modal-dialog-centered">
+                                    <div className="modal-content">
+                                        <div className="modal-header">
+                                            <h4 className="modal-title" id="crearsubcategoriaModalLabel">Crear Categoria</h4>
+                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div className="modal-body">
+                                            <div className="row m-3">
+                                                <div className="col">
+                                                    <label className="col-form-label">Id Categoria</label>
+                                                    <input
+                                                        required
+                                                        type="text"
+                                                        className="form-control"
+                                                        value={nuevaSubCategoria.Id_Categoria}
+                                                        onChange={(e) => setNuevaSubCategoria({ ...nuevaSubCategoria, Id_Categoria: e.target.value })} />
+
+                                                    <label className="col-form-label">SubCategoria</label>
+                                                    <input
+                                                        required
+                                                        type="text"
+                                                        className="form-control"
+                                                        value={nuevaSubCategoria.SubCategoria}
+                                                        onChange={(e) => setNuevaSubCategoria({ ...nuevaSubCategoria, SubCategoria: e.target.value })} />
+                                                </div>
+                                            </div>
+                                            <div className="modal-footer">
+                                                <button
+                                                    className="btn btn-outline-secondary rounded-pill"
+                                                    type="submit"
+                                                >Agregar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                     </div>
 
                     <div className="admin-option col-lg-3 col-md-3 m-3">
