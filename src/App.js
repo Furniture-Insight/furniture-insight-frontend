@@ -17,6 +17,12 @@ import Mueble from './components/pages/Mueble';
 import Factura from './components/pages/Factura';
 import Admin from './components/pages/Admin';
 import AdminDashboard from './components/pages/AdminDashboard';
+import Material from './components/pages/Material';
+import Muebles from './components/pages/Muebles';
+import Categorias from './components/pages/Categorias';
+import SubCategorias from './components/pages/SubCategorias';
+import Usuarios from './components/pages/Usuarios';
+import Admins from './components/pages/Admins';
 
 function App() {
     const [userLogged, setUserLogged] = useState();
@@ -51,7 +57,13 @@ function App() {
                     <Route path="factura" element={<Factura/>}></Route>                 
                 </Route>
                 <Route path="/admin" element={<Admin/>}></Route>
-                <Route path="/admindashboard" element={<AdminDashboard/>} ></Route>          
+                <Route path="/admindashboard" element={<AdminDashboard/>} ></Route>
+                <Route path="/adminmaterial" element={<Material/>}></Route>
+                <Route path="/adminmuebles" element={<Muebles/>}></Route> 
+                <Route path="/admincategorias" element={<Categorias/>}></Route>
+                <Route path="/adminsubcategorias" element={<SubCategorias/>}></Route>
+                <Route path="/adminusuarios" element={<Usuarios/>}></Route>
+                <Route path="/admins" element={<Admins/>}></Route>
             </Routes>
         </BrowserRouter>        
     );

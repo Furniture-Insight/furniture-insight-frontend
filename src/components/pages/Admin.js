@@ -29,7 +29,8 @@ function Admin() {
                 return Promise.reject(error);
             }
             else{
-                alert("Bienvenido, admin")
+                alert("¡Bienvenido, Admin!")
+                navigate("/admindashboard", {replace:true})
             }
         })
     }
