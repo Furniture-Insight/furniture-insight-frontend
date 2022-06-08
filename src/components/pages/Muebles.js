@@ -430,7 +430,7 @@ function Muebles() {
                         </button>
                         
                         <form onSubmit={eliminarSubmit}>
-                            <div className="modal fade" id="deletemuebleModal" tabIndex="-1" aria-labelledby="eliminarmaterialesModalLabel" aria-hidden="true">
+                            <div className="modal fade" id="deletemuebleModal" tabIndex="-1" aria-labelledby="deletemuebleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-dialog-centered">
                                     <div className="modal-content">
                                         <div className="modal-header">
