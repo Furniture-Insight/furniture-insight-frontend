@@ -11,6 +11,8 @@ function Muebles() {
     }
     const [muebles, setMuebles] = useState([]);
     const [nuevomueble, setNuevoMueble] = useState({
+        Id_Material: "",
+        Id_SubCategoria: "",
         Nombre: "",
         Descripcion: "",
         Anchura: "",
@@ -20,8 +22,6 @@ function Muebles() {
         Precio: "",
         Color: "",
         Cantidad: "",
-        Id_Material: "",
-        Id_SubCategoria: ""
     })
     const [editarMueble, setEditarMueble] = useState({
         Nombre: "",
@@ -32,7 +32,8 @@ function Muebles() {
         Medidas_Adicionales: "",
         Precio: "",
         Color: "",
-        Cantidad: ""
+        Cantidad: "",
+        filename: ""
     })
     const [eliminarMueble, setEliminarMueble] = useState({
         Nombre: ""
@@ -47,7 +48,7 @@ function Muebles() {
     const crearMuebles = () => {
         const requestOptions = {
             method: 'POST',
-            headers: { "Content-Type": "application/json" },
+            headers: {  'Content-Type': 'application/json' },
             body: JSON.stringify(nuevomueble)
         }
 
@@ -261,14 +262,14 @@ function Muebles() {
                                                         value={nuevomueble.Color}
                                                         onChange={(e) => setNuevoMueble({ ...nuevomueble, Color: e.target.value })} /> 
 
-                                                    {/* <label className="col-form-label">Imagen</label>
+                                                    <label className="col-form-label">Imagen</label>
                                                     <input
                                                         required
                                                         type="file"
                                                         className="form-control"
                                                         id="formFile"
-                                                        value={nuevomueble.}
-                                                        onChange={(e) => setNuevoMueble({ ...nuevomueble, : e.target.value })} /> */}
+                                                        value={nuevomueble.filename}
+                                                        onChange={(e) => setNuevoMueble({ ...nuevomueble, filename: e.target.value })} />
 
                                                     <label className="col-form-label">Material (ID)</label>
                                                     <input

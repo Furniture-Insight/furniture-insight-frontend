@@ -6,6 +6,7 @@ import logo2 from "../images/logo2.png"
 import bed from "../images/bed.jpg";
 import table from "../images/table.jpg";
 import chairs from "../images/chairs.jpg";
+import imgnotfound from "../images/ImageNotFound.png"
 
 function Home({clickedMueble}) {
 
@@ -16,8 +17,13 @@ function Home({clickedMueble}) {
         const response = await fetch('http://localhost:8000/mueble/all')
         const result = await response.json()
         for (const item of result) {
-            const b64 = Buffer.from(item.data).toString("base64");
+            if(item.data === null) {
+                item.data = {imgnotfound}
+            }
+            else{
+                const b64 = Buffer.from(item.data).toString("base64");
             item.data = b64;
+            }            
         }
         setMuebles(result);
     }

@@ -54,7 +54,7 @@ function Admins() {
 
     const editarAdmins = () => {
         const requestOptions = {
-            method: 'PUT',
+            method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(editarAdmin)
         }
@@ -76,7 +76,12 @@ function Admins() {
     }
 
     const eliminarAdmins = () => {
-        fetch(`http://localhost:8000/administrador/borrar/${eliminarAdmin.Id_Administrador}`, {method: 'DELETE'})
+        const requestOptions = {
+            method: 'DELETE',
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(eliminarAdmin)
+        }
+        fetch(`http://localhost:8000/administrador/borrar/${eliminarAdmin.Id_Administrador}`, requestOptions)
         .then(async response => {
             const isJson = response.headers.get('content-type')?.includes('application/json');
             const data = isJson && await response.json();
