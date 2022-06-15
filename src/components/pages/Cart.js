@@ -14,11 +14,10 @@ function Cart() {
     const [subtotal, setSubtotal] = useState();
     const [ITBIS, setITBIS] = useState();
     const [total, setTotal] = useState();
-
     const cookies = new Cookies();
 
     const getCarrito = async () => {
-        const response = await fetch(`https://furniture-insight-app.herokuapp.com/carrito/carrito/${cookies.get('Id_Usuario')}`);
+        const response = await fetch(`http://localhost:8000/carrito/carrito/${cookies.get('Id_Usuario')}`);
         const result = await response.json();
         for (const item of result) {
             const b64 = Buffer.from(item.MuebleCarrito.data).toString("base64");
@@ -28,7 +27,7 @@ function Cart() {
     }
 
     const getSubtotal = async () => {
-        const response = await fetch(`https://furniture-insight-app.herokuapp.com/carrito/carrito/${cookies.get('Id_Usuario')}`);
+        const response = await fetch(`http://localhost:8000/carrito/carrito/${cookies.get('Id_Usuario')}`);
         const result = await response.json();
         var subtotal = 0;
         for (var item of result) {
@@ -58,7 +57,7 @@ function Cart() {
 
     useEffect(() => {
         if (cookies.get("Id_Usuario") === undefined) {
-            alert("Debe hacer Log In o Sign Up para continuar.")
+            alert("Debe hacer Log In o Sign Up para continuar.")            
         }
         else {
             getCarrito();
@@ -87,7 +86,7 @@ function Cart() {
                     <div className="row">
                         {carrito.map((item) => (
                             <div key={item.Id_Carrito}>
-                                <div className="card mb-3 mt-3" style={{ "maxWidth": "31.25rem" }}>
+                                <div className="card mb-3 mt-3" style={{ "maxWidth": "31.25rem", "marginLeft" : "7.5rem"}}>
                                     <div className="row g-0">
                                         <div className="col-md-4">
                                             <img src={`data:image/${item.MuebleCarrito.mimetype};base64,${item.MuebleCarrito.data}`} className="cart-img" />

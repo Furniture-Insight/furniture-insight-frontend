@@ -1,29 +1,37 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { Buffer } from 'buffer';
+import imgnotfound from "../images/ImageNotFound.png"
 
 function Store({clickedMueble}) {
     let navigate = useNavigate();
     const [muebles, setMuebles] = useState([]);
     const [busqueda, setBusqueda] = useState("")
-
+    
     const getMuebles = async () => {
         const response = await fetch('http://localhost:8000/mueble/all')
         const result = await response.json()
         for (const item of result) {
-            const b64 = Buffer.from(item.data).toString("base64");
+            if(item.data === null) {
+                item.data = {imgnotfound}
+            }
+            else{
+                const b64 = Buffer.from(item.data).toString("base64");
             item.data = b64;
+            }            
         }
         setMuebles(result);
     }
 
     useEffect(() => {
         getMuebles();
-    }, [])    
+    }, [])  
+    
+    const [pagmueble, setPagMueble] = useState(0);
+    const mueblesPorPagina = 2;
+    const numeroDeMueblesVisitado = pagmueble * mueblesPorPagina;
+
 
     console.log(muebles)
 
@@ -73,7 +81,12 @@ function Store({clickedMueble}) {
                                     <div className="card border-secondary text-center mb-5" style={{ "maxWidth": "33.75rem" , "minHeight": "200px"}} onClick={() => clickedMueble(mueble)}>
                                         <div className="row mt-3 g-0">
                                             <div className="col-md-4">
+                                            {
+                                                mueble.data === undefined?
+                                                <img src={imgnotfound} className="img-fluid rounded-start"/>
+                                                :
                                                 <img src={`data:image/${clickedMueble.mimetype};base64,${mueble.data}`} className="img-fluid rounded-start" />
+                                                }                                                
                                             </div>
                                             <div className="col-md-8 align-self-center">
                                                 <div className="card-body">

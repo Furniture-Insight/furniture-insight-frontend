@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+
 
 function Material() {
+    let navigate = useNavigate();
+
+    const gotoDashboard = () => {
+        navigate("/admindashboard", {replace:true})
+    }
 
     const [material, setMaterial] = useState([]);
     const [nuevomaterial, setNuevoMaterial] = useState({
@@ -103,7 +110,10 @@ function Material() {
         eliminarMateriales();
     }
     return (
-        <div className="box">
+        <div className="box text-center">
+            <button
+            className="btn btn-outline-secondary rounded-pill m-3"
+            onClick={gotoDashboard}>Back to Dashboard</button>
             <h1 className='text-center m-5'> Materiales </h1>
             <h3 className='text-center m-3'> Elija un opcion: </h3>
             <div className="container">
