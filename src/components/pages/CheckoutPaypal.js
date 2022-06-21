@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from 'universal-cookie';
 import pp from '../images/pp.png'
 
-function Checkout() {
+function CheckoutPaypal() {
     let navigate = useNavigate();
     const cookies = new Cookies()
     const current = new Date()
@@ -227,4 +227,4 @@ function Checkout() {
     );
 };
 
-export default Checkout;
+export default CheckoutPaypal;
