@@ -42,7 +42,8 @@
     "build": "react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject",    
-    "heroku-prebuild": "npm install --legacy-peer-deps"
+    "heroku-prebuild": "npm install --legacy-peer-deps",
+    "heroku-postbuild": "npm install --legacy-peer-deps"
   },
   "eslintConfig": {
     "extends": [
