@@ -14,7 +14,7 @@ function Home({clickedMueble}) {
     const [muebles, setMuebles] = useState([]);
 
     const getMuebles = async () => {
-        const response = await fetch('http://localhost:8000/mueble/all')
+        const response = await fetch('https://furniture-insight-app.herokuapp.com/mueble/all')
         const result = await response.json()
         for (const item of result) {
             if(item.data === null) {
