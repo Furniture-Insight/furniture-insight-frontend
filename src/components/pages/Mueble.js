@@ -1,9 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import Cookies from "universal-cookie";
+import { useNavigate } from "react-router-dom";
 
 function Mueble({ clickedMueble}) {
-
+    let navigate = useNavigate();
     const cookies = new Cookies();
 
     const [carrito, setCarrito] = useState({
@@ -26,7 +27,13 @@ function Mueble({ clickedMueble}) {
             const data = isJson && await response.json();
 
             if(!response.ok){
-                alert("Verificar que todos los campos esten llenos");
+                if(carrito.Cantidad_Mueble === ""){                    
+                    alert("Favor incluir la cantidad de muebles a comprar.");             
+                }
+                else{
+                    alert("Debe hacer Log In o Sign Up para continuar.");
+                    navigate("/login", {replace: true});
+                }
                 const error = (data && data.message) || response.status;
                 return Promise.reject(error);
             }
