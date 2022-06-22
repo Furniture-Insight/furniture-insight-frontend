@@ -17,7 +17,7 @@ function Cart() {
     const cookies = new Cookies();
 
     const getCarrito = async () => {
-        const response = await fetch(`http://localhost:8000/carrito/carrito/${cookies.get('Id_Usuario')}`);
+        const response = await fetch(`https://furniture-insight-app.herokuapp.com/carrito/carrito/${cookies.get('Id_Usuario')}`);
         const result = await response.json();
         for (const item of result) {
             const b64 = Buffer.from(item.MuebleCarrito.data).toString("base64");
@@ -27,7 +27,7 @@ function Cart() {
     }
 
     const getSubtotal = async () => {
-        const response = await fetch(`http://localhost:8000/carrito/carrito/${cookies.get('Id_Usuario')}`);
+        const response = await fetch(`https://furniture-insight-app.herokuapp.com/carrito/carrito/${cookies.get('Id_Usuario')}`);
         const result = await response.json();
         var subtotal = 0;
         for (var item of result) {
