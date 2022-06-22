@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Buffer } from 'buffer';
 import imgnotfound from "../images/ImageNotFound.png"
-
+//for deploy
 function Store({clickedMueble}) {
     let navigate = useNavigate();
     const [muebles, setMuebles] = useState([]);
