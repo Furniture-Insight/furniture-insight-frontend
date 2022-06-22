@@ -36,7 +36,7 @@ function Login({ isUserLogged }) {
             else{
                 cookies.set('Session', true, {path:'/'})
                 alert("Bienvenido")
-                navigate('/home', {replace:true})            
+                navigate('/', {replace:true})            
             }
             cookies.set('Id_Usuario', data.Usuario, {path:'/'});
             cookies.set('Nombre',data.NombreUsuario, {path:'/'})
