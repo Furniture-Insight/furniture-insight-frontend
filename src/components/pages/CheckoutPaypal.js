@@ -21,6 +21,7 @@ function CheckoutPaypal() {
             const result = await response.json();
             for (const item of result) {
                 cookies.set('Id_MetodoPagoPaypal', item.Id_MetodoPagoPaypal)
+                console.log(item)
             }
             setPaypal(result);
         };
@@ -31,7 +32,7 @@ function CheckoutPaypal() {
             getPaypal();
         }        
     }, [])
-
+    
     const [factura, setFactura] = useState({
         Fecha_Pedido: `${current.getMonth() + 1}/${current.getDate()}/${current.getFullYear()}`,
         Direccion_Envio: "",
@@ -118,18 +119,19 @@ function CheckoutPaypal() {
                     </div>
                     <div className="row mt-3">
                         {paypal.map((item) => (
+                            item.Id_MetodoPagoPaypal === !null ? 
                             <div className="form-check" key={item.Id_MetodoPagoPaypal}>                                
                                 <label className="form-check-label">{item.MetodoPaypal.Mail}</label>
-                            </div>
+                            </div> :
+                            <div className="row mt-3 justify-content-center">
+                            <button
+                                type="button"
+                                className="btn btn-secondary rounded-pill w-50"
+                                data-bs-toggle="modal"
+                                data-bs-target="#cardModal">Agregar Cuenta</button>
+                        </div>                            
                         ))}
-                    </div>
-                    <div className="row mt-3 justify-content-center">
-                        <button
-                            type="button"
-                            className="btn btn-secondary rounded-pill w-50"
-                            data-bs-toggle="modal"
-                            data-bs-target="#cardModal">Agregar Cuenta</button>
-                    </div>
+                    </div>                    
                 </div>
                 <div className="col">
                     <div className="row mt-3">
