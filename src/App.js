@@ -23,6 +23,7 @@ import Categorias from './components/pages/Categorias';
 import SubCategorias from './components/pages/SubCategorias';
 import Usuarios from './components/pages/Usuarios';
 import Admins from './components/pages/Admins';
+import Tickets from './components/pages/Tickets';
 
 function App() {
     const [userLogged, setUserLogged] = useState();
@@ -64,6 +65,7 @@ function App() {
                 <Route path="/adminsubcategorias" element={<SubCategorias/>}></Route>
                 <Route path="/adminusuarios" element={<Usuarios/>}></Route>
                 <Route path="/admins" element={<Admins/>}></Route>
+                <Route path="/tickets" element={<Tickets/>}></Route>
             </Routes>
         </BrowserRouter>        
     );
