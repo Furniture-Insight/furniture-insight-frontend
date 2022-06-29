@@ -1,6 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCouch, faUser, faBed, faChair, faUsers, faHammer } from "@fortawesome/free-solid-svg-icons";
+import { faCouch, faTicket, faBed, faChair, faUsers, faHammer, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from 'react-router-dom';
 
 function AdminDashboard(){
@@ -28,6 +28,10 @@ function AdminDashboard(){
 
     const gotoAdminsPage = () => {
         navigate("/admins", {replace:true})
+    }
+
+    const gotoTicketsPage = () => {
+        navigate("/tickets", {replace:true})
     }
 
     return(
@@ -86,6 +90,15 @@ function AdminDashboard(){
                             <i class="fa-3x" aria-hidden="true"><FontAwesomeIcon icon={faUser}/></i>
                             <div class="title">
                                 <h4>Admin</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="admin-option col-lg-3 col-md-4 m-3" onClick={gotoTicketsPage}>
+                        <div class="box-part text-center">
+                            <i class="fa-3x" aria-hidden="true"><FontAwesomeIcon icon={faTicket}/></i>
+                            <div class="title">
+                                <h4>Tickets</h4>
                             </div>
                         </div>
                     </div>
