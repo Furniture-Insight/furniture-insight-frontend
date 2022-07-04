@@ -37,8 +37,6 @@ function App() {
         setMueble(muebleClicked);
     }    
     
-    console.log(mueble);
-//hello
     return (        
         <BrowserRouter>
             <Routes>

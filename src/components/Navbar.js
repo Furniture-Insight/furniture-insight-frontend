@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Cookies from 'universal-cookie';
 import logo from "./images/logo.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStore, faRightToBracket, faUserPlus, faCartShopping, faUsers, faTableCells, faUserCircle, faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
+import { faStore, faRightToBracket, faUserPlus, faCartShopping, faUsers, faTableCells, faUserCircle, faCircleQuestion, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
 
 function Navbar({isUserLogged}) {
     const cookies = new Cookies();
@@ -65,7 +65,6 @@ function Navbar({isUserLogged}) {
                         <img src={logo} width="40" height="40" alt="logo" className="me-2" />
                         Furniture Insight
                     </Link>
-                    <button type="button" class="btn rounded-circle" data-bs-toggle="modal" data-bs-target="#crearticketModal"><i class="bi bi-question-circle text-light"></i></button>
                     <form onSubmit={crearSubmit}>
                             <div className="modal fade" id="crearticketModal" tabIndex="-1" aria-labelledby="crearticketModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-dialog-centered">
@@ -128,7 +127,10 @@ function Navbar({isUserLogged}) {
                                 <Link className="nav-link" to="/drawSpace"><FontAwesomeIcon icon={faTableCells}/> Smart Room </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/aboutUs"><FontAwesomeIcon icon={faUsers} /> About Us </Link>
+                                <Link className="nav-link" to="/aboutUs"><FontAwesomeIcon icon={faUsers}/> About Us </Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/" data-bs-toggle="modal" data-bs-target="#crearticketModal"><FontAwesomeIcon icon={faQuestionCircle}/> Help </Link>
                             </li>
                         </ul>
                     </div>
