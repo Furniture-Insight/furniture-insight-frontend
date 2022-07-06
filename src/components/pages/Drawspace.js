@@ -2,7 +2,8 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import rough from "roughjs/bundled/rough.esm";
 import getStroke from "perfect-freehand";
 import { Buffer } from 'buffer';
-import interact from 'interactjs'
+import interact from 'interactjs';
+import imgnotfound from "../images/ImageNotFound.png";
 
 
 const generator = rough.generator();
@@ -372,8 +373,13 @@ const Drawspace = () => {
     const response = await fetch('https://furniture-insight-app.herokuapp.com/mueble/all')
     const result = await response.json()
     for (const item of result) {
-      const b64 = Buffer.from(item.data).toString("base64");
-      item.data = b64;
+        if(item.data === null) {
+            item.data = {imgnotfound}
+        }
+        else{
+            const b64 = Buffer.from(item.data).toString("base64");
+        item.data = b64;
+        }            
     }
     setMuebles(result);
   }
@@ -542,7 +548,8 @@ const Drawspace = () => {
           </div>
           <div style={{ position: "absolute", bottom: 0, padding: 10 }}>
             <button className="btn btn-outline-secondary me-1" onClick={undo}>Undo</button>
-            <button className="btn btn-outline-secondary" onClick={redo}>Redo</button>
+            <button className="btn btn-outline-secondary me-1" onClick={redo}>Redo</button>
+            <a type="button" className="btn btn-outline-secondary" href="/">Go to Home</a>
           </div>
           {action === "writing" ? (
             <textarea
@@ -579,10 +586,10 @@ const Drawspace = () => {
 
         </div>
 
-        <div className="col" align="center">
+        <div className="col">
           <div className="row row-cols-1 mt-3 me-3">
             <input
-              className="form-control rounded-pill border border-dark"
+              className="form-control rounded-pill border border-dark ms-4 w-75"
               type="text"
               placeholder="Buscar Mueble"
               onChange={event => setBusqueda(event.target.value)} />
