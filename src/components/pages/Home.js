@@ -72,21 +72,21 @@ function Home({clickedMueble}) {
                 <div className="card-static border-dark h-25 w-75 m-3">
                     {muebles.filter(mueble => mueble.Id_Mueble === 9).map((mueble) => (
                         <div className="container" key={mueble.Id_Mueble}>
-                            <div className="row px-5">
-                                <div className="col p-5">
-                                    <img src={`data:image/${clickedMueble.mimetype};base64,${mueble.data}`} className="mx-auto d-block w-50 pb-5" alt="mueble.jpg"/>
+                            <div className="row px-3">
+                                <div className="col align-self-center p-3">
+                                    <img src={`data:image/${clickedMueble.mimetype};base64,${mueble.data}`} className="mx-auto d-block w-50 m-3" alt="mueble.jpg"/>
                                     <div className="row">
                                         <div className="col">
-                                            <a type="button" className="btn btn-outline-dark btn-homepage" href="/store">See more like this</a>
+                                            <a type="button" className="btn btn-outline-dark btn-homepage m-3" href="/store">More like this</a>
                                         </div>
                                         <div className="col" onClick={handleClick}>
-                                            <a type="button" className="btn btn-outline-dark btn-homepage" onClick={() => clickedMueble(mueble)}>Details</a>
+                                            <a type="button" className="btn btn-outline-dark btn-homepage m-3" onClick={() => clickedMueble(mueble)}>Details</a>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col text-center p-5 mt-5">
-                                    <h3 className="mt-5">{mueble.Nombre}</h3>
-                                    <h5 className="my-3">{mueble.Descripcion}</h5>
+                                <div className="col text-center align-self-center p-5">
+                                    <h3 className="m-5">{mueble.Nombre}</h3>
+                                    <h5 className="m-5">{mueble.Descripcion}</h5>
                                 </div>
                             </div>
                         </div>

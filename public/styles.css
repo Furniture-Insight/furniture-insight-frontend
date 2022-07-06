@@ -267,3 +267,8 @@ footer {
     text-align: center;
     margin: 2.0rem;
 }
+
+.navbar {
+    position: fixed;
+    top: 0;
+}

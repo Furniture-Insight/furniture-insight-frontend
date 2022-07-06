@@ -70,8 +70,8 @@ function Profile({ isUserLogged }) {
     return(
         <>
             <h1 className="welcome-message">¡Bienvenido a tu perfil, {usuario.Nombre}!</h1>
-            <div className="row card-deck justify-content-around">
-                <div className="col-3 card-static border-dark m-5">
+            <div className="row card-deck justify-content-center">
+                <div className="col-5 card-static border-dark p-3 m-3">
                     <div className="card-body">
                         <div>
                             <h4 className="card-title pb-3">Account Details</h4>
@@ -83,16 +83,10 @@ function Profile({ isUserLogged }) {
                         </div>
                     </div>
                 </div>
-                <div className="col-3 card-static border-dark m-5">
+                <div className="col-2 card-static border-dark p-3 m-3">
                     <div className="card-body">
-                        <h4 className="card-title pb-3">Tu Lista</h4>
-                        <p className="card-text"> COMING SOON </p>
-                    </div>
-                </div>
-                <div className="col-3 card-static border-dark m-5">
-                    <div className="card-body">
-                        <h4 className="card-title pb-3">Ajustes</h4>
-                        <div className="d-grid col-5">
+                        <h4 className="card-title pb-4">Ajustes</h4>
+                        <div className="d-grid col">
                             <button
                                 type="button"
                                 className="btn btn-outline-success m-3"
