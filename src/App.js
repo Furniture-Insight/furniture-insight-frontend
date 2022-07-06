@@ -47,7 +47,6 @@ function App() {
                     <Route path="recoverpass" element={<RecoverPass />}></Route>
                     <Route path="store" element={<Store clickedMueble={clickedMueble} />}></Route>
                     <Route path="mueble" element={<Mueble clickedMueble={mueble} />}></Route>
-                    <Route path="drawspace" element={<Drawspace />}></Route>
                     <Route path="cart" element={<Cart />}></Route>
                     <Route path="checkout" element={<Checkout />}></Route>
                     <Route path="checkoutpaypal" element={<CheckoutPaypal/>}></Route>
@@ -55,6 +54,7 @@ function App() {
                     <Route path="profile" element={<Profile isUserLogged = {isUserLogged}/>}></Route>   
                     <Route path="factura" element={<Factura/>}></Route>                 
                 </Route>
+                <Route path="drawspace" element={<Drawspace />}></Route>
                 <Route path="/admin" element={<Admin/>}></Route>
                 <Route path="/admindashboard" element={<AdminDashboard/>} ></Route>
                 <Route path="/adminmaterial" element={<Material/>}></Route>
