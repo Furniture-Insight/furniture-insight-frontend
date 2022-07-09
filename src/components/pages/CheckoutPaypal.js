@@ -210,7 +210,7 @@ function CheckoutPaypal() {
                                                 onChange={(e) => setNewPaypal({ ...newPaypal, Contraseña: e.target.value })} />
                                         </div>
                                     </div>
-                                    <div class="cards-cc ms-4 mb-4">
+                                    <div className="cards-cc ms-4 mb-4">
                                         <img src={pp} alt="pp.png"/>
                                     </div>   
                                 </div>
