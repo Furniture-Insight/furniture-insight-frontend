@@ -35,69 +35,69 @@ function AdminDashboard(){
     }
 
     return(
-        <div class="box">
+        <div className="box">
             <h1 className='text-center m-5'> ¡Bienvenido al Dashboard de Administrador! </h1>
             <h3 className='text-center m-3'> Elija un opcion: </h3>
-            <div class="container">
-                <div class="row justify-content-center">
-                    <div class="admin-option col-lg-3 col-md-4 m-3" onClick={gotoMueblesPage}>
-                        <div class="box-part text-center">
-                            <i class="fa-3x" aria-hidden="true"><FontAwesomeIcon icon={faCouch}/></i>
-                            <div class="title">
+            <div className="container">
+                <div className="row justify-content-center">
+                    <div className="admin-option col-lg-3 col-md-4 m-3" onClick={gotoMueblesPage}>
+                        <div className="box-part text-center">
+                            <i className="fa-3x" aria-hidden="true"><FontAwesomeIcon icon={faCouch}/></i>
+                            <div className="title">
                                 <h4>Muebles</h4>
                             </div>
                         </div>
                     </div>	 
 
-                    <div class="admin-option col-lg-3 col-md-4 m-3" onClick={gotoCategoriasPage}>
-                        <div class="box-part text-center">
-                            <i class="fa-3x" aria-hidden="true"><FontAwesomeIcon icon={faBed}/></i>
-                            <div class="title">
+                    <div className="admin-option col-lg-3 col-md-4 m-3" onClick={gotoCategoriasPage}>
+                        <div className="box-part text-center">
+                            <i className="fa-3x" aria-hidden="true"><FontAwesomeIcon icon={faBed}/></i>
+                            <div className="title">
                                 <h4>Categorias</h4>
                             </div>
                         </div>
                     </div>	 
                         
-                    <div class="admin-option col-lg-3 col-md-4  m-3" onClick={gotoSubCategoriasPage}>
-                        <div class="box-part text-center">
-                            <i class="fa-3x" aria-hidden="true"><FontAwesomeIcon icon={faChair}/></i>
-                            <div class="title">
+                    <div className="admin-option col-lg-3 col-md-4  m-3" onClick={gotoSubCategoriasPage}>
+                        <div className="box-part text-center">
+                            <i className="fa-3x" aria-hidden="true"><FontAwesomeIcon icon={faChair}/></i>
+                            <div className="title">
                                 <h4>Subcategorias</h4>
                             </div>
                         </div>
                     </div>	 
                         
-                    <div class="admin-option col-lg-3 col-md-4  m-3" onClick={gotoMaterialPage}>
-                        <div class="box-part text-center">
-                            <i class="fa-3x" aria-hidden="true"><FontAwesomeIcon icon={faHammer}/></i>
-                            <div class="title">
+                    <div className="admin-option col-lg-3 col-md-4  m-3" onClick={gotoMaterialPage}>
+                        <div className="box-part text-center">
+                            <i className="fa-3x" aria-hidden="true"><FontAwesomeIcon icon={faHammer}/></i>
+                            <div className="title">
                                 <h4>Materiales</h4>
                             </div>
                         </div>
                     </div>	 
                         
-                    <div class="admin-option col-lg-3 col-md-4 m-3" onClick={gotoUsuariosPage}>
-                        <div class="box-part text-center">
-                            <i class="fa-3x" aria-hidden="true"><FontAwesomeIcon icon={faUsers}/></i>
-                            <div class="title">
+                    <div className="admin-option col-lg-3 col-md-4 m-3" onClick={gotoUsuariosPage}>
+                        <div className="box-part text-center">
+                            <i className="fa-3x" aria-hidden="true"><FontAwesomeIcon icon={faUsers}/></i>
+                            <div className="title">
                                 <h4>Usuarios</h4>
                             </div>
                         </div>
                     </div>	 
                         
-                    <div class="admin-option col-lg-3 col-md-4 m-3" onClick={gotoAdminsPage}>
-                        <div class="box-part text-center">
-                            <i class="fa-3x" aria-hidden="true"><FontAwesomeIcon icon={faUser}/></i>
-                            <div class="title">
+                    <div className="admin-option col-lg-3 col-md-4 m-3" onClick={gotoAdminsPage}>
+                        <div className="box-part text-center">
+                            <i className="fa-3x" aria-hidden="true"><FontAwesomeIcon icon={faUser}/></i>
+                            <div className="title">
                                 <h4>Admin</h4>
                             </div>
                         </div>
                     </div>
 
-                    <div class="admin-option col-lg-3 col-md-4 m-3" onClick={gotoTicketsPage}>
-                        <div class="box-part text-center">
-                            <i class="fa-3x" aria-hidden="true"><FontAwesomeIcon icon={faTicket}/></i>
-                            <div class="title">
+                    <div className="admin-option col-lg-3 col-md-4 m-3" onClick={gotoTicketsPage}>
+                        <div className="box-part text-center">
+                            <i className="fa-3x" aria-hidden="true"><FontAwesomeIcon icon={faTicket}/></i>
+                            <div className="title">
                                 <h4>Tickets</h4>
                             </div>
                         </div>

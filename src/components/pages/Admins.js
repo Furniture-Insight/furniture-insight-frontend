@@ -24,7 +24,7 @@ function Admins() {
     })
 
     const getAdmin = async () => {
-        const response = await fetch('http://localhost:8000/administrador/all')
+        const response = await fetch('https://furniture-insight-app.herokuapp.com/administrador/all')
         const result = await response.json()
         setAdmin(result);
     }
@@ -36,7 +36,7 @@ function Admins() {
             body: JSON.stringify(nuevoadmin)
         }
 
-        fetch('http://localhost:8000/administrador/crear', requestOptions)
+        fetch('https://furniture-insight-app.herokuapp.com/administrador/crear', requestOptions)
             .then(async response => {
                 const isJson = response.headers.get('content-type')?.includes('application/json');
                 const data = isJson && await response.json();
@@ -61,7 +61,7 @@ function Admins() {
             body: JSON.stringify(editarAdmin)
         }
 
-        fetch(`http://localhost:8000/administrador/editar/${editarAdmin.Id_Administrador}`, requestOptions)
+        fetch(`https://furniture-insight-app.herokuapp.com/administrador/editar/${editarAdmin.Id_Administrador}`, requestOptions)
             .then(async response => {
                 const isJson = response.headers.get('content-type')?.includes('application/json');
                 const data = isJson && await response.json();
@@ -83,7 +83,7 @@ function Admins() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(eliminarAdmin)
         }
-        fetch(`http://localhost:8000/administrador/borrar/${eliminarAdmin.Id_Administrador}`, requestOptions)
+        fetch(`https://furniture-insight-app.herokuapp.com/administrador/borrar/${eliminarAdmin.Id_Administrador}`, requestOptions)
         .then(async response => {
             const isJson = response.headers.get('content-type')?.includes('application/json');
             const data = isJson && await response.json();

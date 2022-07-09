@@ -18,7 +18,7 @@ function Categorias() {
     })
 
     const getCategoria = async () => {
-        const response = await fetch('http://localhost:8000/categoria/categoria/all')
+        const response = await fetch('https://furniture-insight-app.herokuapp.com/categoria/categoria/all')
         const result = await response.json()
         setCategoria(result);
     }
@@ -30,7 +30,7 @@ function Categorias() {
             body: JSON.stringify(nuevaCategoria)
         }
 
-        fetch('http://localhost:8000/categoria/crear', requestOptions)
+        fetch('https://furniture-insight-app.herokuapp.com/categoria/crear', requestOptions)
             .then(async response => {
                 const isJson = response.headers.get('content-type')?.includes('application/json');
                 const data = isJson && await response.json();
@@ -51,7 +51,7 @@ function Categorias() {
     }, [setCategoria])
 
     const eliminarCategorias = () => {
-        fetch(`http://localhost:8000/categoria/borrar/${eliminarCategoria.Id_Categoria}`, {method: 'DELETE'})
+        fetch(`https://furniture-insight-app.herokuapp.com/categoria/borrar/${eliminarCategoria.Id_Categoria}`, {method: 'DELETE'})
         .then(async response => {
             const isJson = response.headers.get('content-type')?.includes('application/json');
             const data = isJson && await response.json();

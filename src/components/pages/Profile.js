@@ -93,7 +93,7 @@ function Profile({ isUserLogged }) {
                                 data-bs-toggle="modal"
                                 data-bs-target="#cardModal">Editar datos
                             </button>
-                            <Link type="button" class="btn btn-outline-danger m-3" to="/" onClick={handleClick}>Logout</Link>
+                            <Link type="button" className="btn btn-outline-danger m-3" to="/" onClick={handleClick}>Logout</Link>
                         </div>
                         <div>
                         </div>

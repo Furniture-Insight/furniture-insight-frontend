@@ -40,7 +40,7 @@ function Muebles() {
     })
 
     const getMuebles = async () => {
-        const response = await fetch('http://localhost:8000/mueble/all')
+        const response = await fetch('https://furniture-insight-app.herokuapp.com/mueble/all')
         const result = await response.json()
         setMuebles(result);
     }
@@ -52,7 +52,7 @@ function Muebles() {
             body: JSON.stringify(nuevomueble)
         }
 
-        fetch('http://localhost:8000/mueble/crear', requestOptions)
+        fetch('https://furniture-insight-app.herokuapp.com/mueble/crear', requestOptions)
             .then(async response => {
                 const isJson = response.headers.get('content-type')?.includes('application/json');
                 const data = isJson && await response.json();
@@ -75,7 +75,7 @@ function Muebles() {
             body: JSON.stringify(editarMueble)
         }
 
-        fetch(`http://localhost:8000/mueble/update/${editarMueble.Nombre}`, requestOptions)
+        fetch(`https://furniture-insight-app.herokuapp.com/mueble/update/${editarMueble.Nombre}`, requestOptions)
             .then(async response => {
                 const isJson = response.headers.get('content-type')?.includes('application/json');
                 const data = isJson && await response.json();
@@ -92,7 +92,7 @@ function Muebles() {
     }
 
     const eliminarMuebles = () => {
-        fetch(`http://localhost:8000/mueble/delete/${eliminarMueble.Nombre}`, {method: 'DELETE'})
+        fetch(`https://furniture-insight-app.herokuapp.com/mueble/delete/${eliminarMueble.Nombre}`, {method: 'DELETE'})
         .then(async response => {
             const isJson = response.headers.get('content-type')?.includes('application/json');
             const data = isJson && await response.json();
