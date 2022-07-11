@@ -18,7 +18,7 @@ function Admin() {
             body: JSON.stringify(admin)
         }
 
-        fetch('http://localhost:8000/admin', requestOptions)
+        fetch('https://furniture-insight-app.herokuapp.com/admin', requestOptions)
         .then(async response => {
             const isJson = response.headers.get('content-type')?.includes('application/json');
             const data = isJson && await response.json();

@@ -1,10 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 
 function Muebles() {
     let navigate = useNavigate();
+    const formData = new FormData();
+    var idmueble = ""
 
     const gotoDashboard = () => {
         navigate("/admindashboard", {replace:true})
@@ -23,6 +26,9 @@ function Muebles() {
         Color: "",
         Cantidad: "",
     })
+
+    const [imagenMueble, setImagenMueble] = useState(null)
+
     const [editarMueble, setEditarMueble] = useState({
         Nombre: "",
         Descripcion: "",
@@ -40,10 +46,15 @@ function Muebles() {
     })
 
     const getMuebles = async () => {
-        const response = await fetch('http://localhost:8000/mueble/all')
+        const response = await fetch('https://furniture-insight-app.herokuapp.com/mueble/all')
         const result = await response.json()
         setMuebles(result);
     }
+
+    const agregarImagen = (event) => {
+        formData.append('data', event.target.files[0])
+        setImagenMueble(formData)
+    } 
 
     const crearMuebles = () => {
         const requestOptions = {
@@ -52,7 +63,7 @@ function Muebles() {
             body: JSON.stringify(nuevomueble)
         }
 
-        fetch('http://localhost:8000/mueble/crear', requestOptions)
+        fetch('https://furniture-insight-app.herokuapp.com/mueble/crear', requestOptions)
             .then(async response => {
                 const isJson = response.headers.get('content-type')?.includes('application/json');
                 const data = isJson && await response.json();
@@ -63,9 +74,43 @@ function Muebles() {
                     return Promise.reject(error);
                 }
                 else {
-                    alert("Mueble creado.")
+                    agregarImagenMueble()
                 }
             })
+    }
+
+    // function getFormData(object) {
+    //     console.log(object)
+    //     const formData = new FormData();
+    //     Object.keys(object).forEach(key => formData.append(key, object[key]));
+    //     for (const value of formData.values()) {
+    //         console.log(value);
+    //       }
+    //     return formData;
+    // }
+
+    const agregarImagenMueble = () => {
+        // const requestOptions = {
+        //     method: 'POST',
+        //     headers: {'Content-Type': 'multipart/form-data'},
+        //     body: getFormData(imagenMueble)
+        // }
+
+        // fetch('http://localhost:5000/mueble/crearImagen', requestOptions)
+        //     .then(async response => {
+        //         const isJson = response.headers.get('content-type')?.includes('multipart/form-data');
+        //         const data = isJson && await response.json();
+
+        //         if (!response.ok) {
+        //             alert("Verificar que todos los campos esten llenos");
+        //             const error = (data && data.message) || response.status;
+        //             return Promise.reject(error);
+        //         }
+        //         else {
+        //             alert("Mueble creado.")
+        //         }
+        //     })
+        axios.put('https://furniture-insight-app.herokuapp.com/mueble/crearImagen', imagenMueble)
     }
 
     const editarMuebles = () => {
@@ -75,7 +120,7 @@ function Muebles() {
             body: JSON.stringify(editarMueble)
         }
 
-        fetch(`http://localhost:8000/mueble/update/${editarMueble.Nombre}`, requestOptions)
+        fetch(`https://furniture-insight-app.herokuapp.com/mueble/update/${editarMueble.Nombre}`, requestOptions)
             .then(async response => {
                 const isJson = response.headers.get('content-type')?.includes('application/json');
                 const data = isJson && await response.json();
@@ -92,7 +137,7 @@ function Muebles() {
     }
 
     const eliminarMuebles = () => {
-        fetch(`http://localhost:8000/mueble/delete/${eliminarMueble.Nombre}`, {method: 'DELETE'})
+        fetch(`https://furniture-insight-app.herokuapp.com/mueble/delete/${eliminarMueble.Nombre}`, {method: 'DELETE'})
         .then(async response => {
             const isJson = response.headers.get('content-type')?.includes('application/json');
             const data = isJson && await response.json();
@@ -179,7 +224,7 @@ function Muebles() {
                             Crear Mueble
                         </button>
 
-                        <form onSubmit={crearSubmit}>
+                        <form onSubmit={crearSubmit} encType="multipart/form-data">
                             <div className="modal fade" id="crearmuebleModal" tabIndex="-1" aria-labelledby="crearmuebleModalLabel" aria-hidden="true">
                                 <div className="modal-dialog modal-dialog-centered">
                                     <div className="modal-content">
@@ -265,11 +310,11 @@ function Muebles() {
                                                     <label className="col-form-label">Imagen</label>
                                                     <input
                                                         required
+                                                        name="imagen"
                                                         type="file"
                                                         className="form-control"
                                                         id="formFile"
-                                                        value={nuevomueble.filename}
-                                                        onChange={(e) => setNuevoMueble({ ...nuevomueble, filename: e.target.value })} />
+                                                        onChange={agregarImagen} />
 
                                                     <label className="col-form-label">Material (ID)</label>
                                                     <input

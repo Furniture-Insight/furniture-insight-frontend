@@ -25,7 +25,7 @@ function SubCategorias() {
     })
 
     const getSubCategorias = async () => {
-        const response = await fetch('http://localhost:8000/subcategoria/all')
+        const response = await fetch('https://furniture-insight-app.herokuapp.com/subcategoria/all')
         const result = await response.json()
         setSubCategorias(result);
     }
@@ -41,7 +41,7 @@ function SubCategorias() {
             body: JSON.stringify(nuevaSubCategoria)
         }
 
-        fetch('http://localhost:8000/subcategoria/crear', requestOptions)
+        fetch('https://furniture-insight-app.herokuapp.com/subcategoria/crear', requestOptions)
             .then(async response => {
                 const isJson = response.headers.get('content-type')?.includes('application/json');
                 const data = isJson && await response.json();
@@ -64,7 +64,7 @@ function SubCategorias() {
             body: JSON.stringify(editarSubCategoria)
         }
 
-        fetch(`http://localhost:8000/subcategoria/update/${editarSubCategoria.Id_SubCategoria}`, requestOptions)
+        fetch(`https://furniture-insight-app.herokuapp.com/subcategoria/update/${editarSubCategoria.Id_SubCategoria}`, requestOptions)
         .then(async response => {
             const isJson = response.headers.get('content-type')?.includes('application/json');
             const data = isJson && await response.json();
@@ -81,7 +81,7 @@ function SubCategorias() {
     }
 
     const eliminarSubCategorias = () => {
-        fetch(`http://localhost:8000/subcategoria/delete/${eliminarSubCategoria.Id_SubCategoria}`, {method: 'DELETE'})
+        fetch(`https://furniture-insight-app.herokuapp.com/subcategoria/delete/${eliminarSubCategoria.Id_SubCategoria}`, {method: 'DELETE'})
         .then(async response => {
             const isJson = response.headers.get('content-type')?.includes('application/json');
             const data = isJson && await response.json();

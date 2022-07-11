@@ -21,7 +21,7 @@ function Usuarios() {
     })
 
     const getUsuario = async () => {
-        const response = await fetch('http://localhost:8000/user/user/all')
+        const response = await fetch('https://furniture-insight-app.herokuapp.com/user/user/all')
         const result = await response.json()
         setUsuario(result);
     }
@@ -33,7 +33,7 @@ function Usuarios() {
             body: JSON.stringify(nuevouser)
         }
 
-        fetch('http://localhost:8000/user/crear', requestOptions)
+        fetch('https://furniture-insight-app.herokuapp.com/user/crear', requestOptions)
             .then(async response => {
                 const isJson = response.headers.get('content-type')?.includes('application/json');
                 const data = isJson && await response.json();

@@ -23,7 +23,7 @@ function Material() {
     })
 
     const getMateriales = async () => {
-        const response = await fetch('http://localhost:8000/material/all')
+        const response = await fetch('https://furniture-insight-app.herokuapp.com/material/all')
         const result = await response.json()
         setMaterial(result);
     }
@@ -62,7 +62,7 @@ function Material() {
             body: JSON.stringify(editarMaterial)
         }
 
-        fetch(`http://localhost:8000/material/update/${editarMaterial.Id_Material}`, requestOptions)
+        fetch(`https://furniture-insight-app.herokuapp.com/material/update/${editarMaterial.Id_Material}`, requestOptions)
             .then(async response => {
                 const isJson = response.headers.get('content-type')?.includes('application/json');
                 const data = isJson && await response.json();
@@ -79,7 +79,7 @@ function Material() {
     }
 
     const eliminarMateriales = () => {
-        fetch(`http://localhost:8000/material/delete/${eliminarMaterial.Id_Material}`, {method: 'DELETE'})
+        fetch(`https://furniture-insight-app.herokuapp.com/material/delete/${eliminarMaterial.Id_Material}`, {method: 'DELETE'})
         .then(async response => {
             const isJson = response.headers.get('content-type')?.includes('application/json');
             const data = isJson && await response.json();
