@@ -110,7 +110,11 @@ function Muebles() {
         //             alert("Mueble creado.")
         //         }
         //     })
-        axios.put('https://furniture-insight-app.herokuapp.com/mueble/crearImagen', imagenMueble)
+        axios.put('https://furniture-insight-app.herokuapp.com/mueble/crearImagen', imagenMueble).then(
+                alert(
+                    "Mueble Creado"
+                )
+        )
     }
 
     const editarMuebles = () => {
