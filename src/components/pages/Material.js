@@ -39,7 +39,7 @@ function Material() {
             body: JSON.stringify(nuevomaterial)
         }
 
-        fetch('http://localhost:8000/material/crear', requestOptions)
+        fetch('https://furniture-insight-app.herokuapp.com/material/crear', requestOptions)
             .then(async response => {
                 const isJson = response.headers.get('content-type')?.includes('application/json');
                 const data = isJson && await response.json();
@@ -122,7 +122,7 @@ function Material() {
                         <div className="box-part text-center">
                             <div className="title">
                                 <button
-                                    className="btn btn-secondary"
+                                    className="btn btn-outline-secondary rounded-pill w-50 py-3"
                                     data-bs-toggle="modal"
                                     data-bs-target="#crearmaterialModal">Crear Material</button>
                             </div>
@@ -164,7 +164,7 @@ function Material() {
                         <div className="box-part text-center">
                             <div className="title">
                                 <button
-                                    className="btn btn-secondary"
+                                    className="btn btn-outline-secondary rounded-pill w-50 py-3"
                                     data-bs-toggle="modal"
                                     data-bs-target="#vermaterialesModal">Ver Materiales</button>
                             </div>
@@ -198,7 +198,7 @@ function Material() {
                         <div className="box-part text-center">
                             <div className="title">
                                 <button
-                                    className="btn btn-secondary"
+                                    className="btn btn-outline-secondary rounded-pill w-50 py-3"
                                     data-bs-toggle="modal"
                                     data-bs-target="#editarmaterialesModal">Editar Materiales</button>
                             </div>
@@ -249,7 +249,7 @@ function Material() {
                         <div className="box-part text-center">
                             <div className="title">
                                 <button
-                                    className="btn btn-secondary"
+                                    className="btn btn-outline-secondary rounded-pill w-50 py-3"
                                     data-bs-toggle="modal"
                                     data-bs-target="#eliminarmaterialesModal">Eliminar Materiales</button>
                             </div>

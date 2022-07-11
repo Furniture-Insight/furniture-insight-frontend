@@ -190,10 +190,10 @@ function Checkout() {
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div className="modal-body">
-                                <div class="first-row">
-                                    <div class="owner">
+                                <div className="first-row">
+                                    <div className="owner">
                                         <h5>Nombre en Tarjeta</h5>
-                                        <div class="input-field mb-3">
+                                        <div className="input-field mb-3">
                                             <input
                                                 required
                                                 type="text"
@@ -202,9 +202,9 @@ function Checkout() {
                                                 onChange={(e) => setNewTarjeta({ ...newTarjeta, Nombre: e.target.value })} />
                                         </div>
                                     </div>
-                                    <div class="cvv">
+                                    <div className="cvv">
                                         <h5>CVV</h5>
-                                        <div class="input-field mb-3">
+                                        <div className="input-field mb-3">
                                             <input
                                                 required
                                                 type="password"
@@ -215,10 +215,10 @@ function Checkout() {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="second-row">
-                                    <div class="card-number">
+                                <div className="second-row">
+                                    <div className="card-number">
                                         <h5>Numero de Tarjeta</h5>
-                                        <div class="input-field mb-3">
+                                        <div className="input-field mb-3">
                                             <input
                                                 required
                                                 type="text"
@@ -228,10 +228,10 @@ function Checkout() {
                                         </div>
                                     </div>
                                 </div>
-                                <div class="third-row">
+                                <div className="third-row">
                                     <h5>Fecha de Expiración</h5>
-                                    <div class="input-date mb-3">
-                                        <div class="date">
+                                    <div className="input-date mb-3">
+                                        <div className="date">
                                             <input
                                                 required
                                                 type="text"
@@ -239,7 +239,7 @@ function Checkout() {
                                                 value={newTarjeta.Fecha_Expiracion}
                                                 onChange={(e) => setNewTarjeta({ ...newTarjeta, Fecha_Expiracion: e.target.value })}/>
                                         </div>
-                                        <div class="cards-cc">
+                                        <div className="cards-cc">
                                             <img src={mc} alt="mc.jpg"/>
                                             <img src={vs} alt="vs.png"/>
                                         </div>   

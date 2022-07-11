@@ -93,7 +93,7 @@ function Tickets() {
             <div className="container-mueble">
                 <div className="grid-container">
                     {tickets.map((item) =>  (
-                        <div class="box m-5" key={item.ID_Ticket}>
+                        <div className="box m-5" key={item.ID_Ticket}>
                             <dl className="row">
                                 <dt className="col-sm-3">Numero de Ticket</dt>
                                 <dd className="col-sm-9">{item.ID_Ticket}</dd>
