@@ -589,6 +589,7 @@ const Drawspace = () => {
         <div id="drawspace-muebles" className="col">
           <div className="row row-cols-1 mt-3 me-3">
             <input
+            id="drawspace-search"
               className="form-control rounded-pill border border-dark ms-4 w-75"
               type="text"
               placeholder="Buscar Mueble"
