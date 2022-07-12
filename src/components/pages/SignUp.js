@@ -6,7 +6,7 @@ import Cookies from 'universal-cookie';
 
 function SignUp({ isUserLogged }) {
     let navigate = useNavigate();
-
+//deploy
     const cookies = new Cookies();
 
     const [usuario, setUsuario] = useState({
