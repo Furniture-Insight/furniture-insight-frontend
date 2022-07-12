@@ -93,12 +93,12 @@ function Navbar({isUserLogged}) {
                                                         onChange={(e) => setNuevoTicket({ ...nuevoticket, email: e.target.value })} />
 
                                                     <label className="col-form-label">Describa lo sucedido:</label>
-                                                    <input
+                                                    <textarea
                                                         required
                                                         type="text"
                                                         className="form-control"
                                                         value={nuevoticket.description}
-                                                        onChange={(e) => setNuevoTicket({ ...nuevoticket, description: e.target.value })} />
+                                                        onChange={(e) => setNuevoTicket({ ...nuevoticket, description: e.target.value })}/>
                                                 </div>
                                             </div>
                                             <div className="modal-footer">

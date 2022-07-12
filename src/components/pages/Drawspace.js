@@ -5,7 +5,6 @@ import { Buffer } from 'buffer';
 import interact from 'interactjs';
 import imgnotfound from "../images/ImageNotFound.png";
 
-
 const generator = rough.generator();
 
 const createElement = (id, x1, y1, x2, y2, type) => {
@@ -498,7 +497,7 @@ const Drawspace = () => {
       {/*<script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"/>*/}
       <div className="row">
         <div className="col-10 dropzone">
-          <div style={{ position: "absolute" }}>
+          <div id="drawspace-buttons" style={{ position: "absolute" }}>
             <h3 className="m-3"> Grid Tools </h3>
             <div className="row m-2">
               <div className="col">
@@ -546,9 +545,10 @@ const Drawspace = () => {
               </div>
             </div>
           </div>
-          <div style={{ position: "absolute", bottom: 0, padding: 10 }}>
+          <div id="drawspace-buttons2" style={{ position: "absolute", bottom: 0, padding: 30 }}>
             <button className="btn btn-outline-secondary me-1" onClick={undo}>Undo</button>
             <button className="btn btn-outline-secondary me-1" onClick={redo}>Redo</button>
+            <button className="btn btn-outline-secondary me-1" onClick={() => window.print()}>Print PDF</button>
             <a type="button" className="btn btn-outline-secondary" href="/">Go to Home</a>
           </div>
           {action === "writing" ? (
@@ -586,7 +586,7 @@ const Drawspace = () => {
 
         </div>
 
-        <div className="col">
+        <div id="drawspace-muebles" className="col">
           <div className="row row-cols-1 mt-3 me-3">
             <input
               className="form-control rounded-pill border border-dark ms-4 w-75"
