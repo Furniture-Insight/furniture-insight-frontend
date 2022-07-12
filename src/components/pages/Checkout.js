@@ -17,7 +17,7 @@ function Checkout() {
         Nombre: "",
         Id_Usuario: cookies.get('Id_Usuario')
     })
-
+//hmmm
     useEffect(() => {
         const getTarjeta = async () => {
             const response = await fetch(`https://furniture-insight-app.herokuapp.com/metodopago/obtener/${cookies.get('Id_Usuario')}`);
