@@ -13,8 +13,8 @@ function Profile({ isUserLogged }) {
         cookies.remove('ITBIS');
         cookies.remove('Subtotal');
         cookies.remove('Total');
-        cookies.set('Session', false, {path:'/'})       
-        isUserLogged(false);        
+        cookies.set('Session', 0, {path:'/'})       
+        isUserLogged(cookies.get('Session'));        
     }   
 
     const[usuario, setUsuario] = useState({});

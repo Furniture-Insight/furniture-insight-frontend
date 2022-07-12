@@ -33,15 +33,16 @@ function SignUp({ isUserLogged }) {
             const data = isJson && await response.json();
 
             if(!response.ok) {
-                cookies.set('Session', false, {path:'/'})
+                cookies.set('Session', 0, {path:'/'})
                 alert("Verificar que todos los campos esten llenos")
                 const error = (data && data.message) || response.status;
                 return Promise.reject(error);
             }
             else{
-                cookies.set('Session', true, {path:'/'})
+                cookies.set('Session', 1, {path:'/'})
                 alert("Bienvenido")
                 navigate('/', {replace:true})
+                window.location.reload()
             }
             cookies.set('Id_Usuario', data.Id_Usuario, {path:'/'});
             cookies.set('Nombre',usuario.Nombre, {path:'/'})
@@ -67,7 +68,7 @@ function SignUp({ isUserLogged }) {
     }
 
     const handleClick = () => {
-        isUserLogged(true);             
+        isUserLogged(cookies.get('Session'));             
     }    
     
 

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCreditCard } from "@fortawesome/free-regular-svg-icons";
 import { faPaypal } from '@fortawesome/free-brands-svg-icons';
-
+import {faTrash} from '@fortawesome/free-solid-svg-icons'
 
 function Cart() {
     let navigate = useNavigate();
@@ -55,6 +55,23 @@ function Cart() {
         return total
     }
 
+    const quitarMueble = async (Id_Carrito) => {
+        fetch(`https://furniture-insight-app.herokuapp.com/carrito/delete/${Id_Carrito}`, {method: 'DELETE'})
+        .then(async response => {
+            const isJson = response.headers.get('content-type')?.includes('application/json');
+            const data = isJson && await response.json();
+
+            if (!response.ok) {
+                alert("Verificar que todos los campos esten llenos");
+                const error = (data && data.message) || response.status;
+                return Promise.reject(error);
+            }
+            else {
+                window.location.reload();
+            }
+    })
+}
+
     useEffect(() => {
         if (cookies.get("Id_Usuario") === undefined) {
             alert("Debe hacer Log In o Sign Up para continuar.")
@@ -98,6 +115,9 @@ function Cart() {
                                                     <label className="card-text">{item.MuebleCarrito.Nombre}</label>
                                                     <label className="card-text">Cantidad: {item.Cantidad_Mueble}</label>
                                                     <label className="card-text">Precio: {item.MuebleCarrito.Precio}</label>
+                                                    <button className="btn btn-danger w-25 ms-2" onClick={() => quitarMueble(item.Id_Carrito)}>
+                                                        <FontAwesomeIcon icon={faTrash}/>
+                                                    </button>
                                                 </div>
                                             </div>
                                         </div>

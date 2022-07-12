@@ -8,6 +8,7 @@ import { faStore, faRightToBracket, faUserPlus, faCartShopping, faUsers, faTable
 
 function Navbar({isUserLogged}) {
     const cookies = new Cookies();
+    const session = cookies.get('Session');
 
     const handleClick = () =>{
         cookies.remove('Id_Usuario');
@@ -17,11 +18,12 @@ function Navbar({isUserLogged}) {
         cookies.remove('ITBIS');
         cookies.remove('Subtotal');
         cookies.remove('Total');
-        cookies.set('Session', false, {path:'/'})       
-        isUserLogged(false);        
+        cookies.set('Session', 0, {path:'/'})       
+        isUserLogged(cookies.get('Session'));        
     }    
     
     const usuarioNombre = cookies.get('Nombre');
+    
 
     const [nuevoticket, setNuevoTicket] = useState({
         title: "",
@@ -134,7 +136,7 @@ function Navbar({isUserLogged}) {
                             </li>
                         </ul>
                     </div>
-                    {isUserLogged ?
+                    {session == 1 ?
                     <div className="collapse navbar-collapse navbarToggler">
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">                        
                             <li className="nav-item dropdown">
