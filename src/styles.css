@@ -20,3 +20,27 @@ body{
 .admin-option{
     cursor: pointer;
 }
+
+@media print{
+    #drawspace-buttons{
+        visibility: hidden;
+    }
+
+    #drawspace-buttons2{
+        visibility: hidden;
+    }
+
+    #drawspace-muebles{
+        visibility: hidden;
+    }
+
+    #canvas{
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+
+@page{
+    size: A3 landscape;
+}
