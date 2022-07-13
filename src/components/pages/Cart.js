@@ -25,13 +25,13 @@ function Cart() {
         }
         setCarrito(result);
     }
-
+        
     const getSubtotal = async () => {
         const response = await fetch(`https://furniture-insight-app.herokuapp.com/carrito/carrito/${cookies.get('Id_Usuario')}`);
         const result = await response.json();
         var subtotal = 0;
         for (var item of result) {
-            subtotal = subtotal + item.MuebleCarrito.Precio
+            subtotal = subtotal + (item.MuebleCarrito.Precio * item.Cantidad_Mueble)
         }
         setSubtotal(subtotal);
         cookies.set('Subtotal', subtotal, { path: '/' })

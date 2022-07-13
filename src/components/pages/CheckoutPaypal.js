@@ -119,7 +119,7 @@ function CheckoutPaypal() {
                     </div>
                     <div className="row mt-3">
                         {paypal.map((item) => (
-                            item.Id_MetodoPagoPaypal === !null ? 
+                            item.Id_MetodoPagoPaypal === null ? 
                             <div className="form-check" key={item.Id_MetodoPagoPaypal}>                                
                                 <label className="form-check-label">{item.MetodoPaypal.Mail}</label>
                             </div> :

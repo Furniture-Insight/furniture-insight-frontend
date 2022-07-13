@@ -118,7 +118,7 @@ function Navbar({isUserLogged}) {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse navbarToggler" >
-                        <ul className="navbar-nav ms-auto mb-2 mb-lg-0 nav nav-tabs">
+                        <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li className="nav-item">
                                 <Link className="nav-link" aria-current="page" to="/store"><FontAwesomeIcon icon={faStore}/> Store </Link>
                             </li>
@@ -151,7 +151,7 @@ function Navbar({isUserLogged}) {
                         </ul>
                     </div>:
                     <div className="collapse navbar-collapse navbarToggler">
-                        <ul className="navbar-nav ms-auto mb-2 mb-lg-0 nav nav-tabs">                        
+                        <ul className="navbar-nav ms-auto mb-2 mb-lg-0">                        
                             <li className="nav-item">                             
                                 <Link className="nav-link" to="/login"><FontAwesomeIcon icon={faRightToBracket}/> Login </Link>                                                           
                             </li>

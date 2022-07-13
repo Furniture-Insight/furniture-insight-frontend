@@ -20,6 +20,7 @@ function Profile({ isUserLogged }) {
     const[usuario, setUsuario] = useState({});
     const[newUsuario, setNewUsuario] = useState({
         Id_Genero: "",
+        Email: "",
         Nombre: "",
         Apellido: "",
         Contraseña: "",
@@ -42,7 +43,7 @@ function Profile({ isUserLogged }) {
             body: JSON.stringify(newUsuario)
         }
 
-        fetch(`http://furniture-insight-app.herokuapp.com/user/editar/${cookies.get('Id_Usuario')}`, requestOptions)
+        fetch('http://furniture-insight-app.herokuapp.com/user/editar', requestOptions)
             .then(async response => {
                 const isJson = response.headers.get('content-type')?.includes('application/json');
                 const data = isJson && await response.json();
@@ -54,6 +55,8 @@ function Profile({ isUserLogged }) {
                 }
                 else {
                     alert("Usuario editado")
+                    cookies.set('Nombre', newUsuario.Nombre, {path:'/'})
+                    window.location.reload();                   
                 }
             })
     }
@@ -111,10 +114,24 @@ function Profile({ isUserLogged }) {
                             <div className="modal-body">
                                 <div className="row">
                                     <div className="col">
+                                        <label className="col-form-label">Ingrese su email actual</label>
+                                    </div>
+                                    <div className="col">
+                                    <input
+                                        required
+                                        className="mb-3 form-control rounded-pill border border-dark"
+                                        type="Email"
+                                        placeholder="Email"
+                                        value={newUsuario.Email}
+                                        onChange={(e) => setNewUsuario({ ...newUsuario, Email: e.target.value })}/>
+                                    </div>
+                                </div>
+                                <div className="row">
+                                    <div className="col">
                                         <label className="col-form-label">Ingrese su contraseña actual</label>
                                     </div>
                                     <div className="col">
-                                        <input
+                                    <input
                                         required
                                         className="mb-3 form-control rounded-pill border border-dark"
                                         type="password"
@@ -132,7 +149,7 @@ function Profile({ isUserLogged }) {
                                         type="text"
                                         className="form-control"
                                         value={newUsuario.Nombre}
-                                        onChange={(e) => setNewUsuario({ ...newUsuario, Nombre: e.target.value })} />
+                                        onChange={(e) => setNewUsuario({ ...newUsuario, Nombre: e.target.value })}/>
                                     </div>
                                 </div>
                                 <div className="row mt-3">
@@ -154,7 +171,7 @@ function Profile({ isUserLogged }) {
                                     </div>
                                     <div className="col">
                                         <input
-                                        type="text"
+                                        type="password"
                                         className="form-control"
                                         value={newUsuario.Contraseña_nueva}
                                         onChange={(e) => setNewUsuario({ ...newUsuario, Contraseña_nueva: e.target.value })} />
